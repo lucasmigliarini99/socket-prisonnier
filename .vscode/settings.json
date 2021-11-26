@@ -1,0 +1,12 @@
+{
+    "files.associations": {
+        "new": "c",
+        "*.tcc": "c",
+        "inet.h": "c",
+        "pthread.h": "c",
+        "types.h": "c",
+        "stdlib.h": "c",
+        "string.h": "c",
+        "server.h": "c"
+    }
+}
