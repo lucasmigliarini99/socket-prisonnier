@@ -24,6 +24,7 @@ void *threadProcess(void * ptr);
 int open_connection();
 void init_connection();
 void send_action();
+void send_msg();
 
 #endif /* CLIENTCXNMANAGER_H */
 

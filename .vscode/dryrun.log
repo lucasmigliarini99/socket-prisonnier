@@ -1,0 +1,15 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/student/Desktop/socket-server'
+mkdir -p output
+gcc -Wall -Wextra -g  -c src/main.c  -o src/main.o
+gcc -Wall -Wextra -g  -c src/Client/client.c  -o src/Client/client.o
+gcc -Wall -Wextra -g  -c src/Client/launchClient.c  -o src/Client/launchClient.o
+gcc -Wall -Wextra -g  -c src/Server/launchServer.c  -o src/Server/launchServer.o
+gcc -Wall -Wextra -g  -c src/Server/server.c  -o src/Server/server.o
+gcc -Wall -Wextra -g  -o output/main src/main.o src/Client/client.o src/Client/launchClient.o src/Server/launchServer.o src/Server/server.o -lpthread 
+echo Executing 'all' complete!
+make: Leaving directory '/home/student/Desktop/socket-server'
+ 
+find: 'include': No such file or directory
+find: 'lib': No such file or directory
+ 

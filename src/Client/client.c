@@ -12,18 +12,30 @@
 
 
 Connection cnx;
+int save;
 
 void *threadProcess(void * ptr) {
     char buffer_in[BUFFERSIZE];
     int sockfd = *((int *) ptr);
     int len;
-    while ((len = read(sockfd, buffer_in, BUFFERSIZE)) != 0) {
+
+    save = sockfd;
+
+    
+    while ((len = read(sockfd, buffer_in, BUFFERSIZE)) != 0 && 1) {
+    
+        
+
+        
         if (strncmp(buffer_in, "exit", 4) == 0) {
             break;
         }
+        if (save != sockfd){
+            printf("receive %d chars\n", len);
+            printf("%.*s\n", len, buffer_in);
+        }
 
-        printf("receive %d chars\n", len);
-        printf("%.*s\n", len, buffer_in);
+        
     }
     close(sockfd);
     printf("client pthread ended, len=%d\n", len);
@@ -65,9 +77,9 @@ void init_connection(){
 
 
     cnx.socketClient = open_connection();
-    strcpy(msg, "Hello from Xeon"); //Xeon is the name of the this client
-    printf("sending : %s\n", msg);
-    write(cnx.socketClient, msg, strlen(msg));
+    // strcpy(msg, "Hello from Xeon"); //Xeon is the name of the this client
+    // printf("sending : %s\n", msg);
+    // write(cnx.socketClient, msg, strlen(msg));
 
     //Creation d'un pthread de lecture
     pthread_create(&cnx.thread, 0, threadProcess, &cnx.socketClient);
@@ -75,13 +87,18 @@ void init_connection(){
     pthread_detach(cnx.thread);
 }
 
-void send_action(){
-    //send(cnx.socketClient, &msg, sizeof(msg),0);
+void send_msg(){
     char msg[33];
-    recv(cnx.socketClient, msg, 32, 0);
-    printf("%s\n",msg);
+    printf("Mot: \n");
     scanf("%s", msg);
+    send_action(msg);
+}
+
+void send_action(char msg[33]){
+    //send(cnx.socketClient, &msg, sizeof(msg),0);
+    //recv(cnx.socketClient, msg, 32, 0);
     write(cnx.socketClient, msg, strlen(msg));
+
 }
 /*
 int main(void)

@@ -31,6 +31,7 @@
 int main(int argc, char** argv) {
     int sockfd = -1;
     int index = 1;
+    int compteur = 1;
     connection_t *connection;
     pthread_t thread;
 
@@ -54,6 +55,7 @@ int main(int argc, char** argv) {
         connection = (connection_t *) malloc(sizeof (connection_t));
         connection->sockfd = accept(sockfd, &connection->address, &connection->addr_len);
         connection->index = index++;
+        connection->name = compteur++;
         if (connection->sockfd <= 0) {
             free(connection);
         } else {

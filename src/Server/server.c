@@ -12,6 +12,7 @@
 
 connection_t* connections[MAXSIMULTANEOUSCLIENTS];
 
+
 void init_sockets_array() {
     for (int i = 0; i < MAXSIMULTANEOUSCLIENTS; i++) {
         connections[i] = NULL;
@@ -64,8 +65,8 @@ void *threadProcess(void *ptr) {
     add(connection);
 
     //Welcome the new client
-    printf("Welcome #%i\n", connection->index);
-    sprintf(buffer_out, "Welcome #%i\n", connection->index);
+    printf("Welcomeeeee #%i\n", connection->index);
+    sprintf(buffer_out, "Welcome Joueur:%i\n",connection->name);
     write(connection->sockfd, buffer_out, strlen(buffer_out));
 
     while ((len = read(connection->sockfd, buffer_in, BUFFERSIZE)) > 0) {
@@ -75,14 +76,24 @@ void *threadProcess(void *ptr) {
         }
 
         printf("DEBUG-----------------------------------------------------------\n");
+        printf("Player: %i\n",connection->name);
         printf("len : %i\n", len);
-        printf("Buffer : %.*s\n", len, buffer_in);
+        printf("Buffer : %.*s\n",len, buffer_in);
         printf("----------------------------------------------------------------\n");
 
         strcpy(buffer_out, "\nServer Echo : ");
         strncat(buffer_out, buffer_in, len);
+        //send all message
+        /*for (int i = 0; i < 100; i++)
+        {
+            if(connections[i] != NULL && connections[i]->name != connection->name){
+                sprintf(buffer_out, "Joueur:%i dit: %s\n",connection->name,buffer_in);
+                write(connections[i]->sockfd, buffer_out, strlen(buffer_out));
+            }
+        }*/
+        send_all_player(connection,buffer_in,buffer_out);
 
-        if (buffer_in[0] == '@') {
+        /*if (buffer_in[0] == '@') {
             for (int i = 0; i < MAXSIMULTANEOUSCLIENTS; i++) {
                 if (connections[i] != NULL) {
                     write(connections[i]->sockfd, buffer_out, strlen(buffer_out));
@@ -99,7 +110,7 @@ void *threadProcess(void *ptr) {
             }
         } else {
             write(connection->sockfd, buffer_out, strlen(buffer_out));
-        }
+        }*/
 
         //clear input buffer
         memset(buffer_in, '\0', BUFFERSIZE);
@@ -110,6 +121,19 @@ void *threadProcess(void *ptr) {
     free(connection);
     pthread_exit(0);
 
+}
+
+void send_all_player(connection_t *player, char buffer_in[BUFFERSIZE],char buffer_out[BUFFERSIZE]){
+
+    for (int i = 0; i < 100; i++)
+    {
+        if(connections[i] != NULL && connections[i]->name != player->name){
+            sprintf(buffer_out, "Joueur:%i dit: %s\n",player->name,buffer_in);
+            write(connections[i]->sockfd, buffer_out, strlen(buffer_out));
+        }
+    }
+    
+    
 }
 
 int create_server_socket() {

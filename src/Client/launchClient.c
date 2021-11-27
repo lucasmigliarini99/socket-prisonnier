@@ -36,7 +36,7 @@ int main(int argc, char** argv) {
     init_connection();
     
     do {
-        send_action();
+        send_msg();
     } while (true);
 
 

@@ -1,0 +1,438 @@
+make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+find:  
+'include' 
+: No such file or directory 
+
+ 
+find:  
+'lib' 
+: No such file or directory 
+
+ 
+# GNU Make 4.3
+# Built for x86_64-redhat-linux-gnu
+# Copyright (C) 1988-2020 Free Software Foundation, Inc.
+# License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+# This is free software: you are free to change and redistribute it.
+# There is NO WARRANTY, to the extent permitted by law.
+
+# Make data base, printed on Sat Nov 27 15:37:02 2021
+
+# Variables
+
+# environment
+GDK_BACKEND = x11
+# makefile (from 'Makefile', line 18)
+OUTPUT := output
+# environment
+LC_ALL = C
+# environment
+NO_AT_BRIDGE = 1
+# makefile (from 'Makefile', line 21)
+SRC := src
+# makefile (from 'Makefile', line 44)
+MD := mkdir -p
+# environment
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-5530def4-5a02-4af7-a598-7339fa210dab.sock
+# environment
+VSCODE_CWD = /home/student
+# makefile (from 'Makefile', line 51)
+LIBS := 
+# environment
+GDM_LANG = en_US.utf8
+# default
+MAKE_COMMAND := make
+# environment
+GTK3_MODULES = xapp-gtk3-module
+# environment
+define BASH_FUNC_which%%
+() {  ( alias;
+ eval ${which_declare} ) | /usr/bin/which --tty-only --read-alias --read-functions --show-tilde --show-dot "$@"
+}
+endef
+# automatic
+@D = $(patsubst %/,%,$(dir $@))
+# environment
+VSCODE_HANDLES_UNCAUGHT_ERRORS = true
+# default
+.VARIABLES := 
+# environment
+PWD = /home/student/Desktop/socket-server
+# automatic
+%D = $(patsubst %/,%,$(dir $%))
+# environment
+HOSTNAME = fedora
+# environment
+MAIL = /var/spool/mail/student
+# environment
+XDG_DATA_DIRS = /home/student/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share:/usr/share
+# automatic
+^D = $(patsubst %/,%,$(dir $^))
+# environment
+VSCODE_LOG_STACK = false
+# automatic
+%F = $(notdir $%)
+# environment
+VSCODE_CODE_CACHE_PATH = /home/student/.config/Code/CachedData/e7d7e9a9348e6a8cc8c03f877d39cb72e5dfb1ff
+# environment
+XDG_SESSION_PATH = /org/freedesktop/DisplayManager/Session0
+# environment
+SSH_ASKPASS = /usr/libexec/openssh/gnome-ssh-askpass
+# environment
+LANG = C
+# environment
+XAUTHORITY = /run/lightdm/student/xauthority
+# default
+.LOADED := 
+# default
+.INCLUDE_DIRS = /usr/include /usr/local/include /usr/include
+# makefile
+MAKEFLAGS = pqrR
+# makefile
+CURDIR := /home/student/Desktop/socket-server
+# environment
+VSCODE_PIPE_LOGGING = true
+# environment
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
+# environment
+LESSOPEN = ||/usr/bin/lesspipe.sh %s
+# automatic
+*D = $(patsubst %/,%,$(dir $*))
+# environment
+MFLAGS = -pqrR
+# environment
+SSH_AUTH_SOCK = /tmp/ssh-XXXXXXU4m6Fg/agent.1325
+# default
+.SHELLFLAGS := -c
+# makefile (from 'Makefile', line 65)
+OUTPUTMAIN := output/main
+# environment
+HISTSIZE = 1000
+# environment
+XDG_CONFIG_DIRS = /etc/xdg
+# automatic
++D = $(patsubst %/,%,$(dir $+))
+# environment
+XDG_SESSION_DESKTOP = xfce
+# environment
+VSCODE_CRASH_REPORTER_START_OPTIONS = {"companyName":"Microsoft","productName":"VSCode","submitURL":"appcenter://code?aid=fba07a4d-84bd-4fc8-a125-9640fc8ce171&uid=44063800-6e9f-453c-8b17-6101ae4978aa&iid=44063800-6e9f-453c-8b17-6101ae4978aa&sid=44063800-6e9f-453c-8b17-6101ae4978aa","uploadToServer":true}
+# makefile (from 'Makefile', line 1)
+MAKEFILE_LIST := Makefile
+# automatic
+@F = $(notdir $@)
+# environment
+VSCODE_VERBOSE_LOGGING = true
+# environment
+VSCODE_PID = 2027
+# environment
+XDG_SESSION_TYPE = x11
+# automatic
+?D = $(patsubst %/,%,$(dir $?))
+# makefile (from 'Makefile', line 48)
+INCLUDES := 
+# environment
+SESSION_MANAGER = local/unix:@/tmp/.ICE-unix/1325,unix/unix:/tmp/.ICE-unix/1325
+# automatic
+*F = $(notdir $*)
+# environment
+CHROME_DESKTOP = code-url-handler.desktop
+# environment
+DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
+# makefile (from 'Makefile', line 27)
+LIB := lib
+# automatic
+<D = $(patsubst %/,%,$(dir $<))
+# environment
+VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
+# makefile (from 'Makefile', line 24)
+INCLUDE := include
+# environment
+BREAKPAD_DUMP_LOCATION = /home/student/.config/Code/exthost Crash Reports
+# default
+MAKE_HOST := x86_64-redhat-linux-gnu
+# environment
+IMSETTINGS_INTEGRATE_DESKTOP = yes
+# makefile
+SHELL = /bin/sh
+# default
+MAKECMDGOALS := all
+# environment
+XMODIFIERS = @im=none
+# environment
+SHLVL = 0
+# environment
+MAKELEVEL := 0
+# default
+MAKE = $(MAKE_COMMAND)
+# environment
+IMSETTINGS_MODULE = none
+# environment
+PATH = /home/student/.local/bin:/home/student/bin:/usr/lib64/ccache:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/home/student/.composer/vendor/bin
+# environment
+MOZ_GMP_PATH = /usr/lib64/mozilla/plugins/gmp-gmpopenh264/system-installed
+# default
+MAKEFILES := 
+# automatic
+^F = $(notdir $^)
+# makefile (from 'Makefile', line 38)
+MAIN := main
+# makefile (from 'Makefile', line 41)
+LIBDIRS := 
+# environment
+VSCODE_LOG_NATIVE = false
+# automatic
+?F = $(notdir $?)
+# makefile (from 'Makefile', line 40)
+INCLUDEDIRS := 
+# environment
+XDG_SEAT = seat0
+# environment
+XDG_CURRENT_DESKTOP = XFCE
+# automatic
++F = $(notdir $+)
+# environment
+XDG_SEAT_PATH = /org/freedesktop/DisplayManager/Seat0
+# environment
+DESKTOP_SESSION = xfce
+# environment
+ORIGINAL_XDG_CURRENT_DESKTOP = XFCE
+# makefile (from 'Makefile', line 57)
+OBJECTS := src/main.o src/Client/client.o src/Client/launchClient.o src/Server/launchServer.o src/Server/server.o
+# 'override' directive
+GNUMAKEFLAGS := 
+# environment
+LOGNAME = student
+# environment
+XDG_VTNR = 1
+# makefile
+.DEFAULT_GOAL := all
+# makefile (from 'Makefile', line 43)
+RM = rm -f
+# environment
+HISTCONTROL = ignoredups
+# environment
+EDITOR = /usr/bin/nano
+# environment
+DISPLAY = :0.0
+# environment
+USER = student
+# default
+MAKE_VERSION := 4.3
+# 'override' directive
+.SHELLSTATUS := 1
+# makefile (from 'Makefile', line 42)
+FIXPATH = $1
+# environment
+which_declare = declare -f
+# makefile (from 'Makefile', line 39)
+SOURCEDIRS := src src/Client src/Server
+# environment
+SSH_AGENT_PID = 1487
+# environment
+_ = /usr/bin/make
+# environment
+XDG_RUNTIME_DIR = /run/user/1000
+# makefile (from 'Makefile', line 10)
+CFLAGS := -Wall -Wextra -g
+# environment
+XDG_SESSION_CLASS = user
+# environment
+VSCODE_AMD_ENTRYPOINT = vs/workbench/services/extensions/node/extensionHostProcess
+# environment
+HOME = /home/student
+# environment
+QT_IM_MODULE = xim
+# environment
+ELECTRON_RUN_AS_NODE = 1
+# environment
+VSCODE_IPC_HOOK = /run/user/1000/vscode-62ee4e9e-1.60.0-main.sock
+# environment
+TERM = dumb
+# environment
+XDG_SESSION_ID = 2
+# environment
+PANEL_GDK_CORE_DEVICE_EVENTS = 0
+# default
+.RECIPEPREFIX := 
+# automatic
+<F = $(notdir $<)
+# default
+SUFFIXES := 
+# environment
+XDG_GREETER_DATA_DIR = /var/lib/lightdm-data/student
+# default
+.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell nocomment grouped-target extra-prereqs archives jobserver output-sync check-symlink guile load
+# makefile (from 'Makefile', line 7)
+CC = gcc
+# makefile (from 'Makefile', line 15)
+LFLAGS = -lpthread
+# makefile (from 'Makefile', line 54)
+SOURCES := src/main.c src/Client/client.c src/Client/launchClient.c src/Server/launchServer.c src/Server/server.c
+# environment
+XDG_MENU_PREFIX = xfce-
+# environment
+GDMSESSION = xfce
+# variable set hash-table stats:
+# Load=124/1024=12%, Rehash=0, Collisions=13/187=7%
+
+# Pattern-specific Variable Values
+
+# No pattern-specific variable values.
+
+# Directories
+
+# src/Server (device 41, inode 30749): 6 files, no impossibilities.
+# src/Client (device 41, inode 30744): 6 files, no impossibilities.
+# src (device 41, inode 30743): 8 files, no impossibilities.
+# . (device 41, inode 30679): 6 files, no impossibilities.
+
+# 26 files, no impossibilities in 4 directories.
+
+# Implicit Rules
+
+ 
+# No implicit rules.
+
+# Files
+
+.c.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 81):
+	$(CC) $(CFLAGS) $(INCLUDES) -c $<  -o $@
+
+# Not a target:
+src/Server/server.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+Makefile:
+#  Implicit rule search has been done.
+#  Last modified 2021-11-27 15:36:00.468436048
+#  File has been updated.
+#  Successfully updated.
+
+clean:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 85):
+	$(RM) $(OUTPUTMAIN)
+	$(RM) $(call FIXPATH,$(OBJECTS))
+	@echo Cleanup complete!
+
+# Not a target:
+src/Client/launchClient.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+src/Server/launchServer.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+src/main.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+.DEFAULT:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+output:
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: ''
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := output
+# automatic
+# * := 
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=4/13=31%
+#  recipe to execute (from 'Makefile', line 71):
+	$(MD) $(OUTPUT)
+
+all: output main
+#  Command line target.
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/5=0%
+#  recipe to execute (from 'Makefile', line 68):
+	@echo Executing 'all' complete!
+
+run: all
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 90):
+	./$(OUTPUTMAIN)
+	@echo Executing 'run: all' complete!
+
+# Not a target:
+src/Client/client.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+main: src/main.o src/Client/client.o src/Client/launchClient.o src/Server/launchServer.o src/Server/server.o
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 74):
+	$(CC) $(CFLAGS) $(INCLUDES) -o $(OUTPUTMAIN) $(OBJECTS) $(LFLAGS) $(LIBS)
+
+# Not a target:
+.SUFFIXES:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+.PHONY: clean
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# files hash-table stats:
+# Load=15/1024=1%, Rehash=0, Collisions=0/39=0%
+# VPATH Search Paths
+
+# No 'vpath' search paths.
+
+# No general ('VPATH' variable) search path.
+
+# strcache buffers: 1 (0) / strings = 38 / storage = 378 B / avg = 9 B
+# current buf: size = 8162 B / used = 378 B / count = 38 / avg = 9 B
+
+# strcache performance: lookups = 62 / hit rate = 38%
+# hash-table stats:
+# Load=38/8192=0%, Rehash=0, Collisions=0/62=0%
+# Finished Make data base on Sat Nov 27 15:37:02 2021
+
+ 
