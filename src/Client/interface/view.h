@@ -5,18 +5,18 @@
  */
 
 /* 
- * File:   main.c
+ * File:   clientcxnmanager.h
  * Author: aurelio
  *
  */
+#include <pthread.h>
 
-#include <stdio.h>
-#include <stdlib.h>
+void on_window_main_destroy();
+void on_button_click();
+int timer_handler();
+void on_Cancel();
 
-#include <Client/network/client.h>
+init_interface(int argc, char **argv, int sockfdd, pthread_t thread);
 
 
-int main(int argc, char **argv)
-{
-    init_connection();
-}
+

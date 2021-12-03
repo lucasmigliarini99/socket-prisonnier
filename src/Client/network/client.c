@@ -71,20 +71,17 @@ int open_connection() {
     return sockfd;
 }
 
-void init_connection(){
+void init_connection(int argc, char** argv){
 
-    char msg[100];
+    int sockfd;
+    int status = 0;
+    char *msg = malloc(100);
+    pthread_t thread;
 
 
-    cnx.socketClient = open_connection();
-    // strcpy(msg, "Hello from Xeon"); //Xeon is the name of the this client
-    // printf("sending : %s\n", msg);
-    // write(cnx.socketClient, msg, strlen(msg));
-
-    //Creation d'un pthread de lecture
-    pthread_create(&cnx.thread, 0, threadProcess, &cnx.socketClient);
-    //write(connection->sock,"Main APP Still running",15);
-    pthread_detach(cnx.thread);
+    sockfd = open_connection();
+    init_interface(argc, argv,sockfd, thread);
+    
 }
 
 void send_msg(){
@@ -100,21 +97,3 @@ void send_action(char msg[33]){
     write(cnx.socketClient, msg, strlen(msg));
 
 }
-/*
-int main(void)
-{
-    int socketClient = socket(AF_INET, SOCK_STREAM, 0);
-    
-
-
-    char msg[33];
-    recv(socketClient, msg, 32, 0);
-    printf("%s\n",msg);
-    //scanf("%s %d", user.nom, &user.age);
-    //send(socketClient, &user, sizeof(user),0);
-
-    close(socketClient);
-
-    return 0;
-
-}*/

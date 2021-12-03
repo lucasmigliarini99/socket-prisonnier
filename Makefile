@@ -5,6 +5,8 @@
 
 # define the C compiler to use
 CC = gcc
+GTK1 = `pkg-config --cflags gtk+-3.0` -rdynamic
+GTK2 = `pkg-config --libs gtk+-3.0`
 
 # define any compile-time flags
 CFLAGS	:= -Wall -Wextra -g
@@ -21,10 +23,10 @@ OUTPUT	:= output
 SRC		:= src
 
 # define include directory
-INCLUDE	:= include
+# INCLUDE	:= include
 
 # define lib directory
-LIB		:= lib
+# LIB		:= lib
 
 ifeq ($(OS),Windows_NT)
 MAIN	:= main.exe
@@ -71,14 +73,14 @@ $(OUTPUT):
 	$(MD) $(OUTPUT)
 
 $(MAIN): $(OBJECTS) 
-	$(CC) $(CFLAGS) $(INCLUDES) -o $(OUTPUTMAIN) $(OBJECTS) $(LFLAGS) $(LIBS)
+	$(CC) $(CFLAGS) $(GTK1) $(INCLUDES) -o $(OUTPUTMAIN) $(OBJECTS) $(LFLAGS) $(LIBS) $(GTK2)
 
 # this is a suffix replacement rule for building .o's from .c's
 # it uses automatic variables $<: the name of the prerequisite of
 # the rule(a .c file) and $@: the name of the target of the rule (a .o file) 
 # (see the gnu make manual section about automatic variables)
 .c.o:
-	$(CC) $(CFLAGS) $(INCLUDES) -c $<  -o $@
+	$(CC) $(CFLAGS) $(GTK1) $(INCLUDES) -c $<  -o $@
 
 .PHONY: clean
 clean:
