@@ -173,6 +173,7 @@ void on_Denoncer()
 
     //incrementation du compteur de round
     compteur++;
+    send_msg();
 }
 
 void on_Taire(Joueur j)

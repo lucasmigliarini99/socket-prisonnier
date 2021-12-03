@@ -23,17 +23,13 @@ void *threadProcess(void * ptr) {
 
     
     while ((len = read(sockfd, buffer_in, BUFFERSIZE)) != 0 && 1) {
-    
-        
-
-        
+       
         if (strncmp(buffer_in, "exit", 4) == 0) {
             break;
         }
-        if (save != sockfd){
-            printf("receive %d chars\n", len);
-            printf("%.*s\n", len, buffer_in);
-        }
+        
+        printf("receive %d chars\n", len);
+        printf("%.*s\n", len, buffer_in);
 
         
     }
@@ -79,8 +75,8 @@ void init_connection(int argc, char** argv){
     pthread_t thread;
 
 
-    sockfd = open_connection();
-    init_interface(argc, argv,sockfd, thread);
+    cnx.socketClient = open_connection();
+    init_interface(argc, argv,cnx.socketClient, thread);
     
 }
 
@@ -94,6 +90,7 @@ void send_msg(){
 void send_action(char msg[33]){
     //send(cnx.socketClient, &msg, sizeof(msg),0);
     //recv(cnx.socketClient, msg, 32, 0);
+    printf("Send action \n");
     write(cnx.socketClient, msg, strlen(msg));
 
 }
