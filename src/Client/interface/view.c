@@ -20,13 +20,7 @@
 
 GtkBuilder *builder = NULL;
 
-typedef struct
-{
-    int score;
-    char pseudo[64];
-    int *choix;
 
-} Joueur;
 
 Joueur joueur;
 

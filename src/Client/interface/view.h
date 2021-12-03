@@ -1,15 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 /* 
- * File:   clientcxnmanager.h
- * Author: aurelio
+ * File:   view.h
+ * Author: Lucas
  *
  */
 #include <pthread.h>
+
+typedef struct
+{
+    int score;
+    char pseudo[64];
+    int *choix;
+
+} Joueur;
 
 void on_window_main_destroy();
 void on_button_click();
