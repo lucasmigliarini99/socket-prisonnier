@@ -28,6 +28,8 @@ typedef struct
 
 } Joueur;
 
+Joueur joueur;
+
 int sockfd;
 
 int timer_id = 0;
@@ -146,7 +148,7 @@ void on_ConfirmationPseudo(Joueur j)
     }
 }
 
-void on_Denoncer(Joueur j)
+void on_Denoncer()
 {
 
     GtkWidget *win2;
@@ -157,7 +159,7 @@ void on_Denoncer(Joueur j)
 
     if (compteur == 0)
     {
-        j.choix = malloc(sizeof(int) * 5);
+        joueur.choix = malloc(sizeof(int) * 5);
     }
     //regarde la nombre de tour, si il est egale a 5 le jeu s'arrete.
     if (compteur == 4)
@@ -173,14 +175,13 @@ void on_Denoncer(Joueur j)
     }
 
     //ajouts du choix dennoncer --> 1, par rapport au tour actuel.
-    j.choix[compteur] = 1;
+    joueur.choix[compteur] = 1;
 
     //incrementation du compteur de round
     compteur++;
-    printf("===== %d ==========\n", j.choix[compteur - 1]);
 }
 
-/* void on_Taire(Joueur j)
+void on_Taire(Joueur j)
 {
     GtkWidget *win2;
     win2 = GTK_WIDGET(gtk_builder_get_object(builder, "Win_Jeux"));
@@ -188,6 +189,10 @@ void on_Denoncer(Joueur j)
     GtkWidget *win3;
     win3 = GTK_WIDGET(gtk_builder_get_object(builder, "Win_Score"));
 
+    if (compteur == 0)
+    {
+        joueur.choix = malloc(sizeof(int) * 5);
+    }
     //regarde la nombre de tour, si il est egale a 5 le jeu s'arrete.
     if (compteur == 4)
     {
@@ -202,13 +207,12 @@ void on_Denoncer(Joueur j)
     }
 
     //ajouts du choix se taire --> 0, par rapport au tour actuel.
-    j.choix[compteur] = 0;
+    joueur.choix[compteur] = 0;
 
     //incrementation du compteur de round
-    compteur += 1;
-    printf("%d\n", j.choix[compteur]);
+    compteur++;
 }
- */
+
 /*
  * 
  */
