@@ -9,13 +9,40 @@
 #include <stdbool.h>
 
 #include "client.h"
-
+#include "ini.h"
 
 Connection cnx;
 int save;
 
+static int handler(void* config, const char* section, const char* name,
+                   const char* value)
+{
+    // config instance for filling in the values.
+    configuration* pconfig = (configuration*)config;
+
+    // define a macro for checking Sections and keys under the sections.
+    #define MATCH(s, n) strcmp(section, s) == 0 && strcmp(name, n) == 0
+
+    // fill the values in config struct for Section 1.
+    if(MATCH("Config 1", "adresse_ip")){ 
+        pconfig->s1.adresse_ip = strdup(value);
+    }else if(MATCH("Config 1", "port")){
+        pconfig->s1.port = atoi(value);
+    }
+    // fill the values in config struct for Section 2.
+    else if(MATCH("Config 2", "adresse_ip")){
+        pconfig->s2.adresse_ip = strdup(value);
+    }else if(MATCH("Config 2", "port")){
+        pconfig->s2.port = atoi(value);
+    }else{
+        return 0;
+    }
+
+    return 1;
+}
+
 void *threadProcess(void * ptr) {
-    char buffer_in[BUFFERSIZE];
+    char buffer_in[BUFFERSIZE]; 
     int sockfd = *((int *) ptr);
     int len;
 
@@ -40,6 +67,14 @@ void *threadProcess(void * ptr) {
 
 
 int open_connection() {
+
+    configuration config;
+    
+    if (ini_parse("config.ini", handler, &config) < 0) {
+        printf("Can't load 'config.ini'\n");
+        return 1;
+    }
+
     int sockfd;
 
     struct sockaddr_in serverAddr;
