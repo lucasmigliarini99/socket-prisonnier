@@ -11,7 +11,7 @@ https://github.com/benhoyt/inih
 
 */
 
-#ifndef INI_H
+#ifndef INI_H 
 #define INI_H
 
 /* Make this header file easier to include in C++ code */
