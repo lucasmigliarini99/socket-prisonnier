@@ -28,3 +28,22 @@ void send_msg();
 
 #endif /* CLIENTCXNMANAGER_H */
 
+// define a structure for holding the values in "Section 1".
+typedef struct{
+    int port;
+    const char* adresse_ip;
+} section_one;
+
+// define a structure for holding the values in "Section 2".
+typedef struct{
+    int port;
+    const char* adresse_ip;
+} section_two;
+
+// define a structure for holding all of the config.
+typedef struct
+{
+    section_one s1;
+    section_two s2;
+} configuration;
+
