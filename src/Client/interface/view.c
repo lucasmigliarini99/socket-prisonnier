@@ -22,7 +22,7 @@ GtkBuilder *builder = NULL;
 
 
 
-Joueur joueur;
+
 
 int sockfd;
 
@@ -86,10 +86,10 @@ void on_toogle(GtkWidget *widget, gpointer data)
     }
 }
 
-void test(Joueur *j)
-{
-    j->choix = malloc(sizeof(int) * 10);
-}
+// void test(Joueur *j)
+// {
+//     j->choix = malloc(sizeof(int) * 10);
+// }
 
 void on_Cancel()
 {
@@ -151,62 +151,44 @@ void on_Denoncer()
     GtkWidget *win3;
     win3 = GTK_WIDGET(gtk_builder_get_object(builder, "Win_Score"));
 
-    if (compteur == 0)
-    {
-        joueur.choix = malloc(sizeof(int) * 5);
-    }
-    //regarde la nombre de tour, si il est egale a 5 le jeu s'arrete.
-    if (compteur == 4)
-    {
-        //arret du timer
-        g_source_remove(timer_id);
-
-        //fermeture de la fenetre actuelle
-        gtk_widget_hide(win2);
-
-        //ouverture de la fenêtre suivante
-        gtk_widget_show(win3);
-    }
-
-    //ajouts du choix dennoncer --> 1, par rapport au tour actuel.
-    joueur.choix[compteur] = 1;
+    
 
     //incrementation du compteur de round
-    compteur++;
-    send_msg();
+    
+    send_action();
 }
 
-void on_Taire(Joueur j)
-{
-    GtkWidget *win2;
-    win2 = GTK_WIDGET(gtk_builder_get_object(builder, "Win_Jeux"));
+// void on_Taire(Joueur j)
+// {
+//     GtkWidget *win2;
+//     win2 = GTK_WIDGET(gtk_builder_get_object(builder, "Win_Jeux"));
 
-    GtkWidget *win3;
-    win3 = GTK_WIDGET(gtk_builder_get_object(builder, "Win_Score"));
+//     GtkWidget *win3;
+//     win3 = GTK_WIDGET(gtk_builder_get_object(builder, "Win_Score"));
 
-    if (compteur == 0)
-    {
-        joueur.choix = malloc(sizeof(int) * 5);
-    }
-    //regarde la nombre de tour, si il est egale a 5 le jeu s'arrete.
-    if (compteur == 4)
-    {
-        //arret du timer
-        g_source_remove(timer_id);
+//     if (compteur == 0)
+//     {
+//         joueur.choix = malloc(sizeof(int) * 5);
+//     }
+//     //regarde la nombre de tour, si il est egale a 5 le jeu s'arrete.
+//     if (compteur == 4)
+//     {
+//         //arret du timer
+//         g_source_remove(timer_id);
 
-        //fermeture de la fenetre actuelle
-        gtk_widget_hide(win2);
+//         //fermeture de la fenetre actuelle
+//         gtk_widget_hide(win2);
 
-        //ouverture de la fenêtre suivante
-        gtk_widget_show(win3);
-    }
+//         //ouverture de la fenêtre suivante
+//         gtk_widget_show(win3);
+//     }
 
-    //ajouts du choix se taire --> 0, par rapport au tour actuel.
-    joueur.choix[compteur] = 0;
+//     //ajouts du choix se taire --> 0, par rapport au tour actuel.
+//     joueur.choix[compteur] = 0;
 
-    //incrementation du compteur de round
-    compteur++;
-}
+//     //incrementation du compteur de round
+//     compteur++;
+// }
 
 /*
  * 

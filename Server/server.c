@@ -52,8 +52,10 @@ pthread_mutex_unlock(&lock);
  * @return 
  */
 void *threadProcess(void *ptr) {
-    char buffer_in[BUFFERSIZE];
-    char buffer_out[BUFFERSIZE];
+    Joueur *buffer_in= malloc(sizeof(Joueur));
+    Joueur *buffer_out[BUFFERSIZE];
+
+    
 
     int len;
     connection_t *connection;
@@ -64,25 +66,27 @@ void *threadProcess(void *ptr) {
 
     add(connection);
 
+    
+
     //Welcome the new client
     printf("Welcomeeeee #%i\n", connection->index);
-    sprintf(buffer_out, "Welcome Joueur:%i\n",connection->name);
-    write(connection->sockfd, buffer_out, strlen(buffer_out));
+    printf("Welcome Joueur:%i\n",connection->name);
+    write(connection->sockfd, buffer_out, sizeof(Joueur));
 
-    while ((len = read(connection->sockfd, buffer_in, BUFFERSIZE)) > 0) {
+    while ((len = read(connection->sockfd, buffer_in, sizeof(Joueur))) > 0) {
 
-        if (strncmp(buffer_in, "bye", 3) == 0) {
-            break;
-        }
+        // if (strncmp(buffer_in, "bye", 3) == 0) {
+        //     break;
+        // }
 
         printf("DEBUG-----------------------------------------------------------\n");
         printf("Player: %i\n",connection->name);
         printf("len : %i\n", len);
-        printf("Buffer : %.*s\n",len, buffer_in);
+        printf("Buffer : %i\n",buffer_in->id);
         printf("----------------------------------------------------------------\n");
 
-        strcpy(buffer_out, "\nServer Echo : ");
-        strncat(buffer_out, buffer_in, len);
+        //strcpy(buffer_out, "\nServer Echo : ");
+        //strncat(buffer_out, buffer_in, len);
         //send all message
         /*for (int i = 0; i < 100; i++)
         {
@@ -91,7 +95,7 @@ void *threadProcess(void *ptr) {
                 write(connections[i]->sockfd, buffer_out, strlen(buffer_out));
             }
         }*/
-        send_all_player(connection,buffer_in,buffer_out);
+        //send_all_player(connection,buffer_in,buffer_out);
 
         /*if (buffer_in[0] == '@') {
             for (int i = 0; i < MAXSIMULTANEOUSCLIENTS; i++) {
@@ -113,7 +117,7 @@ void *threadProcess(void *ptr) {
         }*/
 
         //clear input buffer
-        memset(buffer_in, '\0', BUFFERSIZE);
+        memset(buffer_in, '\0', sizeof(Joueur));
     }
     printf("Connection to client %i ended \n", connection->index);
     close(connection->sockfd);

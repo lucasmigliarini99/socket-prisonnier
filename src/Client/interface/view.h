@@ -12,7 +12,7 @@ typedef struct
     char pseudo[64];
     int *choix;
 
-} Joueur;
+} Joueurss;
 
 void on_window_main_destroy();
 void on_button_click();

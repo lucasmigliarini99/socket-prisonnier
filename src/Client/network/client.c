@@ -12,6 +12,7 @@
 
 
 Connection cnx;
+Joueur j;
 int save;
 
 void *threadProcess(void * ptr) {
@@ -73,6 +74,7 @@ void init_connection(int argc, char** argv){
     int status = 0;
     char *msg = malloc(100);
     pthread_t thread;
+    
 
 
     cnx.socketClient = open_connection();
@@ -87,10 +89,14 @@ void send_msg(){
     send_action(msg);
 }
 
-void send_action(char msg[33]){
-    //send(cnx.socketClient, &msg, sizeof(msg),0);
+void send_action(){
+    j.id = 1;
+    j.message = 1;
+    sprintf(j.pseudo, "NomDuJoueur");
+    j.score = 1;
+    //send(cnx.socketClient, &j, sizeof(j),0);
     //recv(cnx.socketClient, msg, 32, 0);
     printf("Send action \n");
-    write(cnx.socketClient, msg, strlen(msg));
+    write(cnx.socketClient, &j, sizeof(j));
 
 }
