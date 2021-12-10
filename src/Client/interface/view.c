@@ -12,15 +12,15 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "view.h"
 
-#include <view.h>
-#include <../network/client.h>
+#include "../network/client.h"
+#include "../network/ini.h"
+#include "../network/config.ini"
 
 #include <gtk/gtk.h>
 
 GtkBuilder *builder = NULL;
-
-
 
 Joueur joueur;
 
@@ -29,6 +29,9 @@ int sockfd;
 int timer_id = 0;
 int elapsed_time = 0;
 int compteur = 0;
+
+// création du tableau qui vas recevoir les structures de configurations.
+section_one config[10] = {'\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0'};
 
 /**
  * Fermeture de la fenetre
@@ -208,6 +211,17 @@ void on_Taire(Joueur j)
     compteur++;
 }
 
+int init_interconnexion(int argc, char **argv)
+{
+    GtkWidget *win;
+    gtk_init(&argc, &argv);
+
+    builder = gtk_builder_new_from_file("src/Client/interface/Interface.glade");
+    win = GTK_WIDGET(gtk_builder_get_object(builder, "Win_Bienvenue"));
+    gtk_builder_connect_signals(builder, NULL);
+    gtk_widget_show(win);
+}
+
 /*
  * 
  */
@@ -218,7 +232,7 @@ int init_interface(int argc, char **argv, int sockfdd, pthread_t thread)
 
     gtk_init(&argc, &argv);
     builder = gtk_builder_new_from_file("src/Client/interface/Interface.glade");
-    win = GTK_WIDGET(gtk_builder_get_object(builder, "Win_Bienvenue"));
+    win = GTK_WIDGET(gtk_builder_get_object(builder, "Win_Jeux"));
     gtk_builder_connect_signals(builder, NULL);
     gtk_widget_show(win);
 
