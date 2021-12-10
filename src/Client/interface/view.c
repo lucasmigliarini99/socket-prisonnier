@@ -56,7 +56,7 @@ int timer_handler()
 {
     elapsed_time++;
     char txt[100];
-    printf("timer running, time : %d\n", elapsed_time);
+    //printf("timer running, time : %d\n", elapsed_time);
     GtkLabel *timelabel = GTK_LABEL(gtk_builder_get_object(builder, "time_display"));
     snprintf(txt, 100, "%04i", elapsed_time);
     gtk_label_set_text(timelabel, txt);
@@ -86,10 +86,6 @@ void on_toogle(GtkWidget *widget, gpointer data)
     }
 }
 
-// void test(Joueur *j)
-// {
-//     j->choix = malloc(sizeof(int) * 10);
-// }
 
 void on_Cancel()
 {

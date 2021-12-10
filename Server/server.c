@@ -66,7 +66,7 @@ void *threadProcess(void *ptr) {
 
     add(connection);
 
-    
+    buffer_in->id = connection->index;
 
     //Welcome the new client
     printf("Welcomeeeee #%i\n", connection->index);
@@ -82,7 +82,7 @@ void *threadProcess(void *ptr) {
         printf("DEBUG-----------------------------------------------------------\n");
         printf("Player: %i\n",connection->name);
         printf("len : %i\n", len);
-        printf("Buffer : %i\n",buffer_in->id);
+        printf("Buffer : %s\n",buffer_in->pseudo);
         printf("----------------------------------------------------------------\n");
 
         //strcpy(buffer_out, "\nServer Echo : ");

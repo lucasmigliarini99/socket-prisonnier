@@ -90,9 +90,9 @@ void send_msg(){
 }
 
 void send_action(){
-    j.id = 1;
+
     j.message = 1;
-    sprintf(j.pseudo, "NomDuJoueur");
+    sprintf(j.pseudo, "Snoupi");
     j.score = 1;
     //send(cnx.socketClient, &j, sizeof(j),0);
     //recv(cnx.socketClient, msg, 32, 0);

@@ -25,6 +25,7 @@ typedef struct
     int id;
     char pseudo[256];
     int score;
+    int choix;
     int message;
 } Joueur;
 
