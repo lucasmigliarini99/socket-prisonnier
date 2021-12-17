@@ -31,7 +31,6 @@ typedef struct
 
 
 
-
 void init_sockets_array();
 void add(connection_t *connection);
 void del(connection_t *connection);
