@@ -11,7 +11,6 @@ typedef struct
     int score;
     char pseudo[64];
     int *choix;
-    int enjeu;
 
 } Joueurss;
 

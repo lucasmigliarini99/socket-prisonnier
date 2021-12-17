@@ -16,7 +16,7 @@ Joueur j;
 int save;
 
 void *threadProcess(void * ptr) {
-    Joueur buffer_in[BUFFERSIZE];
+    char buffer_in[BUFFERSIZE];
     int sockfd = *((int *) ptr);
     int len;
 
@@ -77,6 +77,8 @@ void init_connection(int argc, char** argv){
 
     j.score = 0;
     
+
+
     cnx.socketClient = open_connection();
     init_interface(argc, argv,cnx.socketClient, thread);
     
@@ -93,7 +95,6 @@ void send_action(){
     j.message = 1;
     sprintf(j.pseudo, "Snoupi");
     j.score = 1;
-    j.enjeu = 0; 
     //send(cnx.socketClient, &j, sizeof(j),0);
     //recv(cnx.socketClient, msg, 32, 0);
     printf("Send action \n");
