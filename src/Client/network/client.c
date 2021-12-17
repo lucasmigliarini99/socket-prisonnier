@@ -71,7 +71,7 @@ int open_connection() {
 
     configuration config;
     
-    if (ini_parse("config.ini", handler, &config) < 0) {
+    if (ini_parse("src/Client/network/config.ini", handler, &config) < 0) {
         printf("Can't load 'config.ini'\n");
         return 1;
     }
@@ -122,13 +122,8 @@ void send_pseudo(char *pseudo){
     write(cnx.socketClient, &j, sizeof(j));
 }
 
-void send_action(){
-
-    j.message = 1;
-    sprintf(j.pseudo, "Snoupi");
-    j.score = 1;
-    j.enjeu = 0; 
-    //send(cnx.socketClient, &j, sizeof(j),0);
+void send_action(char msg[33]){
+    //send(cnx.socketClient, &msg, sizeof(msg),0);
     //recv(cnx.socketClient, msg, 32, 0);
     printf("Send action \n");
     write(cnx.socketClient, &j, sizeof(j));
