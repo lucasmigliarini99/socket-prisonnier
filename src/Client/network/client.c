@@ -88,9 +88,9 @@ int open_connection() {
     // Address family is Internet 
     serverAddr.sin_family = AF_INET;
     //Set port number, using htons function 
-    serverAddr.sin_port = htons(port);
+    serverAddr.sin_port = htons(config.s1.port);
     //Set IP address to localhost
-    serverAddr.sin_addr.s_addr = inet_addr("127.0.0.1");
+    serverAddr.sin_addr.s_addr = inet_addr(config.s1.adresse_ip);
 
     memset(serverAddr.sin_zero, '\0', sizeof serverAddr.sin_zero);
 

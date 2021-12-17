@@ -17,11 +17,7 @@ https://github.com/benhoyt/inih
 
 #include <stdio.h>
 #include <ctype.h>
-<<<<<<< HEAD
 #include <string.h> 
-=======
-#include <string.h>
->>>>>>> connection
 
 #include "ini.h"
 
