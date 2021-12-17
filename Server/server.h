@@ -20,7 +20,6 @@ typedef struct {
     int name;
 } connection_t;
 
-<<<<<<< Updated upstream
 typedef struct
 {
     int id;
@@ -30,8 +29,6 @@ typedef struct
     int message;
 } Joueur;
 
-=======
->>>>>>> Stashed changes
 
 
 
