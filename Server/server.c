@@ -11,7 +11,6 @@
 #include "server.h"
 
 connection_t* connections[MAXSIMULTANEOUSCLIENTS];
-int players[MAXSIMULTANEOUSCLIENTS];
 
 
 void init_sockets_array() {
@@ -75,10 +74,8 @@ pthread_mutex_unlock(&lock);
  * @return 
  */
 void *threadProcess(void *ptr) {
-    Joueur *buffer_in= malloc(sizeof(Joueur));
-    Joueur *buffer_out[BUFFERSIZE];
-
-    
+    char buffer_in[BUFFERSIZE];
+    char buffer_out[BUFFERSIZE];
 
     int len;
     connection_t *connection;
@@ -94,19 +91,19 @@ void *threadProcess(void *ptr) {
 
     //Welcome the new client
     printf("Welcomeeeee #%i\n", connection->index);
-    printf("Welcome Joueur:%i\n",connection->name);
-    write(connection->sockfd, buffer_out, sizeof(Joueur));
+    sprintf(buffer_out, "Welcome Joueur:%i\n",connection->name);
+    write(connection->sockfd, buffer_out, strlen(buffer_out));
 
-    while ((len = read(connection->sockfd, buffer_in, sizeof(Joueur))) > 0) {
+    while ((len = read(connection->sockfd, buffer_in, BUFFERSIZE)) > 0) {
 
-        // if (strncmp(buffer_in, "bye", 3) == 0) {
-        //     break;
-        // }
+        if (strncmp(buffer_in, "bye", 3) == 0) {
+            break;
+        }
 
         printf("DEBUG-----------------------------------------------------------\n");
         printf("Player: %i\n",connection->name);
         printf("len : %i\n", len);
-        printf("Buffer : %s\n",buffer_in->pseudo);
+        printf("Buffer : %.*s\n",len, buffer_in);
         printf("----------------------------------------------------------------\n");
 
         //strcpy(buffer_out, "\nServer Echo : ");
@@ -141,7 +138,7 @@ void *threadProcess(void *ptr) {
         }*/
 
         //clear input buffer
-        memset(buffer_in, '\0', sizeof(Joueur));
+        memset(buffer_in, '\0', BUFFERSIZE);
     }
     printf("Connection to client %i ended \n", connection->index);
     close(connection->sockfd);
@@ -198,5 +195,3 @@ int create_server_socket() {
 
     return sockfd;
 }
-
-
