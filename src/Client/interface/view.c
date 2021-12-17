@@ -30,9 +30,6 @@ int timer_id = 0;
 int elapsed_time = 0;
 int compteur = 0;
 
-// création du tableau qui vas recevoir les structures de configurations.
-section_one config[10] = {'\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0'};
-
 /**
  * Fermeture de la fenetre
  * cette fonction est invoke par le gestionnaire d'evt
