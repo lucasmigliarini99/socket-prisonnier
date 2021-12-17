@@ -177,7 +177,7 @@
               <object class="GtkLabel">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="label" translatable="yes">En attente de joueurs (.../2)</property>
+                <property name="label" translatable="yes">En attente de joueurs (1/2)</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -201,7 +201,7 @@
               <object class="GtkLabel">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="label" translatable="yes">Partie : .../5</property>
+                <property name="label" translatable="yes">Partie : 0/5</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -285,7 +285,7 @@
               <object class="GtkLabel">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="label" translatable="yes">Votre score : ...</property>
+                <property name="label" translatable="yes">Votre score : 0</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -297,7 +297,7 @@
               <object class="GtkLabel">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="label" translatable="yes">Score adversaire : ...</property>
+                <property name="label" translatable="yes">Score adversaire : 0</property>
               </object>
               <packing>
                 <property name="expand">False</property>

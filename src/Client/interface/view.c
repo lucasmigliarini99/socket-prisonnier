@@ -15,8 +15,7 @@
 #include "view.h"
 
 #include "../network/client.h"
-#include "../network/ini.h"
-#include "../network/config.ini"
+/* #include "../network/ini.h" */
 
 #include <gtk/gtk.h>
 
@@ -116,12 +115,20 @@ void on_Cancel()
 
 void on_ConfirmationPseudo(Joueur j)
 {
+    //initialisation des fenêtres
     GtkWidget *win;
     win = GTK_WIDGET(gtk_builder_get_object(builder, "Win_Bienvenue"));
     gtk_builder_connect_signals(builder, NULL);
 
     GtkWidget *win2;
     win2 = GTK_WIDGET(gtk_builder_get_object(builder, "Win_Jeux"));
+
+    //initialisation des bouttons denoncer et se taire
+    GtkWidget *Denonce;
+    Denonce = GTK_WIDGET(gtk_builder_get_object(builder, "ButtonDenoncer"));
+
+    GtkWidget *Taire;
+    Taire = GTK_WIDGET(gtk_builder_get_object(builder, "ButtonTaire"));
 
     // recuperation du pseudo.
     printf("bouton 'Confirmer' clicked\n");
@@ -135,6 +142,10 @@ void on_ConfirmationPseudo(Joueur j)
     //ouverture de la fenêtre suivante
     gtk_widget_show(win2);
 
+    //Boutton cacher en attendant le debut de la partie
+    gtk_widget_hide(Denonce);
+    gtk_widget_hide(Taire);
+
     //demmarage du timer
     if (timer_id == 0)
     {
@@ -144,15 +155,17 @@ void on_ConfirmationPseudo(Joueur j)
 
 void on_Denoncer()
 {
-
+    //initialisation des fenêtres
     GtkWidget *win2;
     win2 = GTK_WIDGET(gtk_builder_get_object(builder, "Win_Jeux"));
 
     GtkWidget *win3;
     win3 = GTK_WIDGET(gtk_builder_get_object(builder, "Win_Score"));
 
+    //debut du compteur de tour
     if (compteur == 0)
     {
+        //initialisation du tableau de choix du joueurs
         joueur.choix = malloc(sizeof(int) * 5);
     }
     //regarde la nombre de tour, si il est egale a 5 le jeu s'arrete.
@@ -166,6 +179,9 @@ void on_Denoncer()
 
         //ouverture de la fenêtre suivante
         gtk_widget_show(win3);
+
+        //remise du compteur a zero pour de potentiel autre partie
+        compteur = -1;
     }
 
     //ajouts du choix dennoncer --> 1, par rapport au tour actuel.
@@ -173,19 +189,22 @@ void on_Denoncer()
 
     //incrementation du compteur de round
     compteur++;
-    send_msg();
+    //send_msg();
 }
 
 void on_Taire(Joueur j)
 {
+    //initialisation des fenêtres
     GtkWidget *win2;
     win2 = GTK_WIDGET(gtk_builder_get_object(builder, "Win_Jeux"));
 
     GtkWidget *win3;
     win3 = GTK_WIDGET(gtk_builder_get_object(builder, "Win_Score"));
 
+    //debut du compteur de tour
     if (compteur == 0)
     {
+        //initialisation du tableau de choix du joueur
         joueur.choix = malloc(sizeof(int) * 5);
     }
     //regarde la nombre de tour, si il est egale a 5 le jeu s'arrete.
@@ -199,6 +218,9 @@ void on_Taire(Joueur j)
 
         //ouverture de la fenêtre suivante
         gtk_widget_show(win3);
+
+        //remise du compteur a zero pour de potentiel autre partie
+        compteur = -1;
     }
 
     //ajouts du choix se taire --> 0, par rapport au tour actuel.
@@ -208,14 +230,19 @@ void on_Taire(Joueur j)
     compteur++;
 }
 
-int init_interconnexion(int argc, char **argv)
+void on_Rejouer()
 {
+    //initialisation des fenêtres
     GtkWidget *win;
-    gtk_init(&argc, &argv);
-
-    builder = gtk_builder_new_from_file("src/Client/interface/Interface.glade");
     win = GTK_WIDGET(gtk_builder_get_object(builder, "Win_Bienvenue"));
-    gtk_builder_connect_signals(builder, NULL);
+
+    GtkWidget *win3;
+    win3 = GTK_WIDGET(gtk_builder_get_object(builder, "Win_Score"));
+
+    //fermeture de la fenetre actuelle
+    gtk_widget_hide(win3);
+
+    //ouverture de la premiere fenetre : celle du choix du pseudo
     gtk_widget_show(win);
 }
 
@@ -229,7 +256,7 @@ int init_interface(int argc, char **argv, int sockfdd, pthread_t thread)
 
     gtk_init(&argc, &argv);
     builder = gtk_builder_new_from_file("src/Client/interface/Interface.glade");
-    win = GTK_WIDGET(gtk_builder_get_object(builder, "Win_Jeux"));
+    win = GTK_WIDGET(gtk_builder_get_object(builder, "Win_Bienvenue"));
     gtk_builder_connect_signals(builder, NULL);
     gtk_widget_show(win);
 
