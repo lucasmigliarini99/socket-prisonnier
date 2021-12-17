@@ -12,6 +12,7 @@
 
 
 Connection cnx;
+Joueur j;
 int save;
 
 void *threadProcess(void * ptr) {
@@ -80,17 +81,16 @@ void init_connection(int argc, char** argv){
     
 }
 
-void send_msg(){
-    char msg[33];
-    printf("Mot: \n");
-    scanf("%s", msg);
-    send_action(msg);
+void send_pseudo(char *pseudo){
+    sprintf(j.pseudo, pseudo);
+    printf("Send pseudo \n");
+    write(cnx.socketClient, &j, sizeof(j));
 }
 
 void send_action(char msg[33]){
     //send(cnx.socketClient, &msg, sizeof(msg),0);
     //recv(cnx.socketClient, msg, 32, 0);
     printf("Send action \n");
-    write(cnx.socketClient, msg, strlen(msg));
+    write(cnx.socketClient, &j, sizeof(j));
 
 }
