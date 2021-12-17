@@ -20,6 +20,16 @@ typedef struct{
     pthread_t thread;
 } Connection;
 
+typedef struct Joueur
+{
+    int id;
+    char pseudo[256];
+    int score;
+    int choix;
+    int message;
+    int enjeu;
+} Joueur;
+
 void *threadProcess(void * ptr);
 int open_connection();
 void init_connection();

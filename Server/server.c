@@ -41,6 +41,28 @@ void del(connection_t *connection) {
     perror("Connection not in pool ");
     exit(-5);
 }
+
+// void addPlayer(int index) {
+//     for (int i = 0; i < MAXSIMULTANEOUSCLIENTS; i++) {
+//         if (connections[i] == NULL) {
+//             connections[i] = index;
+//             return;
+//         }
+//     }
+//     perror("Too much simultaneous connections");
+//     exit(-5);
+// }
+
+// void delPlayer(int index) {
+//     for (int i = 0; i < MAXSIMULTANEOUSCLIENTS; i++) {
+//         if (connections[i] == index) {
+//             connections[i] = NULL;
+//             return;
+//         }
+//     }
+//     perror("Connection not in pool ");
+//     exit(-5);
+// }
 /*
 pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
 pthread_mutex_lock(&lock);
@@ -67,6 +89,9 @@ void *threadProcess(void *ptr) {
 
     add(connection);
 
+    buffer_in->id = connection->index;
+    //addPlayer(connection->index);
+
     //Welcome the new client
     printf("Welcomeeeee #%i\n", connection->index);
     printf("Welcome Joueur:%i\n",connection->name);
@@ -84,36 +109,7 @@ void *threadProcess(void *ptr) {
         printf("Buffer : %s\n",buffer_in->pseudo);
         printf("----------------------------------------------------------------\n");
 
-        strcpy(buffer_out, "\nServer Echo : ");
-        strncat(buffer_out, buffer_in, len);
-        //send all message
-        /*for (int i = 0; i < 100; i++)
-        {
-            if(connections[i] != NULL && connections[i]->name != connection->name){
-                sprintf(buffer_out, "Joueur:%i dit: %s\n",connection->name,buffer_in);
-                write(connections[i]->sockfd, buffer_out, strlen(buffer_out));
-            }
-        }*/
-        send_all_player(connection,buffer_in,buffer_out);
-
-        /*if (buffer_in[0] == '@') {
-            for (int i = 0; i < MAXSIMULTANEOUSCLIENTS; i++) {
-                if (connections[i] != NULL) {
-                    write(connections[i]->sockfd, buffer_out, strlen(buffer_out));
-                }
-            }
-        } else if (buffer_in[0] == '#') {
-            int client = 0;
-            int read = sscanf(buffer_in, "%*[^0123456789]%d ", &client);
-            for (int i = 0; i < MAXSIMULTANEOUSCLIENTS; i++) {
-                if (client == connections[i]->index) {
-                    write(connections[i]->sockfd, buffer_out, strlen(buffer_out));
-                    break;
-                } //no client found ? : we dont care !!
-            }
-        } else {
-            write(connection->sockfd, buffer_out, strlen(buffer_out));
-        }*/
+        send_attente(connection,buffer_in,buffer_out);
 
         //clear input buffer
         memset(buffer_in, '\0', sizeof(Joueur));
@@ -126,13 +122,28 @@ void *threadProcess(void *ptr) {
 
 }
 
+void send_attente(connection_t *player, char buffer_in[BUFFERSIZE],char buffer_out[BUFFERSIZE]){
+
+
+    sprintf(buffer_out, "En attente");
+    for (int i = 0; i < 100; i++)
+    {
+        if(connections[i] != NULL && connections[i]->index == 2){
+            sprintf(buffer_out, "le joueur est là");
+        }      
+    }
+    write(player->sockfd, buffer_out, strlen(buffer_out));
+    
+    
+}
+
 void send_all_player(connection_t *player, char buffer_in[BUFFERSIZE],char buffer_out[BUFFERSIZE]){
 
     for (int i = 0; i < 100; i++)
     {
         if(connections[i] != NULL && connections[i]->name != player->name){
             sprintf(buffer_out, "Joueur:%i dit: %s\n",player->name,buffer_in);
-            write(connections[i]->sockfd, buffer_out, strlen(buffer_out));
+            
         }
     }
     

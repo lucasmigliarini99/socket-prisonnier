@@ -87,8 +87,13 @@ void send_pseudo(char *pseudo){
     write(cnx.socketClient, &j, sizeof(j));
 }
 
-void send_action(char msg[33]){
-    //send(cnx.socketClient, &msg, sizeof(msg),0);
+void send_action(){
+
+    j.message = 1;
+    sprintf(j.pseudo, "Snoupi");
+    j.score = 1;
+    j.enjeu = 0; 
+    //send(cnx.socketClient, &j, sizeof(j),0);
     //recv(cnx.socketClient, msg, 32, 0);
     printf("Send action \n");
     write(cnx.socketClient, &j, sizeof(j));
