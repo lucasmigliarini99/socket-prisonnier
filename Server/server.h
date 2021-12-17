@@ -20,13 +20,15 @@ typedef struct {
     int name;
 } connection_t;
 
-typedef struct
+
+typedef struct Joueur
 {
     int id;
     char pseudo[256];
     int score;
     int choix;
     int message;
+    int enjeu;
 } Joueur;
 
 
