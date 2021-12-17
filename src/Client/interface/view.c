@@ -12,17 +12,22 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "view.h"
 
-#include <view.h>
-#include <../network/client.h>
+#include "../network/client.h"
+/* #include "../network/ini.h" */
 
 #include <gtk/gtk.h>
 
 GtkBuilder *builder = NULL;
 
+<<<<<<< HEAD
 
 
 
+=======
+Joueur joueur;
+>>>>>>> connection
 
 int sockfd;
 
@@ -115,12 +120,20 @@ void on_Cancel()
 
 void on_ConfirmationPseudo()
 {
+    //initialisation des fenêtres
     GtkWidget *win;
     win = GTK_WIDGET(gtk_builder_get_object(builder, "Win_Bienvenue"));
     gtk_builder_connect_signals(builder, NULL);
 
     GtkWidget *win2;
     win2 = GTK_WIDGET(gtk_builder_get_object(builder, "Win_Jeux"));
+
+    //initialisation des bouttons denoncer et se taire
+    GtkWidget *Denonce;
+    Denonce = GTK_WIDGET(gtk_builder_get_object(builder, "ButtonDenoncer"));
+
+    GtkWidget *Taire;
+    Taire = GTK_WIDGET(gtk_builder_get_object(builder, "ButtonTaire"));
 
     // recuperation du pseudo.
     printf("bouton 'Confirmer' clicked\n");
@@ -134,7 +147,13 @@ void on_ConfirmationPseudo()
     //ouverture de la fenêtre suivante
     gtk_widget_show(win2);
 
+<<<<<<< HEAD
     
+=======
+    //Boutton cacher en attendant le debut de la partie
+    gtk_widget_hide(Denonce);
+    gtk_widget_hide(Taire);
+>>>>>>> connection
 
     //demmarage du timer
     if (timer_id == 0)
@@ -145,13 +164,14 @@ void on_ConfirmationPseudo()
 
 void on_Denoncer()
 {
-
+    //initialisation des fenêtres
     GtkWidget *win2;
     win2 = GTK_WIDGET(gtk_builder_get_object(builder, "Win_Jeux"));
 
     GtkWidget *win3;
     win3 = GTK_WIDGET(gtk_builder_get_object(builder, "Win_Score"));
 
+<<<<<<< HEAD
     
 
     //incrementation du compteur de round
@@ -163,23 +183,83 @@ void on_Denoncer()
 // {
 //     GtkWidget *win2;
 //     win2 = GTK_WIDGET(gtk_builder_get_object(builder, "Win_Jeux"));
+=======
+    //debut du compteur de tour
+    if (compteur == 0)
+    {
+        //initialisation du tableau de choix du joueurs
+        joueur.choix = malloc(sizeof(int) * 5);
+    }
+    //regarde la nombre de tour, si il est egale a 5 le jeu s'arrete.
+    if (compteur == 4)
+    {
+        //arret du timer
+        g_source_remove(timer_id);
+
+        //fermeture de la fenetre actuelle
+        gtk_widget_hide(win2);
+
+        //ouverture de la fenêtre suivante
+        gtk_widget_show(win3);
+
+        //remise du compteur a zero pour de potentiel autre partie
+        compteur = -1;
+    }
+
+    //ajouts du choix dennoncer --> 1, par rapport au tour actuel.
+    joueur.choix[compteur] = 1;
+
+    //incrementation du compteur de round
+    compteur++;
+    //send_msg();
+}
+
+void on_Taire(Joueur j)
+{
+    //initialisation des fenêtres
+    GtkWidget *win2;
+    win2 = GTK_WIDGET(gtk_builder_get_object(builder, "Win_Jeux"));
+>>>>>>> connection
 
 //     GtkWidget *win3;
 //     win3 = GTK_WIDGET(gtk_builder_get_object(builder, "Win_Score"));
 
+<<<<<<< HEAD
    
 //     //regarde la nombre de tour, si il est egale a 5 le jeu s'arrete.
 //     if (compteur == 4)
 //     {
 //         //arret du timer
 //         g_source_remove(timer_id);
+=======
+    //debut du compteur de tour
+    if (compteur == 0)
+    {
+        //initialisation du tableau de choix du joueur
+        joueur.choix = malloc(sizeof(int) * 5);
+    }
+    //regarde la nombre de tour, si il est egale a 5 le jeu s'arrete.
+    if (compteur == 4)
+    {
+        //arret du timer
+        g_source_remove(timer_id);
+>>>>>>> connection
 
 //         //fermeture de la fenetre actuelle
 //         gtk_widget_hide(win2);
 
+<<<<<<< HEAD
 //         //ouverture de la fenêtre suivante
 //         gtk_widget_show(win3);
 //     }
+=======
+        //ouverture de la fenêtre suivante
+        gtk_widget_show(win3);
+
+        //remise du compteur a zero pour de potentiel autre partie
+        compteur = -1;
+    }
+>>>>>>> connection
 
 //     //ajouts du choix se taire --> 0, par rapport au tour actuel.
 //     joueur.choix[compteur] = 0;
@@ -187,6 +267,22 @@ void on_Denoncer()
 //     //incrementation du compteur de round
 //     compteur++;
 // }
+
+void on_Rejouer()
+{
+    //initialisation des fenêtres
+    GtkWidget *win;
+    win = GTK_WIDGET(gtk_builder_get_object(builder, "Win_Bienvenue"));
+
+    GtkWidget *win3;
+    win3 = GTK_WIDGET(gtk_builder_get_object(builder, "Win_Score"));
+
+    //fermeture de la fenetre actuelle
+    gtk_widget_hide(win3);
+
+    //ouverture de la premiere fenetre : celle du choix du pseudo
+    gtk_widget_show(win);
+}
 
 /*
  * 

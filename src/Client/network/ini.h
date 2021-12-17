@@ -11,7 +11,11 @@ https://github.com/benhoyt/inih
 
 */
 
+<<<<<<< HEAD
 #ifndef INI_H 
+=======
+#ifndef INI_H
+>>>>>>> connection
 #define INI_H
 
 /* Make this header file easier to include in C++ code */

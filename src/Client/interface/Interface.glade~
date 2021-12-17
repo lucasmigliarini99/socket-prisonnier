@@ -2,6 +2,23 @@
 <!-- Generated with glade 3.38.2 -->
 <interface>
   <requires lib="gtk+" version="3.20"/>
+<<<<<<< HEAD
+=======
+  <object class="GtkListStore" id="ListeIP">
+    <columns>
+      <!-- column-name gchararray1 -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">IP 1</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">IP 2</col>
+      </row>
+    </data>
+  </object>
+>>>>>>> connection
   <object class="GtkApplicationWindow" id="Win_Bienvenue">
     <property name="can-focus">False</property>
     <signal name="destroy" handler="on_window_main_destroy" swapped="no"/>
@@ -90,6 +107,7 @@
           </packing>
         </child>
         <child>
+<<<<<<< HEAD
           <object class="GtkBox" id="ParametreIP">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
@@ -135,6 +153,8 @@
           </packing>
         </child>
         <child>
+=======
+>>>>>>> connection
           <object class="GtkBox" id="ButtonQuitter">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
@@ -205,10 +225,17 @@
             <property name="can-focus">False</property>
             <property name="orientation">vertical</property>
             <child>
+<<<<<<< HEAD
               <object class="GtkLabel" id="waitPlayer">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
                 <property name="label" translatable="yes">En attente de joueurs (1/2)</property>
+=======
+              <object class="GtkLabel">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="label" translatable="yes">En attente de joueurs (.../2)</property>
+>>>>>>> connection
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -232,7 +259,11 @@
               <object class="GtkLabel">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
+<<<<<<< HEAD
                 <property name="label" translatable="yes">Partie : 0/5</property>
+=======
+                <property name="label" translatable="yes">Partie : .../5</property>
+>>>>>>> connection
               </object>
               <packing>
                 <property name="expand">False</property>
