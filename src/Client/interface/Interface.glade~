@@ -316,7 +316,7 @@
               <object class="GtkLabel">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="label" translatable="yes">Votre score : 0</property>
+                <property name="label" translatable="yes">Votre score : ...</property>
               </object>
               <packing>
                 <property name="expand">False</property>

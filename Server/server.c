@@ -11,6 +11,7 @@
 #include "server.h"
 
 connection_t* connections[MAXSIMULTANEOUSCLIENTS];
+int players[MAXSIMULTANEOUSCLIENTS];
 
 
 void init_sockets_array() {
@@ -33,6 +34,28 @@ void add(connection_t *connection) {
 void del(connection_t *connection) {
     for (int i = 0; i < MAXSIMULTANEOUSCLIENTS; i++) {
         if (connections[i] == connection) {
+            connections[i] = NULL;
+            return;
+        }
+    }
+    perror("Connection not in pool ");
+    exit(-5);
+}
+
+void addPlayer(int index) {
+    for (int i = 0; i < MAXSIMULTANEOUSCLIENTS; i++) {
+        if (connections[i] == NULL) {
+            connections[i] = index;
+            return;
+        }
+    }
+    perror("Too much simultaneous connections");
+    exit(-5);
+}
+
+void delPlayer(int index) {
+    for (int i = 0; i < MAXSIMULTANEOUSCLIENTS; i++) {
+        if (connections[i] == index) {
             connections[i] = NULL;
             return;
         }
@@ -67,6 +90,7 @@ void *threadProcess(void *ptr) {
     add(connection);
 
     buffer_in->id = connection->index;
+    addPlayer(connection->index);
 
     //Welcome the new client
     printf("Welcomeeeee #%i\n", connection->index);
@@ -174,3 +198,5 @@ int create_server_socket() {
 
     return sockfd;
 }
+
+

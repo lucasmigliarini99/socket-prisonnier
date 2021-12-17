@@ -74,6 +74,8 @@ void init_connection(int argc, char** argv){
     int status = 0;
     char *msg = malloc(100);
     pthread_t thread;
+
+    j.score = 0;
     
 
 
@@ -82,11 +84,10 @@ void init_connection(int argc, char** argv){
     
 }
 
-void send_msg(){
-    char msg[33];
-    printf("Mot: \n");
-    scanf("%s", msg);
-    send_action(msg);
+void send_pseudo(char *pseudo){
+    sprintf(j.pseudo, pseudo);
+    printf("Send pseudo \n");
+    write(cnx.socketClient, &j, sizeof(j));
 }
 
 void send_action(){

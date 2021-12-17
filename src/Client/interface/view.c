@@ -57,10 +57,13 @@ int timer_handler()
     elapsed_time++;
     char txt[100];
     //printf("timer running, time : %d\n", elapsed_time);
-    GtkLabel *timelabel = GTK_LABEL(gtk_builder_get_object(builder, "time_display"));
-    snprintf(txt, 100, "%04i", elapsed_time);
-    gtk_label_set_text(timelabel, txt);
-    return 1;
+    if(compteur != 0){
+         GtkLabel *timelabel = GTK_LABEL(gtk_builder_get_object(builder, "time_display"));
+        snprintf(txt, 100, "%04i", elapsed_time);
+        gtk_label_set_text(timelabel, txt);
+        return 1;
+    }
+   
 }
 
 /**
@@ -110,7 +113,7 @@ void on_Cancel()
     }
 }
 
-void on_ConfirmationPseudo(Joueur j)
+void on_ConfirmationPseudo()
 {
     GtkWidget *win;
     win = GTK_WIDGET(gtk_builder_get_object(builder, "Win_Bienvenue"));
@@ -123,13 +126,15 @@ void on_ConfirmationPseudo(Joueur j)
     printf("bouton 'Confirmer' clicked\n");
     GtkEntry *texte = GTK_ENTRY(gtk_builder_get_object(builder, "texte"));
     GtkEntry *data = (gchar *)gtk_entry_get_text(texte);
-    strcpy(j.pseudo, data);
+    send_pseudo(data);
 
     //fermeture de la fenetre actuelle
     gtk_widget_hide(win);
 
     //ouverture de la fenêtre suivante
     gtk_widget_show(win2);
+
+    
 
     //demmarage du timer
     if (timer_id == 0)
@@ -154,34 +159,34 @@ void on_Denoncer()
     send_action();
 }
 
-void on_Taire(Joueur j)
-{
-    GtkWidget *win2;
-    win2 = GTK_WIDGET(gtk_builder_get_object(builder, "Win_Jeux"));
+// void on_Taire(Joueur j)
+// {
+//     GtkWidget *win2;
+//     win2 = GTK_WIDGET(gtk_builder_get_object(builder, "Win_Jeux"));
 
-    GtkWidget *win3;
-    win3 = GTK_WIDGET(gtk_builder_get_object(builder, "Win_Score"));
+//     GtkWidget *win3;
+//     win3 = GTK_WIDGET(gtk_builder_get_object(builder, "Win_Score"));
 
    
-    //regarde la nombre de tour, si il est egale a 5 le jeu s'arrete.
-    if (compteur == 4)
-    {
-        //arret du timer
-        g_source_remove(timer_id);
+//     //regarde la nombre de tour, si il est egale a 5 le jeu s'arrete.
+//     if (compteur == 4)
+//     {
+//         //arret du timer
+//         g_source_remove(timer_id);
 
-        //fermeture de la fenetre actuelle
-        gtk_widget_hide(win2);
+//         //fermeture de la fenetre actuelle
+//         gtk_widget_hide(win2);
 
-        //ouverture de la fenêtre suivante
-        gtk_widget_show(win3);
-    }
+//         //ouverture de la fenêtre suivante
+//         gtk_widget_show(win3);
+//     }
 
-    //ajouts du choix se taire --> 0, par rapport au tour actuel.
-    joueur.choix[compteur] = 0;
+//     //ajouts du choix se taire --> 0, par rapport au tour actuel.
+//     joueur.choix[compteur] = 0;
 
-    //incrementation du compteur de round
-    compteur++;
-}
+//     //incrementation du compteur de round
+//     compteur++;
+// }
 
 /*
  * 
