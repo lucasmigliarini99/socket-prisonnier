@@ -42,27 +42,6 @@ void del(connection_t *connection) {
     exit(-5);
 }
 
-// void addPlayer(int index) {
-//     for (int i = 0; i < MAXSIMULTANEOUSCLIENTS; i++) {
-//         if (connections[i] == NULL) {
-//             connections[i] = index;
-//             return;
-//         }
-//     }
-//     perror("Too much simultaneous connections");
-//     exit(-5);
-// }
-
-// void delPlayer(int index) {
-//     for (int i = 0; i < MAXSIMULTANEOUSCLIENTS; i++) {
-//         if (connections[i] == index) {
-//             connections[i] = NULL;
-//             return;
-//         }
-//     }
-//     perror("Connection not in pool ");
-//     exit(-5);
-// }
 /*
 pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
 pthread_mutex_lock(&lock);
@@ -109,7 +88,12 @@ void *threadProcess(void *ptr) {
         printf("Buffer : %s\n",buffer_in->pseudo);
         printf("----------------------------------------------------------------\n");
 
-        send_attente(connection,buffer_in,buffer_out);
+        if (buffer_in->enjeu == 0)
+        {
+            send_attente(connection,buffer_in,buffer_out);
+        }
+        
+        
 
         //clear input buffer
         memset(buffer_in, '\0', sizeof(Joueur));
@@ -137,23 +121,11 @@ void send_attente(connection_t *player, char buffer_in[BUFFERSIZE],char buffer_o
     
 }
 
-void send_all_player(connection_t *player, char buffer_in[BUFFERSIZE],char buffer_out[BUFFERSIZE]){
-
-    for (int i = 0; i < 100; i++)
-    {
-        if(connections[i] != NULL && connections[i]->name != player->name){
-            sprintf(buffer_out, "Joueur:%i dit: %s\n",player->name,buffer_in);
-            
-        }
-    }
-    
-    
-}
 
 int create_server_socket() {
     int sockfd = -1;
     struct sockaddr_in address;
-    int port = 7799;
+    int port = 3379;
 
     /* create socket */
     sockfd = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);

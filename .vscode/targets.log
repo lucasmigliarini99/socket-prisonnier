@@ -1,14 +1,4 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
-find:  
-'include' 
-: No such file or directory 
-
- 
-find:  
-'lib' 
-: No such file or directory 
-
- 
 # GNU Make 4.3
 # Built for x86_64-redhat-linux-gnu
 # Copyright (C) 1988-2020 Free Software Foundation, Inc.
@@ -16,28 +6,29 @@ find:
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sat Nov 27 15:37:02 2021
+# Make data base, printed on Mon Dec 20 13:59:18 2021
 
 # Variables
 
 # environment
 GDK_BACKEND = x11
-# makefile (from 'Makefile', line 18)
+# makefile (from 'Makefile', line 20)
 OUTPUT := output
 # environment
 LC_ALL = C
 # environment
 NO_AT_BRIDGE = 1
-# makefile (from 'Makefile', line 21)
+# makefile (from 'Makefile', line 23)
 SRC := src
-# makefile (from 'Makefile', line 44)
+# makefile (from 'Makefile', line 46)
 MD := mkdir -p
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-5530def4-5a02-4af7-a598-7339fa210dab.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-7014f80e-462e-43e0-bc86-113b7edb86b8.sock
 # environment
 VSCODE_CWD = /home/student
-# makefile (from 'Makefile', line 51)
-LIBS := 
+# makefile (from 'Makefile', line 53)
+ 
+LIBS := -L. -L./.git -L./.git/branches -L./.git/hooks -L./.git/info -L./.git/refs -L./.git/refs/heads -L./.git/refs/tags -L./.git/refs/remotes -L./.git/refs/remotes/origin -L./.git/objects -L./.git/objects/pack -L./.git/objects/info -L./.git/logs -L./.git/logs/refs -L./.git/logs/refs/remotes -L./.git/logs/refs/remotes/origin -L./.git/logs/refs/heads -L./.vscode -L./Server -L./output -L./src -L./src/Client -L./src/Client/interface -L./src/Client/network
 # environment
 GDM_LANG = en_US.utf8
 # default
@@ -57,7 +48,7 @@ VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # default
 .VARIABLES := 
 # environment
-PWD = /home/student/Desktop/socket-server
+PWD = /home/student/Desktop/socket-prisonnier
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
 # environment
@@ -89,7 +80,7 @@ XAUTHORITY = /run/lightdm/student/xauthority
 # makefile
 MAKEFLAGS = pqrR
 # makefile
-CURDIR := /home/student/Desktop/socket-server
+CURDIR := /home/student/Desktop/socket-prisonnier
 # environment
 VSCODE_PIPE_LOGGING = true
 # environment
@@ -101,10 +92,10 @@ LESSOPEN = ||/usr/bin/lesspipe.sh %s
 # environment
 MFLAGS = -pqrR
 # environment
-SSH_AUTH_SOCK = /tmp/ssh-XXXXXXU4m6Fg/agent.1325
+SSH_AUTH_SOCK = /tmp/ssh-XXXXXXsscEIo/agent.1328
 # default
 .SHELLFLAGS := -c
-# makefile (from 'Makefile', line 65)
+# makefile (from 'Makefile', line 67)
 OUTPUTMAIN := output/main
 # environment
 HISTSIZE = 1000
@@ -123,29 +114,25 @@ MAKEFILE_LIST := Makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 2027
+VSCODE_PID = 2903
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
-# makefile (from 'Makefile', line 48)
-INCLUDES := 
+# makefile (from 'Makefile', line 50)
+INCLUDES := -I. -I./.git -I./.git/branches -I./.git/hooks -I./.git/info -I./.git/refs -I./.git/refs/heads -I./.git/refs/tags -I./.git/refs/remotes -I./.git/refs/remotes/origin -I./.git/objects -I./.git/objects/pack -I./.git/objects/info -I./.git/logs -I./.git/logs/refs -I./.git/logs/refs/remotes -I./.git/logs/refs/remotes/origin -I./.git/logs/refs/heads -I./.vscode -I./Server -I./output -I./src -I./src/Client -I./src/Client/interface -I./src/Client/network
 # environment
-SESSION_MANAGER = local/unix:@/tmp/.ICE-unix/1325,unix/unix:/tmp/.ICE-unix/1325
+SESSION_MANAGER = local/unix:@/tmp/.ICE-unix/1328,unix/unix:/tmp/.ICE-unix/1328
 # automatic
 *F = $(notdir $*)
 # environment
 CHROME_DESKTOP = code-url-handler.desktop
 # environment
 DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
-# makefile (from 'Makefile', line 27)
-LIB := lib
 # automatic
 <D = $(patsubst %/,%,$(dir $<))
 # environment
 VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
-# makefile (from 'Makefile', line 24)
-INCLUDE := include
 # environment
 BREAKPAD_DUMP_LOCATION = /home/student/.config/Code/exthost Crash Reports
 # default
@@ -174,16 +161,16 @@ MOZ_GMP_PATH = /usr/lib64/mozilla/plugins/gmp-gmpopenh264/system-installed
 MAKEFILES := 
 # automatic
 ^F = $(notdir $^)
-# makefile (from 'Makefile', line 38)
+# makefile (from 'Makefile', line 40)
 MAIN := main
-# makefile (from 'Makefile', line 41)
-LIBDIRS := 
+# makefile (from 'Makefile', line 43)
+LIBDIRS := . ./.git ./.git/branches ./.git/hooks ./.git/info ./.git/refs ./.git/refs/heads ./.git/refs/tags ./.git/refs/remotes ./.git/refs/remotes/origin ./.git/objects ./.git/objects/pack ./.git/objects/info ./.git/logs ./.git/logs/refs ./.git/logs/refs/remotes ./.git/logs/refs/remotes/origin ./.git/logs/refs/heads ./.vscode ./Server ./output ./src ./src/Client ./src/Client/interface ./src/Client/network
 # environment
 VSCODE_LOG_NATIVE = false
 # automatic
 ?F = $(notdir $?)
-# makefile (from 'Makefile', line 40)
-INCLUDEDIRS := 
+# makefile (from 'Makefile', line 42)
+INCLUDEDIRS := . ./.git ./.git/branches ./.git/hooks ./.git/info ./.git/refs ./.git/refs/heads ./.git/refs/tags ./.git/refs/remotes ./.git/refs/remotes/origin ./.git/objects ./.git/objects/pack ./.git/objects/info ./.git/logs ./.git/logs/refs ./.git/logs/refs/remotes ./.git/logs/refs/remotes/origin ./.git/logs/refs/heads ./.vscode ./Server ./output ./src ./src/Client ./src/Client/interface ./src/Client/network
 # environment
 XDG_SEAT = seat0
 # environment
@@ -196,17 +183,19 @@ XDG_SEAT_PATH = /org/freedesktop/DisplayManager/Seat0
 DESKTOP_SESSION = xfce
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = XFCE
-# makefile (from 'Makefile', line 57)
-OBJECTS := src/main.o src/Client/client.o src/Client/launchClient.o src/Server/launchServer.o src/Server/server.o
+# makefile (from 'Makefile', line 59)
+OBJECTS := src/main.o src/Client/interface/view.o src/Client/network/client.o src/Client/network/ini.o
 # 'override' directive
 GNUMAKEFLAGS := 
+# makefile (from 'Makefile', line 8)
+GTK1 = `pkg-config --cflags gtk+-3.0` -rdynamic
 # environment
 LOGNAME = student
 # environment
 XDG_VTNR = 1
 # makefile
 .DEFAULT_GOAL := all
-# makefile (from 'Makefile', line 43)
+# makefile (from 'Makefile', line 45)
 RM = rm -f
 # environment
 HISTCONTROL = ignoredups
@@ -219,29 +208,45 @@ USER = student
 # default
 MAKE_VERSION := 4.3
 # 'override' directive
-.SHELLSTATUS := 1
-# makefile (from 'Makefile', line 42)
+.SHELLSTATUS := 0
+# makefile (from 'Makefile', line 44)
 FIXPATH = $1
 # environment
 which_declare = declare -f
-# makefile (from 'Makefile', line 39)
-SOURCEDIRS := src src/Client src/Server
+# makefile (from 'Makefile', line 41)
+ 
+SOURCEDIRS := src src/Client src/Client/interface src/Client/network
+ 
 # environment
-SSH_AGENT_PID = 1487
+ 
+SSH_AGENT_PID = 1490
+ 
 # environment
+ 
 _ = /usr/bin/make
+ 
 # environment
+ 
 XDG_RUNTIME_DIR = /run/user/1000
-# makefile (from 'Makefile', line 10)
+ 
+# makefile (from 'Makefile', line 12)
+ 
 CFLAGS := -Wall -Wextra -g
+ 
 # environment
+ 
 XDG_SESSION_CLASS = user
+ 
 # environment
+ 
 VSCODE_AMD_ENTRYPOINT = vs/workbench/services/extensions/node/extensionHostProcess
+ 
 # environment
 HOME = /home/student
 # environment
 QT_IM_MODULE = xim
+# makefile (from 'Makefile', line 9)
+GTK2 = `pkg-config --libs gtk+-3.0`
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
@@ -264,16 +269,16 @@ XDG_GREETER_DATA_DIR = /var/lib/lightdm-data/student
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell nocomment grouped-target extra-prereqs archives jobserver output-sync check-symlink guile load
 # makefile (from 'Makefile', line 7)
 CC = gcc
-# makefile (from 'Makefile', line 15)
+# makefile (from 'Makefile', line 17)
 LFLAGS = -lpthread
-# makefile (from 'Makefile', line 54)
-SOURCES := src/main.c src/Client/client.c src/Client/launchClient.c src/Server/launchServer.c src/Server/server.c
+# makefile (from 'Makefile', line 56)
+SOURCES := src/main.c src/Client/interface/view.c src/Client/network/client.c src/Client/network/ini.c
 # environment
 XDG_MENU_PREFIX = xfce-
 # environment
 GDMSESSION = xfce
 # variable set hash-table stats:
-# Load=124/1024=12%, Rehash=0, Collisions=13/187=7%
+# Load=124/1024=12%, Rehash=0, Collisions=16/194=8%
 
 # Pattern-specific Variable Values
 
@@ -281,16 +286,16 @@ GDMSESSION = xfce
 
 # Directories
 
-# src/Server (device 41, inode 30749): 6 files, no impossibilities.
-# src/Client (device 41, inode 30744): 6 files, no impossibilities.
-# src (device 41, inode 30743): 8 files, no impossibilities.
-# . (device 41, inode 30679): 6 files, no impossibilities.
+# src/Client (device 41, inode 34789): 4 files, no impossibilities.
+# src (device 41, inode 34788): 5 files, no impossibilities.
+# src/Client/network (device 41, inode 34795): 9 files, no impossibilities.
+# . (device 41, inode 34711): 8 files, no impossibilities.
+# src/Client/interface (device 41, inode 34790): 7 files, no impossibilities.
 
-# 26 files, no impossibilities in 4 directories.
+# 33 files, no impossibilities in 5 directories.
 
 # Implicit Rules
 
- 
 # No implicit rules.
 
 # Files
@@ -299,19 +304,13 @@ GDMSESSION = xfce
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 81):
-	$(CC) $(CFLAGS) $(INCLUDES) -c $<  -o $@
-
-# Not a target:
-src/Server/server.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 83):
+	$(CC) $(CFLAGS) $(GTK1) $(INCLUDES) -c $<  -o $@
 
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2021-11-27 15:36:00.468436048
+#  Last modified 2021-12-20 13:57:49.892241199
 #  File has been updated.
 #  Successfully updated.
 
@@ -320,28 +319,24 @@ clean:
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 85):
+#  recipe to execute (from 'Makefile', line 87):
 	$(RM) $(OUTPUTMAIN)
 	$(RM) $(call FIXPATH,$(OBJECTS))
 	@echo Cleanup complete!
 
 # Not a target:
-src/Client/launchClient.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-src/Server/launchServer.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+src/Client/network/ini.o:
+#  Implicit rule search has been done.
+#  Last modified 2021-12-20 13:58:08.110117816
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 src/main.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2021-12-20 13:57:49.895241179
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 .DEFAULT:
@@ -351,29 +346,10 @@ src/main.o:
 
 output:
 #  Implicit rule search has not been done.
-#  Implicit/static pattern stem: ''
-#  File does not exist.
+#  Last modified 2021-12-20 13:57:49.894241186
 #  File has been updated.
-#  Needs to be updated (-q is set).
-# automatic
-# @ := output
-# automatic
-# * := 
-# automatic
-# < := 
-# automatic
-# + := 
-# automatic
-# % := 
-# automatic
-# ^ := 
-# automatic
-# ? := 
-# automatic
-# | := 
-# variable set hash-table stats:
-# Load=8/32=25%, Rehash=0, Collisions=4/13=31%
-#  recipe to execute (from 'Makefile', line 71):
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 73):
 	$(MD) $(OUTPUT)
 
 all: output main
@@ -383,30 +359,58 @@ all: output main
 #  File has been updated.
 #  Needs to be updated (-q is set).
 # variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/5=0%
-#  recipe to execute (from 'Makefile', line 68):
+# Load=0/32=0%, Rehash=0, Collisions=0/12=0%
+#  recipe to execute (from 'Makefile', line 70):
 	@echo Executing 'all' complete!
 
 run: all
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 90):
+#  recipe to execute (from 'Makefile', line 92):
 	./$(OUTPUTMAIN)
 	@echo Executing 'run: all' complete!
 
-# Not a target:
-src/Client/client.o:
+main: src/main.o src/Client/interface/view.o src/Client/network/client.o src/Client/network/ini.o
 #  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit/static pattern stem: ''
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := main
+# automatic
+# * := 
+# automatic
+# < := src/main.o
+# automatic
+# + := src/main.o src/Client/interface/view.o src/Client/network/client.o src/Client/network/ini.o
+# automatic
+# % := 
+# automatic
+# ^ := src/main.o src/Client/interface/view.o src/Client/network/client.o src/Client/network/ini.o
+# automatic
+# ? := src/main.o src/Client/interface/view.o src/Client/network/client.o src/Client/network/ini.o
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=6/20=30%
+#  recipe to execute (from 'Makefile', line 76):
+	$(CC) $(CFLAGS) $(GTK1) $(INCLUDES) -o $(OUTPUTMAIN) $(OBJECTS) $(LFLAGS) $(LIBS) $(GTK2)
 
-main: src/main.o src/Client/client.o src/Client/launchClient.o src/Server/launchServer.o src/Server/server.o
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-#  recipe to execute (from 'Makefile', line 74):
-	$(CC) $(CFLAGS) $(INCLUDES) -o $(OUTPUTMAIN) $(OBJECTS) $(LFLAGS) $(LIBS)
+# Not a target:
+src/Client/interface/view.o:
+#  Implicit rule search has been done.
+#  Last modified 2021-12-20 13:58:08.109117822
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+src/Client/network/client.o:
+#  Implicit rule search has been done.
+#  Last modified 2021-12-20 13:58:08.109117822
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 .SUFFIXES:
@@ -420,19 +424,19 @@ main: src/main.o src/Client/client.o src/Client/launchClient.o src/Server/launch
 #  File has not been updated.
 
 # files hash-table stats:
-# Load=15/1024=1%, Rehash=0, Collisions=0/39=0%
+# Load=14/1024=1%, Rehash=0, Collisions=0/37=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 38 / storage = 378 B / avg = 9 B
-# current buf: size = 8162 B / used = 378 B / count = 38 / avg = 9 B
+# strcache buffers: 1 (0) / strings = 42 / storage = 419 B / avg = 9 B
+# current buf: size = 8162 B / used = 419 B / count = 42 / avg = 9 B
 
-# strcache performance: lookups = 62 / hit rate = 38%
+# strcache performance: lookups = 69 / hit rate = 39%
 # hash-table stats:
-# Load=38/8192=0%, Rehash=0, Collisions=0/62=0%
-# Finished Make data base on Sat Nov 27 15:37:02 2021
+# Load=42/8192=1%, Rehash=0, Collisions=0/69=0%
+# Finished Make data base on Mon Dec 20 13:59:18 2021
 
  

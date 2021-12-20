@@ -71,7 +71,7 @@ int open_connection() {
 
     configuration config;
     
-    if (ini_parse("src/Client/network/config.ini", handler, &config) < 0) {
+    if (ini_parse("config/config.ini", handler, &config) < 0) {
         printf("Can't load 'config.ini'\n");
         return 1;
     }
@@ -109,6 +109,8 @@ void init_connection(int argc, char** argv){
     int status = 0;
     char *msg = malloc(100);
     pthread_t thread;
+    j.choix = 0;
+    j.enjeu = 0;
 
 
     cnx.socketClient = open_connection();
