@@ -1,9 +1,10 @@
 #include "ini.h"
 #include "readerIniGame.h"
-#include "../Server/server.h"
+#include "../network/server.h"
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
+
 
 Jeu jeux[2];
 Joueur j1, j2, j3, j4;
@@ -61,18 +62,22 @@ void recupJoueurs(texte1, texte2)
     jeu2.j1 = j3;
     jeu2.j2 = j4;
     jeux[1] = jeu2;
+
 }
 
-/* int main()
+int get_party(Jeu games[2])
 {
     recup recuperationJoueurs;
-    if (ini_parse("config.ini", handler, &recuperationJoueurs) < 0)
+    if (ini_parse("config/config.ini", handler, &recuperationJoueurs) < 0)
     {
         printf("Can't load 'config.ini'\n");
-        return 1;
     }
-    printf("texte1= %s || texte2= %s\n", recuperationJoueurs.texte1, recuperationJoueurs.texte2);
+    // printf("texte1= %s || texte2= %s\n", recuperationJoueurs.texte1, recuperationJoueurs.texte2);
     recupJoueurs(recuperationJoueurs.texte1, recuperationJoueurs.texte2);
-    printf("Les id des joueurs sont: Joueur 1 du jeu#1= %d, Joueur 2 du jeu#1= %d, Joueur 1 du jeu#2 =%d, Joueur 2 du jeu#2= %d", jeux[0].j1.id, jeux[0].j2.id, jeux[1].j1.id, jeux[1].j2.id);
+    // printf("Les id des joueurs sont: Joueur 1 du jeu#1= %d, Joueur 2 du jeu#1= %d, Joueur 1 du jeu#2 =%d, Joueur 2 du jeu#2= %d", jeux[0].j1.id, jeux[0].j2.id, jeux[1].j1.id, jeux[1].j2.id);
+    games[0].j1 = jeux[0].j1;
+    games[0].j2 = jeux[0].j2;
+    games[1].j1 = jeux[1].j1;
+    games[1].j2 = jeux[1].j2;
 }
- */
+ 

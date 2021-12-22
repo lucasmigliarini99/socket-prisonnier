@@ -22,7 +22,7 @@
 
 #include <stdbool.h>
 
-#include "server.h"
+#include "network/server.h"
 
 /*
  *

@@ -10,24 +10,11 @@
 #include <arpa/inet.h>
 
 #include "../network/server.h"
+#include "../config/readerIniGame.h"
 
 Jeu jouer(Jeu jeu);
 
-Jeu jeux[2];
-int i = 0;
 
-void init_jeux()
-{
-    for(i; i<sizeof(jeux); i++)
-    {
-        jeux[i].j1.choix=NULL;
-        jeux[i].j2.choix=NULL;
-        jeux[i].j1.enjeu=0;
-        jeux[i].j2.enjeu=0;
-        jeux[i].j1.score=0;
-        jeux[i].j2.score=0;
-    }
-}
 
 void send_player(connection_t *player, char buffer_in[BUFFERSIZE],char buffer_out[BUFFERSIZE]){
     write(player->sockfd, buffer_out, strlen(buffer_out));
@@ -36,6 +23,8 @@ void send_player(connection_t *player, char buffer_in[BUFFERSIZE],char buffer_ou
 void send_attente(connection_t* connections[MAXSIMULTANEOUSCLIENTS],connection_t *player, Joueur buffer_in[BUFFERSIZE],Joueur buffer_out[BUFFERSIZE]){
 
 
+    Jeu games[2];
+    get_party(games);
     
     for (int i = 0; i < 100; i++)
     {

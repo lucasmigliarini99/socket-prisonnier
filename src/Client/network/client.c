@@ -71,7 +71,7 @@ int open_connection() {
 
     configuration config;
     
-    if (ini_parse("config/config.ini", handler, &config) < 0) {
+    if (ini_parse("src/Client/network/config.ini", handler, &config) < 0) {
         printf("Can't load 'config.ini'\n");
         return 1;
     }
@@ -79,7 +79,6 @@ int open_connection() {
     int sockfd;
 
     struct sockaddr_in serverAddr;
-    int port = 7799;
 
     // Create the socket. 
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
