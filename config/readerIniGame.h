@@ -1,6 +1,9 @@
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
+
 typedef struct
 {
-    int idDeLaGame;
-    int joueur1;
-    int joueur2;
-} game;
+    const char *texte1;
+    const char *texte2;
+} recup;

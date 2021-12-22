@@ -1,24 +1,24 @@
 #include "ini.h"
-#include "readerIniGame.h"
+#include "../Server/server.h"
 #include <string.h>
 #include <stdio.h>
 
+Jeu jeux[2];
+
 void readGame()
 {
-    game partie1;
-
-    if (ini_parse("config/config.ini", handler, &partie1) < 0)
+    if (ini_parse("config/config.ini", handler, &jeux) < 0)
     {
         printf("Can't load 'config.ini'\n");
         return 1;
     }
 }
 
-static int handler(void *Partie, const char *section, const char *name,
+static int handler(void *jeu, const char *section, const char *name,
                    const char *value)
 {
-    // config instance for filling in the values.
-    games *pPartie = (games *)Partie;
+    Jeu jeu1, jeu2;
+    Joueur j1, j2, j3, j4;
     char texteADecouper1;
     char texteADecouper2;
 
@@ -39,16 +39,18 @@ static int handler(void *Partie, const char *section, const char *name,
     char delim[] = "-";
     char *ptr = strtok(texteADecouper1, delim);
 
-    char *tab;
+    char *tab1;
     for (int i = 0; i < 2; i++)
     {
-        tab[i] = ptr;
+        tab1[i] = ptr;
         ptr = strtok(NULL, delim);
     }
 
-    pPartie->partie1.joueur1 = tab[0];
-    pPartie->partie1.joueur2 = tab[1];
-    print("Les joueurs qui jouent sont joueur %i et %i.", pPartie->partie1.joueur1, pPartie->partie1.joueur2);
+    j1.id = tab1[0];
+    j2.id = tab1[1];
+    jeu1.j1 = j1;
+    jeu1.j2 = j2;
+    jeux[0] = jeu1;
 
     // fill the values in config struct for Section 1.
     if (MATCH("Config", "game2"))
@@ -64,16 +66,18 @@ static int handler(void *Partie, const char *section, const char *name,
     char delim[] = "-";
     char *ptr = strtok(texteADecouper2, delim);
 
-    char *tab;
+    char *tab2;
     for (int i = 0; i < 2; i++)
     {
-        tab[i] = ptr;
+        tab2[i] = ptr;
         ptr = strtok(NULL, delim);
     }
 
-    pPartie->partie2.joueur1 = tab[0];
-    pPartie->partie2.joueur2 = tab[1];
-    print("Les joueurs qui jouent sont joueur %i et %i.", pPartie->partie2.joueur1, pPartie->partie2.joueur2);
+    j3.id = tab2[0];
+    j4.id = tab2[1];
+    jeu2.j1 = j3;
+    jeu2.j2 = j4;
+    jeux[1] = jeu2;
 
     return 1;
 }
