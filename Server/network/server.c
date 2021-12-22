@@ -9,9 +9,14 @@
 #include <arpa/inet.h>
 
 #include "server.h"
+#include "../game/game.h"
+
+
+Jeu jouer(Jeu jeu);
 
 connection_t* connections[MAXSIMULTANEOUSCLIENTS];
 int players[MAXSIMULTANEOUSCLIENTS];
+
 
 
 void init_sockets_array() {
@@ -55,7 +60,7 @@ pthread_mutex_unlock(&lock);
  */
 void *threadProcess(void *ptr) {
     Joueur *buffer_in= malloc(sizeof(Joueur));
-    Joueur *buffer_out[BUFFERSIZE];
+    Joueur *buffer_out= malloc(sizeof(Joueur));
 
     
 
@@ -76,6 +81,8 @@ void *threadProcess(void *ptr) {
     printf("Welcome Joueur:%i\n",connection->name);
     write(connection->sockfd, buffer_out, sizeof(Joueur));
 
+    //init_jeux();
+
     while ((len = read(connection->sockfd, buffer_in, sizeof(Joueur))) > 0) {
 
         // if (strncmp(buffer_in, "bye", 3) == 0) {
@@ -90,9 +97,20 @@ void *threadProcess(void *ptr) {
 
         if (buffer_in->enjeu == 0)
         {
-            send_attente(connection,buffer_in,buffer_out);
+            send_attente(connections,connection,buffer_in,buffer_out);
         }
-        
+
+        /*for(i = 0; i<sizeof(jeux); i++)
+        {
+            if(jeux[i].j1.choix != NULL && jeux[i].j2.choix != NULL)
+            {
+                jeux[i] = jouer(jeux[i]);
+                send_player(connections[jeux[i].j1.id],buffer_in, &jeux[i].j1);
+
+                jeux[i].j1.choix = NULL;
+                jeux[i].j2.choix = NULL;
+            }
+        }      */
         
 
         //clear input buffer
@@ -106,20 +124,7 @@ void *threadProcess(void *ptr) {
 
 }
 
-void send_attente(connection_t *player, char buffer_in[BUFFERSIZE],char buffer_out[BUFFERSIZE]){
 
-
-    sprintf(buffer_out, "En attente");
-    for (int i = 0; i < 100; i++)
-    {
-        if(connections[i] != NULL && connections[i]->index == 2){
-            sprintf(buffer_out, "le joueur est là");
-        }      
-    }
-    write(player->sockfd, buffer_out, strlen(buffer_out));
-    
-    
-}
 
 
 int create_server_socket() {

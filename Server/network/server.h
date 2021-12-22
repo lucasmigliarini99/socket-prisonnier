@@ -31,6 +31,12 @@ typedef struct Joueur
     int enjeu;
 } Joueur;
 
+typedef struct Jeu
+{
+    Joueur j1;
+    Joueur j2;
+} Jeu;
+
 
 
 
@@ -39,7 +45,6 @@ void add(connection_t *connection);
 void del(connection_t *connection);
 void *threadProcess(void *ptr);
 int create_server_socket() ;
-void send_all_player(connection_t *player, char buffer_in[BUFFERSIZE],char buffer_out[BUFFERSIZE]);
 
 #endif /* SERVER_H */
 
