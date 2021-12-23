@@ -94,7 +94,7 @@ int open_connection() {
     };
 
     return sockfd;
-}
+} 
 
 void init_connection(int argc, char** argv){
 
@@ -102,6 +102,7 @@ void init_connection(int argc, char** argv){
     int status = 0;
     char *msg = malloc(100);
     pthread_t thread;
+    j.id = 0;
     
 
 

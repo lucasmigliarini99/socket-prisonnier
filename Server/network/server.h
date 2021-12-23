@@ -23,6 +23,7 @@ typedef struct {
 
 typedef struct Joueur
 {
+    int sockfd;
     int id;
     char pseudo[256];
     int score;

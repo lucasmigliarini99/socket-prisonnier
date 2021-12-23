@@ -48,7 +48,7 @@ Jeu get_party(Jeu games[2])
     {
         printf("Can't load 'config.ini'\n");
     }
-    printf("texte1= %s || texte2= %s\n", recuperationJoueurs.texte1, recuperationJoueurs.texte2);
+    //printf("texte1= %s || texte2= %s\n", recuperationJoueurs.texte1, recuperationJoueurs.texte2);
     
 
     char *ptr = strtok(recuperationJoueurs.texte1, "-");
@@ -77,5 +77,5 @@ Jeu get_party(Jeu games[2])
     jeu2.j2 = j4;
     games[1] = jeu2;
 
-   printf("Les id des joueurs sont: Joueur 1 du jeu#1= %d, Joueur 2 du jeu#1= %d, Joueur 1 du jeu#2 =%d, Joueur 2 du jeu#2= %d", games[0].j1.id, games[0].j2.id, games[1].j1.id, games[1].j2.id);
+   //printf("Les id des joueurs sont: Joueur 1 du jeu#1= %d, Joueur 2 du jeu#1= %d, Joueur 1 du jeu#2 =%d, Joueur 2 du jeu#2= %d", games[0].j1.id, games[0].j2.id, games[1].j1.id, games[1].j2.id);
 }

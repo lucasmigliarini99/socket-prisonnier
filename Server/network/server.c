@@ -10,9 +10,11 @@
 
 #include "server.h"
 #include "../game/game.h"
+#include "../config/readerIniGame.h"
 
 
 Jeu jouer(Jeu jeu);
+Jeu games[2];
 
 connection_t* connections[MAXSIMULTANEOUSCLIENTS];
 int players[MAXSIMULTANEOUSCLIENTS];
@@ -73,7 +75,8 @@ void *threadProcess(void *ptr) {
 
     add(connection);
 
-    buffer_in.id = connection->index;
+    
+    
     //addPlayer(connection->index);
 
     //Welcome the new client
@@ -87,6 +90,18 @@ void *threadProcess(void *ptr) {
         // if (strncmp(buffer_in, "bye", 3) == 0) {
         //     break;
         // }
+        printf("id: %d\n",buffer_in.id);
+        if (buffer_in.id == 0)
+        {
+            buffer_in.id = connection->index;
+        }
+        
+        if (buffer_in.sockfd == 0)
+        {
+            buffer_in.sockfd = connection->sockfd;
+        }
+        printf("id2: %d\n",buffer_in.id);
+        printf("sokect: %d\n",buffer_in.sockfd);
 
         printf("DEBUG-----------------------------------------------------------\n");
         printf("Player: %i\n",connection->name);
@@ -130,7 +145,48 @@ void *threadProcess(void *ptr) {
 }
 
 
+void send_wait(connection_t* connections[MAXSIMULTANEOUSCLIENTS],connection_t *player, Joueur buffer_in){
 
+    printf("id wait: %d\n",buffer_in.id);
+    
+    
+
+    for (int i = 0; i < 2; i++)
+    {
+        if (buffer_in.id == games[i].j1.id)
+        {
+            games[i].j1 = buffer_in; 
+        }
+
+        if (buffer_in.id == games[i].j2.id)
+        {
+            games[i].j2 = buffer_in; 
+        }
+    }
+
+    printf("j1: %d\n",games[0].j1.sockfd);
+    printf("j2: %d\n",games[0].j2.sockfd);
+    
+    
+    if (games[0].j1.sockfd != 0 && games[0].j2.sockfd != 0)
+    {
+        printf("La partie 1 peut commencer !");
+        write(games[0].j1.sockfd, &games[0].j1, sizeof(Joueur));
+        write(games[0].j1.sockfd, &games[0].j2, sizeof(Joueur));
+    }
+    
+
+
+    
+    write(player->sockfd, &buffer_in, sizeof(buffer_in));
+    printf("coucoyuc\n");
+    
+    
+}
+
+void send_player(connection_t *player, char buffer_in[BUFFERSIZE],char buffer_out[BUFFERSIZE]){
+    write(player->sockfd, buffer_out, strlen(buffer_out));
+}
 
 int create_server_socket() {
     int sockfd = -1;
@@ -163,7 +219,7 @@ int create_server_socket() {
         fprintf(stderr, "error: cannot bind socket to port %d\n", port);
         return -4;
     }
-
+    get_party(games);
     return sockfd;
 }
 
