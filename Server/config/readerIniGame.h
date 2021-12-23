@@ -1,6 +1,3 @@
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
 #include <pthread.h>
 #include <sys/socket.h>
 #include <unistd.h>
@@ -13,4 +10,4 @@ typedef struct
     const char *texte2;
 } recup;
 
-int get_party(Jeu games[2]);
+Jeu get_party(Jeu games[2]);

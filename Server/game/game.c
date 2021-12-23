@@ -7,12 +7,13 @@
 #include <pthread.h>
 #include <sys/socket.h>
 #include <unistd.h>
-#include <arpa/inet.h>
+#include <arpa/inet.h> 
+
 
 #include "../network/server.h"
 #include "../config/readerIniGame.h"
 
-Jeu jouer(Jeu jeu);
+
 
 
 
@@ -20,19 +21,21 @@ void send_player(connection_t *player, char buffer_in[BUFFERSIZE],char buffer_ou
     write(player->sockfd, buffer_out, strlen(buffer_out));
 }
 
-void send_attente(connection_t* connections[MAXSIMULTANEOUSCLIENTS],connection_t *player, Joueur buffer_in[BUFFERSIZE],Joueur buffer_out[BUFFERSIZE]){
+void send_wait(connection_t* connections[MAXSIMULTANEOUSCLIENTS],connection_t *player, Joueur buffer_in){
 
 
-    Jeu games[2];
-    get_party(games);
+    /*Jeu games[2];
+    get_party(games);*/
     
     for (int i = 0; i < 100; i++)
     {
         if(connections[i] != NULL && connections[i]->index == 2){
-            buffer_out->enjeu = 1;
+            printf("Joueur 2 est là !\n");
         }      
     }
-    write(player->sockfd, buffer_out, sizeof(buffer_out));
+    buffer_in.enjeu = 1;
+    write(player->sockfd, &buffer_in, sizeof(buffer_in));
+    printf("coucoyuc\n");
     
     
 }

@@ -43,21 +43,15 @@ static int handler(void* config, const char* section, const char* name,
 }
 
 void *threadProcess(void * ptr) {
-    char buffer_in[BUFFERSIZE]; 
+    Joueur *buffer_in= malloc(sizeof(Joueur));
     int sockfd = *((int *) ptr);
     int len;
 
-    save = sockfd;
-
     
-    while ((len = read(sockfd, buffer_in, BUFFERSIZE)) != 0 && 1) {
+    while ((len = read(sockfd, buffer_in, sizeof(Joueur))) != 0 && 1) {
        
-        if (strncmp(buffer_in, "exit", 4) == 0) {
-            break;
-        }
-        
-        printf("receive %d chars\n", len);
-        printf("%.*s\n", len, buffer_in);
+        j.enjeu = buffer_in->enjeu;
+        printf("%s\n", buffer_in->pseudo);
 
         
     }
@@ -108,8 +102,7 @@ void init_connection(int argc, char** argv){
     int status = 0;
     char *msg = malloc(100);
     pthread_t thread;
-    j.choix = 0;
-    j.enjeu = 0;
+    
 
 
     cnx.socketClient = open_connection();
@@ -119,11 +112,12 @@ void init_connection(int argc, char** argv){
 
 void send_pseudo(char *pseudo){
     sprintf(j.pseudo, pseudo);
+    
     printf("Send pseudo \n");
     write(cnx.socketClient, &j, sizeof(j));
 }
 
-void send_action(char msg[33]){
+void send_action(){
     //send(cnx.socketClient, &msg, sizeof(msg),0);
     //recv(cnx.socketClient, msg, 32, 0);
     printf("Send action \n");

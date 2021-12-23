@@ -59,8 +59,8 @@ pthread_mutex_unlock(&lock);
  * @return 
  */
 void *threadProcess(void *ptr) {
-    Joueur *buffer_in= malloc(sizeof(Joueur));
-    Joueur *buffer_out= malloc(sizeof(Joueur));
+    Joueur buffer_in;
+    //Joueur *buffer_out= malloc(sizeof(Joueur));
 
     
 
@@ -73,17 +73,16 @@ void *threadProcess(void *ptr) {
 
     add(connection);
 
-    buffer_in->id = connection->index;
+    buffer_in.id = connection->index;
     //addPlayer(connection->index);
 
     //Welcome the new client
     printf("Welcomeeeee #%i\n", connection->index);
     printf("Welcome Joueur:%i\n",connection->name);
-    write(connection->sockfd, buffer_out, sizeof(Joueur));
 
     //init_jeux();
 
-    while ((len = read(connection->sockfd, buffer_in, sizeof(Joueur))) > 0) {
+    while ((len = read(connection->sockfd, &buffer_in, sizeof(Joueur))) > 0) {
 
         // if (strncmp(buffer_in, "bye", 3) == 0) {
         //     break;
@@ -92,13 +91,19 @@ void *threadProcess(void *ptr) {
         printf("DEBUG-----------------------------------------------------------\n");
         printf("Player: %i\n",connection->name);
         printf("len : %i\n", len);
-        printf("Buffer : %s\n",buffer_in->pseudo);
+        printf("Buffer : %s\n",buffer_in.pseudo);
+        printf("En jeu : %d\n",buffer_in.enjeu);
         printf("----------------------------------------------------------------\n");
 
-        if (buffer_in->enjeu == 0)
+        if (buffer_in.enjeu == 0)
         {
-            send_attente(connections,connection,buffer_in,buffer_out);
+            send_wait(connections,connection,buffer_in);
         }
+
+        // sprintf(buffer_in.pseudo, "jesuistest");
+        // buffer_in.enjeu = 1;
+        // printf("En jeu: %d\n",buffer_in.enjeu);
+        // write(connection->sockfd, &buffer_in, sizeof(buffer_in));
 
         /*for(i = 0; i<sizeof(jeux); i++)
         {
@@ -114,7 +119,7 @@ void *threadProcess(void *ptr) {
         
 
         //clear input buffer
-        memset(buffer_in, '\0', sizeof(Joueur));
+       // memset(buffer_in, '\0', sizeof(Joueur));
     }
     printf("Connection to client %i ended \n", connection->index);
     close(connection->sockfd);
