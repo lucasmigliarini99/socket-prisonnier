@@ -62,6 +62,8 @@ Jeu jouer(Joueur j1, Joueur j2)
             }
         }
     }
+    j1.score_adverse = j2.score;
+    j2.score_adverse = j1.score;
     jeu.j1 = j1;
     jeu.j2 = j2;
     return jeu;

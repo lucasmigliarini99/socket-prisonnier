@@ -6,13 +6,6 @@
  */
 #include <pthread.h>
 
-typedef struct
-{
-    int score;
-    char pseudo[64];
-    int *choix;
-
-} Joueurss;
 
 void on_window_main_destroy();
 void on_button_click();

@@ -15,13 +15,12 @@
 #include "view.h"
 
 #include "../network/client.h"
-/* #include "../network/ini.h" */
 
 #include <gtk/gtk.h>
 
 GtkBuilder *builder = NULL;
 
-Joueur joueur;
+Jeu games;
 
 int sockfd;
 
@@ -175,7 +174,23 @@ void on_Taire()
     win3 = GTK_WIDGET(gtk_builder_get_object(builder, "Win_Score"));
 
    
-    send_action(1);
+    //regarde la nombre de tour, si il est egale a 5 le jeu s'arrete.
+    if (compteur == 4)
+    {
+        //arret du timer
+        g_source_remove(timer_id);
+
+        //fermeture de la fenetre actuelle
+        gtk_widget_hide(win2);
+
+        //ouverture de la fenêtre suivante
+        gtk_widget_show(win3);
+    }
+
+    send_action(2);
+
+    //incrementation du compteur de round
+    compteur++;
 }
 
 void on_Rejouer()

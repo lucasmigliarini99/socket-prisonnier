@@ -27,6 +27,7 @@ typedef struct Joueur
     int id;
     char pseudo[256];
     int score;
+    int score_adverse;
     int choix;
     int message;
     int enjeu;
