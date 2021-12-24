@@ -19,33 +19,18 @@ LFLAGS = -pthread
 OUTPUT	:= output
 
 # define source directory
-SRC_CLIENT		:= src/Client/network
-SRC_SERVER      := Server/network
-SRC_GAME		:= Server/game
-
-# define include directory
-INCLUDE	:= src/Client/interface
-
-# define lib directory
-#LIB		:= lib
-
+SRC_CLIENT		:= src/Client
+SRC_SERVER      := src/Server
 
 CLIENT_MAIN := client
 SERVER_MAIN := server
-CLIENT_SOURCEDIRS	:= $(shell find $(SRC_CLIENT) -type d) $(shell find $(SRC_GAME) -type d)
-SERVER_SOURCEDIRS   := $(shell find $(SRC_SERVER) -type d) $(shell find $(SRC_GAME) -type d)
+CLIENT_SOURCEDIRS	:= $(shell find $(SRC_CLIENT) -type d)
+SERVER_SOURCEDIRS   := $(shell find $(SRC_SERVER) -type d)
 
-INCLUDEDIRS	:= $(shell find $(INCLUDE) -type d)
-#LIBDIRS		:= $(shell find $(LIB) -type d)
 FIXPATH = $1
 RM = rm -f
 MD	:= mkdir -p
 
-# define any directories containing header files other than /usr/include
-INCLUDES	:= $(patsubst %,-I%, $(INCLUDEDIRS:%/=%))
-
-# define the C libs
-#LIBS		:= $(patsubst %,-L%, $(LIBDIRS:%/=%))
 
 # define the C source files
 CLIENT_SOURCES		:= $(wildcard $(patsubst %,%/*.c, $(CLIENT_SOURCEDIRS)))
@@ -75,22 +60,22 @@ all: $(OUTPUT) $(CLIENT_MAIN) $(SERVER_MAIN)
 
 # Client compilation
 $(CLIENT_MAIN): $(OUTPUT) $(CLIENT_OBJECTS)
-	$(CC) $(CFLAGS) $(GTK1) $(INCLUDES) -o $(CLIENT_OUTPUTMAIN) $(CLIENT_OBJECTS) $(LFLAGS) $(GTK2)
-	rsync -rupE $(INCLUDE)/config $(OUTPUT)
+	$(CC) $(CFLAGS) $(GTK1) -o $(CLIENT_OUTPUTMAIN) $(CLIENT_OBJECTS) $(LFLAGS) $(GTK2) $(GTK1)
+	rsync -rupE $(OUTPUT)
 
 
 
 # Server compilation
 $(SERVER_MAIN): $(OUTPUT) $(SERVER_OBJECTS)
-	$(CC) $(CFLAGS) $(INCLUDES) -o $(SERVER_OUTPUTMAIN) $(SERVER_OBJECTS) $(LFLAGS)
-	rsync -rupE $(INCLUDE)/config $(OUTPUT)
+	$(CC) $(CFLAGS) -o $(SERVER_OUTPUTMAIN) $(SERVER_OBJECTS) $(LFLAGS)
+	rsync -rupE $(OUTPUT)
 
 # this is a suffix replacement rule for building .o's from .c's
 # it uses automatic variables $<: the name of the prerequisite of
 # the rule(a .c file) and $@: the name of the target of the rule (a .o file) 
 # (see the gnu make manual section about automatic variables)
 .c.o:
-	$(CC) $(GTK1) $(CFLAGS) $(INCLUDES) -c $<  -o $@
+	$(CC) $(GTK1) $(CFLAGS) -c $<  -o $@
 
 .PHONY: clean
 
