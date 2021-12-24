@@ -6,29 +6,26 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Thu Dec 23 23:32:20 2021
+# Make data base, printed on Fri Dec 24 12:04:30 2021
 
 # Variables
 
 # environment
 GDK_BACKEND = x11
-# makefile (from 'Makefile', line 20)
+# makefile (from 'Makefile', line 19)
 OUTPUT := output
 # environment
 LC_ALL = C
 # environment
 NO_AT_BRIDGE = 1
-# makefile (from 'Makefile', line 23)
-SRC := src
-# makefile (from 'Makefile', line 46)
+# makefile (from 'Makefile', line 30)
+CLIENT_MAIN := client
+# makefile (from 'Makefile', line 39)
 MD := mkdir -p
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-a1234dc8-bf4b-46d7-8d12-feebc66eb58f.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-600cffc9-b23d-4c5c-8a24-75b2cbe89406.sock
 # environment
 VSCODE_CWD = /home/student
-# makefile (from 'Makefile', line 53)
- 
-LIBS := -L. -L./.git -L./.git/branches -L./.git/hooks -L./.git/info -L./.git/refs -L./.git/refs/heads -L./.git/refs/tags -L./.git/refs/remotes -L./.git/refs/remotes/origin -L./.git/objects -L./.git/objects/pack -L./.git/objects/info -L./.git/objects/2d -L./.git/objects/ff -L./.git/objects/c0 -L./.git/objects/17 -L./.git/objects/fb -L./.git/objects/ab -L./.git/objects/68 -L./.git/objects/40 -L./.git/objects/ea -L./.git/objects/0e -L./.git/objects/76 -L./.git/objects/00 -L./.git/objects/16 -L./.git/objects/86 -L./.git/objects/a8 -L./.git/objects/7f -L./.git/objects/11 -L./.git/objects/8e -L./.git/objects/20 -L./.git/objects/f8 -L./.git/objects/e3 -L./.git/objects/f5 -L./.git/objects/ac -L./.git/objects/f0 -L./.git/objects/d5 -L./.git/objects/fc -L./.git/objects/eb -L./.git/objects/d3 -L./.git/objects/d8 -L./.git/logs -L./.git/logs/refs -L./.git/logs/refs/remotes -L./.git/logs/refs/remotes/origin -L./.git/logs/refs/heads -L./.vscode -L./Server -L./Server/game -L./Server/network -L./Server/config -L./output -L./src -L./src/Client -L./src/Client/interface -L./src/Client/network
 # environment
 GDM_LANG = en_US.utf8
 # default
@@ -83,6 +80,8 @@ MAKEFLAGS = pqrR
 CURDIR := /home/student/Desktop/socket-prisonnier
 # environment
 VSCODE_PIPE_LOGGING = true
+# makefile (from 'Makefile', line 32)
+CLIENT_SOURCEDIRS := src/Client src/Client/interface src/Client/network
 # environment
 APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
 # environment
@@ -92,17 +91,17 @@ LESSOPEN = ||/usr/bin/lesspipe.sh %s
 # environment
 MFLAGS = -pqrR
 # environment
-SSH_AUTH_SOCK = /tmp/ssh-XXXXXXKDg5do/agent.1311
+SSH_AUTH_SOCK = /tmp/ssh-XXXXXX7rCxep/agent.1320
 # default
 .SHELLFLAGS := -c
-# makefile (from 'Makefile', line 67)
-OUTPUTMAIN := output/main
 # environment
 HISTSIZE = 1000
 # environment
 XDG_CONFIG_DIRS = /etc/xdg
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
+# makefile (from 'Makefile', line 47)
+CLIENT_SOURCES := src/Client/launchClient.c src/Client/interface/view.c src/Client/network/client.c src/Client/network/ini.c
 # environment
 XDG_SESSION_DESKTOP = xfce
 # environment
@@ -111,18 +110,18 @@ VSCODE_CRASH_REPORTER_START_OPTIONS = {"companyName":"Microsoft","productName":"
 MAKEFILE_LIST := Makefile
 # automatic
 @F = $(notdir $@)
+# makefile (from 'Makefile', line 51)
+CLIENT_OBJECTS := src/Client/launchClient.o src/Client/interface/view.o src/Client/network/client.o src/Client/network/ini.o
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 1892
+VSCODE_PID = 1888
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
-# makefile (from 'Makefile', line 50)
-INCLUDES := -I. -I./.git -I./.git/branches -I./.git/hooks -I./.git/info -I./.git/refs -I./.git/refs/heads -I./.git/refs/tags -I./.git/refs/remotes -I./.git/refs/remotes/origin -I./.git/objects -I./.git/objects/pack -I./.git/objects/info -I./.git/objects/2d -I./.git/objects/ff -I./.git/objects/c0 -I./.git/objects/17 -I./.git/objects/fb -I./.git/objects/ab -I./.git/objects/68 -I./.git/objects/40 -I./.git/objects/ea -I./.git/objects/0e -I./.git/objects/76 -I./.git/objects/00 -I./.git/objects/16 -I./.git/objects/86 -I./.git/objects/a8 -I./.git/objects/7f -I./.git/objects/11 -I./.git/objects/8e -I./.git/objects/20 -I./.git/objects/f8 -I./.git/objects/e3 -I./.git/objects/f5 -I./.git/objects/ac -I./.git/objects/f0 -I./.git/objects/d5 -I./.git/objects/fc -I./.git/objects/eb -I./.git/objects/d3 -I./.git/objects/d8 -I./.git/logs -I./.git/logs/refs -I./.git/logs/refs/remotes -I./.git/logs/refs/remotes/origin -I./.git/logs/refs/heads -I./.vscode -I./Server -I./Server/game -I./Server/network -I./Server/config -I./output -I./src -I./src/Client -I./src/Client/interface -I./src/Client/network
 # environment
-SESSION_MANAGER = local/unix:@/tmp/.ICE-unix/1311,unix/unix:/tmp/.ICE-unix/1311
+SESSION_MANAGER = local/unix:@/tmp/.ICE-unix/1320,unix/unix:/tmp/.ICE-unix/1320
 # automatic
 *F = $(notdir $*)
 # environment
@@ -135,6 +134,8 @@ DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
 VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
 # environment
 BREAKPAD_DUMP_LOCATION = /home/student/.config/Code/exthost Crash Reports
+# makefile (from 'Makefile', line 60)
+SERVER_OUTPUTMAIN := output/server
 # default
 MAKE_HOST := x86_64-redhat-linux-gnu
 # environment
@@ -151,6 +152,8 @@ SHLVL = 0
 MAKELEVEL := 0
 # default
 MAKE = $(MAKE_COMMAND)
+# makefile (from 'Makefile', line 33)
+SERVER_SOURCEDIRS := src/Server src/Server/game src/Server/network src/Server/config
 # environment
 IMSETTINGS_MODULE = none
 # environment
@@ -161,16 +164,16 @@ MOZ_GMP_PATH = /usr/lib64/mozilla/plugins/gmp-gmpopenh264/system-installed
 MAKEFILES := 
 # automatic
 ^F = $(notdir $^)
-# makefile (from 'Makefile', line 40)
-MAIN := main
-# makefile (from 'Makefile', line 43)
-LIBDIRS := . ./.git ./.git/branches ./.git/hooks ./.git/info ./.git/refs ./.git/refs/heads ./.git/refs/tags ./.git/refs/remotes ./.git/refs/remotes/origin ./.git/objects ./.git/objects/pack ./.git/objects/info ./.git/objects/2d ./.git/objects/ff ./.git/objects/c0 ./.git/objects/17 ./.git/objects/fb ./.git/objects/ab ./.git/objects/68 ./.git/objects/40 ./.git/objects/ea ./.git/objects/0e ./.git/objects/76 ./.git/objects/00 ./.git/objects/16 ./.git/objects/86 ./.git/objects/a8 ./.git/objects/7f ./.git/objects/11 ./.git/objects/8e ./.git/objects/20 ./.git/objects/f8 ./.git/objects/e3 ./.git/objects/f5 ./.git/objects/ac ./.git/objects/f0 ./.git/objects/d5 ./.git/objects/fc ./.git/objects/eb ./.git/objects/d3 ./.git/objects/d8 ./.git/logs ./.git/logs/refs ./.git/logs/refs/remotes ./.git/logs/refs/remotes/origin ./.git/logs/refs/heads ./.vscode ./Server ./Server/game ./Server/network ./Server/config ./output ./src ./src/Client ./src/Client/interface ./src/Client/network
+# makefile (from 'Makefile', line 23)
+SRC_SERVER := src/Server
 # environment
 VSCODE_LOG_NATIVE = false
+# makefile (from 'Makefile', line 59)
+CLIENT_OUTPUTMAIN := output/client
 # automatic
 ?F = $(notdir $?)
-# makefile (from 'Makefile', line 42)
-INCLUDEDIRS := . ./.git ./.git/branches ./.git/hooks ./.git/info ./.git/refs ./.git/refs/heads ./.git/refs/tags ./.git/refs/remotes ./.git/refs/remotes/origin ./.git/objects ./.git/objects/pack ./.git/objects/info ./.git/objects/2d ./.git/objects/ff ./.git/objects/c0 ./.git/objects/17 ./.git/objects/fb ./.git/objects/ab ./.git/objects/68 ./.git/objects/40 ./.git/objects/ea ./.git/objects/0e ./.git/objects/76 ./.git/objects/00 ./.git/objects/16 ./.git/objects/86 ./.git/objects/a8 ./.git/objects/7f ./.git/objects/11 ./.git/objects/8e ./.git/objects/20 ./.git/objects/f8 ./.git/objects/e3 ./.git/objects/f5 ./.git/objects/ac ./.git/objects/f0 ./.git/objects/d5 ./.git/objects/fc ./.git/objects/eb ./.git/objects/d3 ./.git/objects/d8 ./.git/logs ./.git/logs/refs ./.git/logs/refs/remotes ./.git/logs/refs/remotes/origin ./.git/logs/refs/heads ./.vscode ./Server ./Server/game ./Server/network ./Server/config ./output ./src ./src/Client ./src/Client/interface ./src/Client/network
+# makefile (from 'Makefile', line 31)
+SERVER_MAIN := server
 # environment
 XDG_SEAT = seat0
 # environment
@@ -183,19 +186,19 @@ XDG_SEAT_PATH = /org/freedesktop/DisplayManager/Seat0
 DESKTOP_SESSION = xfce
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = XFCE
-# makefile (from 'Makefile', line 59)
-OBJECTS := src/main.o src/Client/interface/view.o src/Client/network/client.o src/Client/network/ini.o
 # 'override' directive
 GNUMAKEFLAGS := 
 # makefile (from 'Makefile', line 8)
 GTK1 = `pkg-config --cflags gtk+-3.0` -rdynamic
 # environment
 LOGNAME = student
+# makefile (from 'Makefile', line 22)
+SRC_CLIENT := src/Client
 # environment
 XDG_VTNR = 1
 # makefile
-.DEFAULT_GOAL := all
-# makefile (from 'Makefile', line 45)
+.DEFAULT_GOAL := output
+# makefile (from 'Makefile', line 38)
 RM = rm -f
 # environment
 HISTCONTROL = ignoredups
@@ -209,20 +212,18 @@ USER = student
 MAKE_VERSION := 4.3
 # 'override' directive
 .SHELLSTATUS := 0
-# makefile (from 'Makefile', line 44)
+# makefile (from 'Makefile', line 37)
 FIXPATH = $1
 # environment
 which_declare = declare -f
-# makefile (from 'Makefile', line 41)
-SOURCEDIRS := src src/Client src/Client/interface src/Client/network
 # environment
-SSH_AGENT_PID = 1473
+SSH_AGENT_PID = 1482
 # environment
 _ = /usr/bin/make
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
-# makefile (from 'Makefile', line 12)
-CFLAGS := -Wall -Wextra -g
+# makefile (from 'Makefile', line 11)
+CFLAGS := -Wall -Wextra -g -std=c11 -D_GNU_SOURCE 
 # environment
 XDG_SESSION_CLASS = user
 # environment
@@ -233,6 +234,8 @@ HOME = /home/student
 QT_IM_MODULE = xim
 # makefile (from 'Makefile', line 9)
 GTK2 = `pkg-config --libs gtk+-3.0`
+# makefile (from 'Makefile', line 52)
+SERVER_OBJECTS := src/Server/launchServer.o src/Server/game/game.o src/Server/network/server.o src/Server/config/ini.o src/Server/config/readerIniGame.o
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
@@ -251,20 +254,20 @@ PANEL_GDK_CORE_DEVICE_EVENTS = 0
 SUFFIXES := 
 # environment
 XDG_GREETER_DATA_DIR = /var/lib/lightdm-data/student
+# makefile (from 'Makefile', line 48)
+SERVER_SOURCES := src/Server/launchServer.c src/Server/game/game.c src/Server/network/server.c src/Server/config/ini.c src/Server/config/readerIniGame.c
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell nocomment grouped-target extra-prereqs archives jobserver output-sync check-symlink guile load
 # makefile (from 'Makefile', line 7)
-CC = gcc
-# makefile (from 'Makefile', line 17)
-LFLAGS = -lpthread
-# makefile (from 'Makefile', line 56)
-SOURCES := src/main.c src/Client/interface/view.c src/Client/network/client.c src/Client/network/ini.c
+CC = gcc 
+# makefile (from 'Makefile', line 16)
+LFLAGS = -pthread 
 # environment
 XDG_MENU_PREFIX = xfce-
 # environment
 GDMSESSION = xfce
 # variable set hash-table stats:
-# Load=124/1024=12%, Rehash=0, Collisions=16/194=8%
+# Load=126/1024=12%, Rehash=0, Collisions=8/199=4%
 
 # Pattern-specific Variable Values
 
@@ -272,13 +275,17 @@ GDMSESSION = xfce
 
 # Directories
 
-# src/Client (device 41, inode 41432): 4 files, no impossibilities.
-# src (device 41, inode 41431): 5 files, no impossibilities.
+# src/Server (device 41, inode 41421): 7 files, no impossibilities.
+# src/Client (device 41, inode 41432): 6 files, no impossibilities.
+# src/Server/network (device 41, inode 41462): 5 files, no impossibilities.
 # src/Client/network (device 41, inode 41438): 9 files, no impossibilities.
-# . (device 41, inode 41354): 9 files, no impossibilities.
+# . (device 41, inode 41354): 8 files, no impossibilities.
+ 
 # src/Client/interface (device 41, inode 41433): 7 files, no impossibilities.
+# src/Server/game (device 41, inode 41459): 5 files, no impossibilities.
+# src/Server/config (device 41, inode 42157): 9 files, no impossibilities.
 
-# 34 files, no impossibilities in 5 directories.
+# 56 files, no impossibilities in 8 directories.
 
 # Implicit Rules
 
@@ -290,13 +297,47 @@ GDMSESSION = xfce
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 83):
-	$(CC) $(CFLAGS) $(GTK1) $(INCLUDES) -c $<  -o $@
+#  recipe to execute (from 'Makefile', line 89):
+	$(CC) $(GTK1) $(CFLAGS) -c $<  -o $@
+
+client: output src/Client/launchClient.o src/Client/interface/view.o src/Client/network/client.o src/Client/network/ini.o
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: ''
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := client
+# automatic
+# * := 
+# automatic
+# < := output
+# automatic
+# + := output src/Client/launchClient.o src/Client/interface/view.o src/Client/network/client.o src/Client/network/ini.o
+# automatic
+# % := 
+# automatic
+# ^ := output src/Client/launchClient.o src/Client/interface/view.o src/Client/network/client.o src/Client/network/ini.o
+# automatic
+# ? := output src/Client/launchClient.o src/Client/interface/view.o src/Client/network/client.o src/Client/network/ini.o
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=3/20=15%
+#  recipe to execute (from 'Makefile', line 74):
+	$(CC) $(CFLAGS) $(GTK1) -o $(CLIENT_OUTPUTMAIN) $(CLIENT_OBJECTS) $(LFLAGS) $(GTK2) $(GTK1)
+	rsync -rupE $(OUTPUT)
+
+# Not a target:
+src/Server/game/game.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2021-12-23 23:32:13.455479266
+#  Last modified 2021-12-24 12:03:49.175298845
 #  File has been updated.
 #  Successfully updated.
 
@@ -305,22 +346,43 @@ clean:
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 87):
-	$(RM) $(OUTPUTMAIN)
-	$(RM) $(call FIXPATH,$(OBJECTS))
+#  recipe to execute (from 'Makefile', line 96):
+	$(RM) -R $(OUTPUT)
+	$(RM) $(call FIXPATH,$(CLIENT_OBJECTS))
+	$(RM) $(call FIXPATH,$(SERVER_OBJECTS))
 	@echo Cleanup complete!
 
+server: output src/Server/launchServer.o src/Server/game/game.o src/Server/network/server.o src/Server/config/ini.o src/Server/config/readerIniGame.o
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 81):
+	$(CC) $(CFLAGS) -o $(SERVER_OUTPUTMAIN) $(SERVER_OBJECTS) $(LFLAGS)
+	rsync -rupE $(OUTPUT)
+
 # Not a target:
-src/Client/network/ini.o:
+src/Server/config/readerIniGame.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+src/Client/launchClient.o:
 #  Implicit rule search has been done.
-#  Last modified 2021-12-23 11:18:35.637534315
+#  Last modified 2021-12-24 11:54:40.06666354
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
-src/main.o:
+src/Server/launchServer.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+src/Client/network/ini.o:
 #  Implicit rule search has been done.
-#  Last modified 2021-12-23 11:18:17.589649513
+#  Last modified 2021-12-24 11:28:15.20080636
 #  File has been updated.
 #  Successfully updated.
 
@@ -332,13 +394,13 @@ src/main.o:
 
 output:
 #  Implicit rule search has not been done.
-#  Last modified 2021-12-23 23:32:16.977461869
+#  Last modified 2021-12-24 12:04:08.369217398
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 73):
+#  recipe to execute (from 'Makefile', line 65):
 	$(MD) $(OUTPUT)
 
-all: output main
+all: output client server
 #  Command line target.
 #  Implicit rule search has not been done.
 #  File does not exist.
@@ -346,58 +408,50 @@ all: output main
 #  Needs to be updated (-q is set).
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/12=0%
-#  recipe to execute (from 'Makefile', line 70):
-	@echo Executing 'all' complete!
+#  recipe to execute (from 'Makefile', line 69):
+	@echo All compilation completed !
 
 run: all
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 92):
-	./$(OUTPUTMAIN)
+#  recipe to execute (from 'Makefile', line 102):
+	timeout 2 ./$(SERVER_OUTPUTMAIN)&
+	./$(CLIENT_OUTPUTMAIN)
 	@echo Executing 'run: all' complete!
 
- 
-main: src/main.o src/Client/interface/view.o src/Client/network/client.o src/Client/network/ini.o
+# Not a target:
+src/Server/config/ini.o:
 #  Implicit rule search has not been done.
-#  Implicit/static pattern stem: ''
-#  File does not exist.
-#  File has been updated.
-#  Needs to be updated (-q is set).
-# automatic
-# @ := main
-# automatic
-# * := 
-# automatic
-# < := src/main.o
-# automatic
-# + := src/main.o src/Client/interface/view.o src/Client/network/client.o src/Client/network/ini.o
-# automatic
-# % := 
-# automatic
-# ^ := src/main.o src/Client/interface/view.o src/Client/network/client.o src/Client/network/ini.o
-# automatic
-# ? := src/main.o src/Client/interface/view.o src/Client/network/client.o src/Client/network/ini.o
-# automatic
-# | := 
-# variable set hash-table stats:
-# Load=8/32=25%, Rehash=0, Collisions=6/20=30%
-#  recipe to execute (from 'Makefile', line 76):
-	$(CC) $(CFLAGS) $(GTK1) $(INCLUDES) -o $(OUTPUTMAIN) $(OBJECTS) $(LFLAGS) $(LIBS) $(GTK2)
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 src/Client/interface/view.o:
 #  Implicit rule search has been done.
-#  Last modified 2021-12-23 19:32:33.816320669
+#  Last modified 2021-12-24 11:28:14.783808311
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 src/Client/network/client.o:
 #  Implicit rule search has been done.
-#  Last modified 2021-12-23 23:28:47.759493201
+#  Last modified 2021-12-24 11:28:15.01480723
 #  File has been updated.
 #  Successfully updated.
+
+# Not a target:
+src/Server/network/server.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+documentation:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 107):
+	doxygen
 
 # Not a target:
 .SUFFIXES:
@@ -411,19 +465,20 @@ src/Client/network/client.o:
 #  File has not been updated.
 
 # files hash-table stats:
-# Load=14/1024=1%, Rehash=0, Collisions=0/37=0%
+# Load=21/1024=2%, Rehash=0, Collisions=0/52=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 43 / storage = 430 B / avg = 10 B
-# current buf: size = 8162 B / used = 430 B / count = 43 / avg = 10 B
+# strcache buffers: 1 (0) / strings = 65 / storage = 807 B / avg = 12 B
+# current buf: size = 8162 B / used = 807 B / count = 65 / avg = 12 B
 
-# strcache performance: lookups = 70 / hit rate = 38%
+# strcache performance: lookups = 107 / hit rate = 39%
 # hash-table stats:
-# Load=43/8192=1%, Rehash=0, Collisions=0/70=0%
-# Finished Make data base on Thu Dec 23 23:32:20 2021
+ 
+# Load=65/8192=1%, Rehash=0, Collisions=0/107=0%
+# Finished Make data base on Fri Dec 24 12:04:30 2021
 
  

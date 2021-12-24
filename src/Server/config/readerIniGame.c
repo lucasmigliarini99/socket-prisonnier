@@ -44,7 +44,7 @@ static int handler(void *recuperationJoueurs, const char *section, const char *n
 Jeu get_party(Jeu games[2])
 {
     recup recuperationJoueurs;
-    if (ini_parse("config/config.ini", handler, &recuperationJoueurs) < 0)
+    if (ini_parse("src/Server/config/config.ini", handler, &recuperationJoueurs) < 0)
     {
         printf("Can't load 'config.ini'\n");
     }
@@ -67,7 +67,7 @@ Jeu get_party(Jeu games[2])
 
     char *ptr2 = strtok(recuperationJoueurs.texte2, "-");
     char *joueur3 = ptr2;
-    ptr = strtok(NULL, "-");
+    ptr2 = strtok(NULL, "-");
     char *joueur4 = ptr2;
     int id3 = atoi(joueur3);
     int id4 = atoi(joueur4);
@@ -77,5 +77,5 @@ Jeu get_party(Jeu games[2])
     jeu2.j2 = j4;
     games[1] = jeu2;
 
-   //printf("Les id des joueurs sont: Joueur 1 du jeu#1= %d, Joueur 2 du jeu#1= %d, Joueur 1 du jeu#2 =%d, Joueur 2 du jeu#2= %d", games[0].j1.id, games[0].j2.id, games[1].j1.id, games[1].j2.id);
+   printf("Les id des joueurs sont: Joueur 1 du jeu#1= %d, Joueur 2 du jeu#1= %d, Joueur 1 du jeu#2 =%d, Joueur 2 du jeu#2= %d\n", games[0].j1.id, games[0].j2.id, games[1].j1.id, games[1].j2.id);
 }

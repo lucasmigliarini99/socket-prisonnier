@@ -1,2 +1,18 @@
 
 *.log
+
+Server/game/game.o
+
+Server/launchServer.o
+
+Server/network/server.o
+
+src/Client/interface/view.o
+
+src/Client/launchClient.o
+
+src/Client/network/client.o
+
+src/Client/network/ini.o
+
+src/main.o

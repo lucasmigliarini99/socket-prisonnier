@@ -21,13 +21,13 @@ int players[MAXSIMULTANEOUSCLIENTS];
 
 
 
-void init_sockets_array() {
+void init_sockets_array_Server() {
     for (int i = 0; i < MAXSIMULTANEOUSCLIENTS; i++) {
         connections[i] = NULL;
     }
 }
 
-void add(connection_t *connection) {
+void add_Server(connection_t *connection) {
     for (int i = 0; i < MAXSIMULTANEOUSCLIENTS; i++) {
         if (connections[i] == NULL) {
             connections[i] = connection;
@@ -38,7 +38,7 @@ void add(connection_t *connection) {
     exit(-5);
 }
 
-void del(connection_t *connection) {
+void del_Server(connection_t *connection) {
     for (int i = 0; i < MAXSIMULTANEOUSCLIENTS; i++) {
         if (connections[i] == connection) {
             connections[i] = NULL;
@@ -60,7 +60,7 @@ pthread_mutex_unlock(&lock);
  * @param ptr connection_t 
  * @return 
  */
-void *threadProcess(void *ptr) {
+void *threadProcess_Server(void *ptr) {
     Joueur buffer_in;
     //Joueur *buffer_out= malloc(sizeof(Joueur));
 
@@ -73,7 +73,7 @@ void *threadProcess(void *ptr) {
     connection = (connection_t *) ptr;
     printf("New incoming connection \n");
 
-    add(connection);
+    add_Server(connection);
 
     
     
@@ -90,7 +90,7 @@ void *threadProcess(void *ptr) {
         // if (strncmp(buffer_in, "bye", 3) == 0) {
         //     break;
         // }
-        printf("id: %d\n",buffer_in.id);
+
         if (buffer_in.id == 0)
         {
             buffer_in.id = connection->index;
@@ -100,8 +100,7 @@ void *threadProcess(void *ptr) {
         {
             buffer_in.sockfd = connection->sockfd;
         }
-        printf("id2: %d\n",buffer_in.id);
-        printf("sokect: %d\n",buffer_in.sockfd);
+
 
         printf("DEBUG-----------------------------------------------------------\n");
         printf("Player: %i\n",connection->name);
@@ -138,7 +137,7 @@ void *threadProcess(void *ptr) {
     }
     printf("Connection to client %i ended \n", connection->index);
     close(connection->sockfd);
-    del(connection);
+    del_Server(connection);
     free(connection);
     pthread_exit(0);
 
@@ -149,6 +148,7 @@ void send_wait(connection_t* connections[MAXSIMULTANEOUSCLIENTS],connection_t *p
 
     printf("id wait: %d\n",buffer_in.id);
     
+
     
 
     for (int i = 0; i < 2; i++)
@@ -164,22 +164,34 @@ void send_wait(connection_t* connections[MAXSIMULTANEOUSCLIENTS],connection_t *p
         }
     }
 
-    printf("j1: %d\n",games[0].j1.sockfd);
-    printf("j2: %d\n",games[0].j2.sockfd);
+
+    printf("j1 name %s\n", games[0].j1.pseudo);
+    printf("j2 name %s\n", games[0].j2.pseudo);
+    printf("j3 name %s\n", games[1].j1.pseudo);
+    printf("j4 name %s\n", games[1].j2.pseudo);
     
     
-    if (games[0].j1.sockfd != 0 && games[0].j2.sockfd != 0)
+    if (games[0].j1.sockfd != NULL && games[0].j2.sockfd != NULL)
     {
-        printf("La partie 1 peut commencer !");
+        games[0].j1.enjeu = 1;
+        games[0].j2.enjeu = 1;
+        printf("La partie 1 peut commencer !\n");
         write(games[0].j1.sockfd, &games[0].j1, sizeof(Joueur));
-        write(games[0].j1.sockfd, &games[0].j2, sizeof(Joueur));
+        write(games[0].j2.sockfd, &games[0].j2, sizeof(Joueur));
+    }
+
+    if (games[1].j1.sockfd != NULL && games[1].j2.sockfd != NULL)
+    {
+        games[1].j1.enjeu = 1;
+        games[1].j2.enjeu = 1;
+        printf("j3 %d\n", games[1].j1.id);
+        printf("j4 %d\n", games[1].j2.id);
+        printf("La partie 2 peut commencer !\n");
+        write(games[1].j1.sockfd, &games[1].j1, sizeof(Joueur));
+        write(games[1].j2.sockfd, &games[1].j2, sizeof(Joueur));
     }
     
 
-
-    
-    write(player->sockfd, &buffer_in, sizeof(buffer_in));
-    printf("coucoyuc\n");
     
     
 }
@@ -220,6 +232,11 @@ int create_server_socket() {
         return -4;
     }
     get_party(games);
+    for (int i = 0; i < 2; i++)
+    {
+        games[i].j1.sockfd = NULL;
+        games[i].j2.sockfd = NULL;
+    }
     return sockfd;
 }
 

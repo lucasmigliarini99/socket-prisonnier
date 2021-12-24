@@ -37,7 +37,7 @@ int main(int argc, char** argv) {
 
 
     /* init array*/
-    init_sockets_array();
+    init_sockets_array_Server();
     /* create socket */
     sockfd = create_server_socket();
 
@@ -60,7 +60,7 @@ int main(int argc, char** argv) {
             free(connection);
         } else {
             /* start a new thread but do not wait for it */
-            pthread_create(&thread, 0, threadProcess, (void *) connection);
+            pthread_create(&thread, 0, threadProcess_Server, (void *) connection);
             pthread_detach(thread);
         }
     }

@@ -44,7 +44,7 @@ typedef struct Jeu
 void init_sockets_array();
 void add(connection_t *connection);
 void del(connection_t *connection);
-void *threadProcess(void *ptr);
+void *threadProcess_Server(void *ptr);
 int create_server_socket() ;
 
 #endif /* SERVER_H */
