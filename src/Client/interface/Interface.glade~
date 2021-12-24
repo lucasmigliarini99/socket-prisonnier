@@ -2,8 +2,6 @@
 <!-- Generated with glade 3.38.2 -->
 <interface>
   <requires lib="gtk+" version="3.20"/>
-<<<<<<< HEAD
-=======
   <object class="GtkListStore" id="ListeIP">
     <columns>
       <!-- column-name gchararray1 -->
@@ -18,7 +16,6 @@
       </row>
     </data>
   </object>
->>>>>>> connection
   <object class="GtkApplicationWindow" id="Win_Bienvenue">
     <property name="can-focus">False</property>
     <signal name="destroy" handler="on_window_main_destroy" swapped="no"/>
@@ -107,54 +104,6 @@
           </packing>
         </child>
         <child>
-<<<<<<< HEAD
-          <object class="GtkBox" id="ParametreIP">
-            <property name="visible">True</property>
-            <property name="can-focus">False</property>
-            <child>
-              <object class="GtkButton" id="Refresh">
-                <property name="label" translatable="yes">Rafraichir</property>
-                <property name="visible">True</property>
-                <property name="can-focus">True</property>
-                <property name="receives-default">True</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkComboBox" id="ListeIP">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
-                <property name="tearoff-title" translatable="yes">Parametre</property>
-                <property name="has-entry">True</property>
-                <property name="entry-text-column">1</property>
-                <child internal-child="entry">
-                  <object class="GtkEntry" id="Parametre">
-                    <property name="can-focus">False</property>
-                    <property name="editable">False</property>
-                    <property name="text" translatable="yes">Parametre</property>
-                  </object>
-                </child>
-              </object>
-              <packing>
-                <property name="expand">True</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">4</property>
-          </packing>
-        </child>
-        <child>
-=======
->>>>>>> connection
           <object class="GtkBox" id="ButtonQuitter">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
@@ -225,17 +174,10 @@
             <property name="can-focus">False</property>
             <property name="orientation">vertical</property>
             <child>
-<<<<<<< HEAD
               <object class="GtkLabel" id="waitPlayer">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
                 <property name="label" translatable="yes">En attente de joueurs (1/2)</property>
-=======
-              <object class="GtkLabel">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
-                <property name="label" translatable="yes">En attente de joueurs (.../2)</property>
->>>>>>> connection
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -256,14 +198,10 @@
             <property name="can-focus">False</property>
             <property name="orientation">vertical</property>
             <child>
-              <object class="GtkLabel">
+              <object class="GtkLabel" id="tour_party">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-<<<<<<< HEAD
                 <property name="label" translatable="yes">Partie : 0/5</property>
-=======
-                <property name="label" translatable="yes">Partie : .../5</property>
->>>>>>> connection
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -320,6 +258,19 @@
               </packing>
             </child>
             <child>
+              <object class="GtkLabel" id="choix">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="label" translatable="yes">label</property>
+                <property name="xalign">0</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
               <object class="GtkLabel">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
@@ -328,7 +279,20 @@
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
-                <property name="position">1</property>
+                <property name="position">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="en_choix">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="label" translatable="yes">label</property>
+                <property name="xalign">0.05000000074505806</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">3</property>
               </packing>
             </child>
           </object>
@@ -347,7 +311,7 @@
               <object class="GtkLabel">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="label" translatable="yes">Votre score : ...</property>
+                <property name="label" translatable="yes">Votre score : </property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -356,15 +320,41 @@
               </packing>
             </child>
             <child>
-              <object class="GtkLabel">
+              <object class="GtkLabel" id="score">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="label" translatable="yes">Score adversaire : ...</property>
+                <property name="label" translatable="yes">label</property>
+                <property name="xalign">0</property>
               </object>
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
                 <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="label" translatable="yes">Score adversaire : </property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="en_score">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="label" translatable="yes">label</property>
+                <property name="xalign">0</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">3</property>
               </packing>
             </child>
           </object>
