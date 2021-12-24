@@ -60,6 +60,9 @@ void *threadProcess(void * ptr) {
     printf("client pthread ended, len=%d\n", len);
 }
 
+void get_player(Joueur player){
+    player = j;
+}
 
 
 int open_connection() {

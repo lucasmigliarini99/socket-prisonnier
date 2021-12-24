@@ -37,6 +37,7 @@ int open_connection();
 void init_connection();
 void send_action(int choix);
 void send_pseudo(char *pseudo);
+void get_player(Joueur player);
 
 #endif /* CLIENTCXNMANAGER_H */
 
