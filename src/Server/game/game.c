@@ -14,13 +14,6 @@
 
 
 
-
-
-
-
-
-
-
 /*
 Message :
 0 --> Les deux joueurs coopèrent
@@ -29,43 +22,47 @@ Message :
 3 --> Le joueur a trahi l'autre joueur
 */
 
-Jeu jouer(Jeu jeu)
+Jeu jouer(Joueur j1, Joueur j2)
 {
+    Jeu jeu;
     //joueur 1 et joueur 2 se taisent
-    if(jeu.j1.choix == 1 && jeu.j2.choix == 1)
+    if(j1.choix == 1 && j2.choix == 1)
     {
-        jeu.j1.score += 2;
-        jeu.j2.score += 2;
-        jeu.j1.message = 0;
-        jeu.j2.message = 0;
+        j1.score += 2;
+        j2.score += 2;
+        j1.message = 0;
+        j2.message = 0;
     }
     else
     {
         //joueur 1 se tait et joueur 2 dénonce
-        if(jeu.j1.choix == 1 && jeu.j2.choix == 2)
+        if(j1.choix == 1 && j2.choix == 2)
         {
-            jeu.j1.score -= 1;
-            jeu.j2.score += 3;
-            jeu.j1.message = 2;
-            jeu.j2.message = 3;
+            j1.score -= 1;
+            j2.score += 3;
+            j1.message = 2;
+            j2.message = 3;
         }
         
         else
         {
             //joueur 1 dénonce et joueur 2 se tait
-            if (jeu.j1.choix == 2 && jeu.j2.choix == 1)
+            if (j1.choix == 2 && j2.choix == 1)
             {
-                jeu.j1.score += 3;
-                jeu.j2.score -= 1;
-                jeu.j1.message = 3;
-                jeu.j2.message = 2;
+                j1.score += 3;
+                j2.score -= 1;
+                j1.message = 3;
+                j2.message = 2;
             }
             //joueur 1 et 2 dénoncent, pas de points
             else
             {
-                jeu.j1.message = 1;
-                jeu.j2.message = 1;
+                j1.message = 1;
+                j2.message = 1;
             }
         }
     }
+    jeu.j1 = j1;
+    jeu.j2 = j2;
+    return jeu;
 }

@@ -43,15 +43,16 @@ static int handler(void* config, const char* section, const char* name,
 }
 
 void *threadProcess(void * ptr) {
-    Joueur *buffer_in= malloc(sizeof(Joueur));
+    Joueur buffer_in;
     int sockfd = *((int *) ptr);
     int len;
 
     
-    while ((len = read(sockfd, buffer_in, sizeof(Joueur))) != 0 && 1) {
+    while ((len = read(sockfd, &buffer_in, sizeof(Joueur))) != 0 && 1) {
        
-        j.enjeu = buffer_in->enjeu;
-        printf("%s\n", buffer_in->pseudo);
+        j = buffer_in;
+        printf("%s\n", j.pseudo);
+        printf("score %d\n", j.score);
 
         
     }
@@ -118,10 +119,9 @@ void send_pseudo(char *pseudo){
     write(cnx.socketClient, &j, sizeof(j));
 }
 
-void send_action(){
-    //send(cnx.socketClient, &msg, sizeof(msg),0);
-    //recv(cnx.socketClient, msg, 32, 0);
-    printf("Send action \n");
+void send_action(int choix){
+    
+    j.choix = choix;
     write(cnx.socketClient, &j, sizeof(j));
 
 }

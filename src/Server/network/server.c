@@ -13,7 +13,7 @@
 #include "../config/readerIniGame.h"
 
 
-Jeu jouer(Jeu jeu);
+
 Jeu games[2];
 
 connection_t* connections[MAXSIMULTANEOUSCLIENTS];
@@ -106,30 +106,32 @@ void *threadProcess_Server(void *ptr) {
         printf("Player: %i\n",connection->name);
         printf("len : %i\n", len);
         printf("Buffer : %s\n",buffer_in.pseudo);
-        printf("En jeu : %d\n",buffer_in.enjeu);
+        printf("choix : %d\n",buffer_in.choix);
+        printf("score : %d\n",buffer_in.score);
         printf("----------------------------------------------------------------\n");
 
         if (buffer_in.enjeu == 0)
         {
-            send_wait(connections,connection,buffer_in);
+            send_wait(connections,buffer_in);
         }
 
-        // sprintf(buffer_in.pseudo, "jesuistest");
-        // buffer_in.enjeu = 1;
-        // printf("En jeu: %d\n",buffer_in.enjeu);
-        // write(connection->sockfd, &buffer_in, sizeof(buffer_in));
-
-        /*for(i = 0; i<sizeof(jeux); i++)
+        if (buffer_in.enjeu == 1)
         {
-            if(jeux[i].j1.choix != NULL && jeux[i].j2.choix != NULL)
-            {
-                jeux[i] = jouer(jeux[i]);
-                send_player(connections[jeux[i].j1.id],buffer_in, &jeux[i].j1);
+            send_structure_to_game(buffer_in);
+        }
 
-                jeux[i].j1.choix = NULL;
-                jeux[i].j2.choix = NULL;
+
+        for (int i = 0; i < 2; i++)
+        {
+            if(games[i].j1.choix != NULL && games[i].j2.choix != NULL)
+            {
+                games[i] = jouer(games[i].j1,games[i].j2);
+                write(connections[games[i].j1.id]->sockfd,&games[i].j1, sizeof(Joueur));
+                write(connections[games[i].j1.id]->sockfd,&games[i].j2, sizeof(Joueur));
+                games[i].j1.choix = NULL;
+                games[i].j2.choix = NULL;
             }
-        }      */
+        }
         
 
         //clear input buffer
@@ -143,14 +145,8 @@ void *threadProcess_Server(void *ptr) {
 
 }
 
-
-void send_wait(connection_t* connections[MAXSIMULTANEOUSCLIENTS],connection_t *player, Joueur buffer_in){
-
-    printf("id wait: %d\n",buffer_in.id);
-    
-
-    
-
+void send_structure_to_game(Joueur buffer_in)
+{
     for (int i = 0; i < 2; i++)
     {
         if (buffer_in.id == games[i].j1.id)
@@ -163,7 +159,23 @@ void send_wait(connection_t* connections[MAXSIMULTANEOUSCLIENTS],connection_t *p
             games[i].j2 = buffer_in; 
         }
     }
+}
 
+
+void send_wait(connection_t* connections[MAXSIMULTANEOUSCLIENTS],Joueur buffer_in){
+  
+    for (int i = 0; i < 2; i++)
+    {
+        if (buffer_in.id == games[i].j1.id)
+        {
+            games[i].j1 = buffer_in; 
+        }
+
+        if (buffer_in.id == games[i].j2.id)
+        {
+            games[i].j2 = buffer_in; 
+        }
+    }
 
     printf("j1 name %s\n", games[0].j1.pseudo);
     printf("j2 name %s\n", games[0].j2.pseudo);
@@ -191,14 +203,10 @@ void send_wait(connection_t* connections[MAXSIMULTANEOUSCLIENTS],connection_t *p
         write(games[1].j2.sockfd, &games[1].j2, sizeof(Joueur));
     }
     
-
-    
-    
+     printf("fonction fini\n");
 }
 
-void send_player(connection_t *player, char buffer_in[BUFFERSIZE],char buffer_out[BUFFERSIZE]){
-    write(player->sockfd, buffer_out, strlen(buffer_out));
-}
+
 
 int create_server_socket() {
     int sockfd = -1;

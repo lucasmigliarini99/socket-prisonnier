@@ -163,37 +163,20 @@ void on_Denoncer()
 
     //incrementation du compteur de round
     
-    send_action();
+    send_action(2);
 }
 
-// void on_Taire(Joueur j)
-// {
-//     GtkWidget *win2;
-//     win2 = GTK_WIDGET(gtk_builder_get_object(builder, "Win_Jeux"));
+void on_Taire()
+{
+    GtkWidget *win2;
+    win2 = GTK_WIDGET(gtk_builder_get_object(builder, "Win_Jeux"));
 
-//     GtkWidget *win3;
-//     win3 = GTK_WIDGET(gtk_builder_get_object(builder, "Win_Score"));
+    GtkWidget *win3;
+    win3 = GTK_WIDGET(gtk_builder_get_object(builder, "Win_Score"));
 
    
-//     //regarde la nombre de tour, si il est egale a 5 le jeu s'arrete.
-//     if (compteur == 4)
-//     {
-//         //arret du timer
-//         g_source_remove(timer_id);
-
-//         //fermeture de la fenetre actuelle
-//         gtk_widget_hide(win2);
-
-//         //ouverture de la fenêtre suivante
-//         gtk_widget_show(win3);
-//     }
-
-//     //ajouts du choix se taire --> 0, par rapport au tour actuel.
-//     joueur.choix[compteur] = 0;
-
-//     //incrementation du compteur de round
-//     compteur++;
-// }
+    send_action(1);
+}
 
 void on_Rejouer()
 {

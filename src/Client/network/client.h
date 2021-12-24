@@ -34,7 +34,7 @@ typedef struct Joueur
 void *threadProcess(void * ptr);
 int open_connection();
 void init_connection();
-void send_action();
+void send_action(int choix);
 void send_pseudo(char *pseudo);
 
 #endif /* CLIENTCXNMANAGER_H */
