@@ -52,7 +52,7 @@ SERVER_OUTPUTMAIN	:= $(call FIXPATH,$(OUTPUT)/$(SERVER_MAIN))
 
 $(OUTPUT):
 	$(MD) $(OUTPUT)
- 
+
 
 all: $(OUTPUT) $(CLIENT_MAIN) $(SERVER_MAIN)
 	@echo All compilation completed !

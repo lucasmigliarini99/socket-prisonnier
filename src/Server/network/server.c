@@ -126,8 +126,9 @@ void *threadProcess_Server(void *ptr) {
             if(games[i].j1.choix != NULL && games[i].j2.choix != NULL)
             {
                 games[i] = jouer(games[i].j1,games[i].j2);
-                write(connections[games[i].j1.id]->sockfd,&games[i].j1, sizeof(Joueur));
-                write(connections[games[i].j1.id]->sockfd,&games[i].j2, sizeof(Joueur));
+                send_joueur(games[i].j1);
+                sleep(1);
+                send_joueur(games[i].j2);
                 games[i].j1.choix = NULL;
                 games[i].j2.choix = NULL;
             }
@@ -177,19 +178,14 @@ void send_wait(connection_t* connections[MAXSIMULTANEOUSCLIENTS],Joueur buffer_i
         }
     }
 
-    printf("j1 name %s\n", games[0].j1.pseudo);
-    printf("j2 name %s\n", games[0].j2.pseudo);
-    printf("j3 name %s\n", games[1].j1.pseudo);
-    printf("j4 name %s\n", games[1].j2.pseudo);
-    
-    
     if (games[0].j1.sockfd != NULL && games[0].j2.sockfd != NULL)
     {
         games[0].j1.enjeu = 1;
         games[0].j2.enjeu = 1;
         printf("La partie 1 peut commencer !\n");
-        write(games[0].j1.sockfd, &games[0].j1, sizeof(Joueur));
-        write(games[0].j2.sockfd, &games[0].j2, sizeof(Joueur));
+        send_joueur(games[0].j1);
+        sleep(2);
+        send_joueur(games[0].j2);
     }
 
     if (games[1].j1.sockfd != NULL && games[1].j2.sockfd != NULL)
@@ -199,13 +195,16 @@ void send_wait(connection_t* connections[MAXSIMULTANEOUSCLIENTS],Joueur buffer_i
         printf("j3 %d\n", games[1].j1.id);
         printf("j4 %d\n", games[1].j2.id);
         printf("La partie 2 peut commencer !\n");
-        write(games[1].j1.sockfd, &games[1].j1, sizeof(Joueur));
-        write(games[1].j2.sockfd, &games[1].j2, sizeof(Joueur));
+        send_joueur(games[1].j1);
+        sleep(2);
+        send_joueur(games[1].j2);
     }
-    
-     printf("fonction fini\n");
 }
 
+send_joueur(Joueur j)
+{
+    write(j.sockfd, &j, sizeof(Joueur));
+}
 
 
 int create_server_socket() {

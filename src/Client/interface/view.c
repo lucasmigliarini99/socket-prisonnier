@@ -21,6 +21,9 @@
 GtkBuilder *builder = NULL;
 
 Joueur joueur;
+char scoreMe[100];
+char scoreHe[100];
+
 
 int sockfd;
 
@@ -155,11 +158,8 @@ void on_Denoncer()
     GtkWidget *win2;
     win2 = GTK_WIDGET(gtk_builder_get_object(builder, "Win_Jeux"));
 
-    GtkWidget *win3;
-    win3 = GTK_WIDGET(gtk_builder_get_object(builder, "Win_Score"));
-
     //get player datas
-    get_player(joueur);
+    joueur = get_player();
 
     //define text score, score enemy, name, name enemy and party's round
     GtkWidget *tourParty;
@@ -178,35 +178,32 @@ void on_Denoncer()
     En_Choix = GTK_WIDGET(gtk_builder_get_object(builder, "en_choix"));
 
     //print round of the game
-    gtk_label_set_text(GTK_LABEL(tourParty), compteur);
+    //gtk_label_set_text(GTK_LABEL(tourParty), compteur);
 
     //print choice of players
-    gtk_label_set_text(GTK_LABEL(Choix), joueur.choix);
+    //gtk_label_set_text(GTK_LABEL(Choix), joueur.choix);
 
     /*tk_label_set_text(GTK_LABEL (En_Choix), "vous : %d", joueur.choix);  --> besoin de choix adverse*/
 
     //print score
-    gtk_label_set_text(GTK_LABEL(Score), joueur.score);
 
-    gtk_label_set_text(GTK_LABEL(En_Score), joueur.score_adverse);
+    sprintf(scoreMe, "%d", joueur.score);
+    gtk_label_set_text(GTK_LABEL(Score), (const gchar*)scoreMe);
 
-    //regarde la nombre de tour, si il est egale a 5 le jeu s'arrete.
-    if (compteur == 4)
-    {
-        //arret du timer
-        g_source_remove(timer_id);
+    
 
-        //fermeture de la fenetre actuelle
-        gtk_widget_hide(win2);
+    GtkWidget *Denonce;
+    Denonce = GTK_WIDGET(gtk_builder_get_object(builder, "ButtonDenoncer"));
 
-        //ouverture de la fenêtre suivante
-        gtk_widget_show(win3);
-    }
+    GtkWidget *Taire;
+    Taire = GTK_WIDGET(gtk_builder_get_object(builder, "ButtonTaire"));
+
+    gtk_widget_hide(Denonce);
+    gtk_widget_hide(Taire);
+
+    compteur++;
     //return choice
     send_action(2);
-
-    //incrementation du compteur de round
-    compteur++;
 }
 
 void on_Taire()
@@ -214,11 +211,9 @@ void on_Taire()
     GtkWidget *win2;
     win2 = GTK_WIDGET(gtk_builder_get_object(builder, "Win_Jeux"));
 
-    GtkWidget *win3;
-    win3 = GTK_WIDGET(gtk_builder_get_object(builder, "Win_Score"));
 
     //get player datas
-    get_player(joueur);
+    joueur = get_player();
 
     //define text score, score enemy, name, name enemy and party's round
     GtkWidget *tourParty;
@@ -230,42 +225,77 @@ void on_Taire()
     GtkWidget *En_Score;
     En_Score = GTK_WIDGET(gtk_builder_get_object(builder, "en_score"));
 
+   
+
+    //print score
+    printf("le score de moi %d",joueur.score);
+    sprintf(scoreMe, "%d", joueur.score);
+    gtk_label_set_text(GTK_LABEL(Score), (const gchar*)scoreMe);
+
+    sprintf(scoreHe, "%d", joueur.score_adverse);
+    gtk_label_set_text(GTK_LABEL(En_Score), (const gchar*)scoreHe);
+
+
+    GtkWidget *Denonce;
+    Denonce = GTK_WIDGET(gtk_builder_get_object(builder, "ButtonDenoncer"));
+
+    GtkWidget *Taire;
+    Taire = GTK_WIDGET(gtk_builder_get_object(builder, "ButtonTaire"));
+
+    gtk_widget_hide(Denonce);
+    gtk_widget_hide(Taire);
+
+     compteur++;
+    //return choice
+    send_action(1);
+   
+
+    
+}
+
+int get_round()
+{
+    return compteur;
+}
+
+void AffciherBTN(){
+    GtkWidget *Denonce;
+    Denonce = GTK_WIDGET(gtk_builder_get_object(builder, "ButtonDenoncer"));
+
+    GtkWidget *Taire;
+    Taire = GTK_WIDGET(gtk_builder_get_object(builder, "ButtonTaire"));
+
+    gtk_widget_show(Denonce);
+    gtk_widget_show(Taire);
+}
+
+void FinPartie()
+{
+    joueur = get_player();
+
     GtkWidget *Choix;
     Choix = GTK_WIDGET(gtk_builder_get_object(builder, "choix"));
 
     GtkWidget *En_Choix;
     En_Choix = GTK_WIDGET(gtk_builder_get_object(builder, "en_choix"));
 
-    //print round of the game
-    gtk_label_set_text(GTK_LABEL(tourParty), compteur);
 
     //print choice of players
-    gtk_label_set_text(GTK_LABEL(Choix), joueur.choix);
+    
 
     /*tk_label_set_text(GTK_LABEL (En_Choix), "vous : %d", joueur.choix);  --> besoin de choix adverse*/
 
-    //print score
-    gtk_label_set_text(GTK_LABEL(Score), joueur.score);
-
-    gtk_label_set_text(GTK_LABEL(En_Score), joueur.score_adverse);
-
-    //regarde la nombre de tour, si il est egale a 5 le jeu s'arrete.
-    if (compteur == 4)
+    if(joueur.score > joueur.score_adverse)
     {
-        //arret du timer
-        g_source_remove(timer_id);
-
-        //fermeture de la fenetre actuelle
-        gtk_widget_hide(win2);
-
-        //ouverture de la fenêtre suivante
-        gtk_widget_show(win3);
+       gtk_label_set_text(GTK_LABEL(Choix), "avez gagné");
     }
-    //return choice
-    send_action(1);
-
-    //incrementation du compteur de round
-    compteur++;
+    if(joueur.score == joueur.score_adverse){
+        gtk_label_set_text(GTK_LABEL(Choix), "égalité");
+        gtk_label_set_text(GTK_LABEL (En_Choix), "égalité");
+    }
+    if(joueur.score < joueur.score_adverse){
+        gtk_label_set_text(GTK_LABEL (En_Choix), "a gagné");
+    }
 }
 
 void debutPartie()
