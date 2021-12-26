@@ -43,6 +43,12 @@ static int handler(void* config, const char* section, const char* name,
     return 1;
 }
 
+/**
+ * @brief Called when the client is connected to the server
+ * Used to play
+ * @param ptr 
+ * @return void* 
+ */
 void *threadProcess(void * ptr) {
     Joueur buffer_in;
     int sockfd = *((int *) ptr);
@@ -64,6 +70,7 @@ void *threadProcess(void * ptr) {
             round = get_round();
             if(round >= 0 && round < 6 )
             {
+                j.timeRound[round] = get_time();
                 sleep (2);
                 AffciherBTN();
             }
@@ -83,11 +90,21 @@ void *threadProcess(void * ptr) {
     printf("client pthread ended, len=%d\n", len);
 }
 
+/**
+ * @brief Return the player object
+ * 
+ * @return Joueur 
+ */
 Joueur get_player()
 {
     return j;
 }
 
+/**
+ * @brief Open the connexion using the config.ini file
+ * 
+ * @return int 
+ */
 int open_connection() {
 
     configuration config;
@@ -123,6 +140,12 @@ int open_connection() {
     return sockfd;
 } 
 
+/**
+ * @brief Initialize the connection settings
+ * 
+ * @param argc 
+ * @param argv 
+ */
 void init_connection(int argc, char** argv){
 
     int sockfd;
@@ -138,6 +161,11 @@ void init_connection(int argc, char** argv){
     
 }
 
+/**
+ * @brief Send 
+ * 
+ * @param pseudo 
+ */
 void send_pseudo(char *pseudo){
     sprintf(j.pseudo, pseudo);
     
@@ -145,6 +173,11 @@ void send_pseudo(char *pseudo){
     write(cnx.socketClient, &j, sizeof(j));
 }
 
+/**
+ * @brief Send player's choice to the server
+ * 
+ * @param choix 
+ */
 void send_action(int choix){
     
     j.choix = choix;

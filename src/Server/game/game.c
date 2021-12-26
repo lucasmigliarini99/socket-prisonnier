@@ -16,16 +16,22 @@
 
 /*
 Message :
-0 --> Les deux joueurs coopèrent
-1 --> Les deux joueurs trahissent
-2 --> Le joueur a été trahi
-3 --> Le joueur a trahi l'autre joueur
+0 --> Both players cooperate
+1 --> Both players betray
+2 --> The player is betrayed
+3 --> The player betrays
 */
-
+/**
+ * @brief Make the game between player 1 and player 2
+ * 
+ * @param j1 
+ * @param j2 
+ * @return Jeu 
+ */
 Jeu jouer(Joueur j1, Joueur j2)
 {
     Jeu jeu;
-    //joueur 1 et joueur 2 se taisent
+    //Both players cooperate
     if(j1.choix == 1 && j2.choix == 1)
     {
         j1.score += 2;
@@ -35,7 +41,7 @@ Jeu jouer(Joueur j1, Joueur j2)
     }
     else
     {
-        //joueur 1 se tait et joueur 2 dénonce
+        //Player 1 cooperates, player 2 betrays
         if(j1.choix == 1 && j2.choix == 2)
         {
             j1.score -= 1;
@@ -43,10 +49,10 @@ Jeu jouer(Joueur j1, Joueur j2)
             j1.message = 2;
             j2.message = 3;
         }
-        
+
         else
         {
-            //joueur 1 dénonce et joueur 2 se tait
+            //player 1 betrays, player 2 cooperates
             if (j1.choix == 2 && j2.choix == 1)
             {
                 j1.score += 3;
@@ -54,7 +60,7 @@ Jeu jouer(Joueur j1, Joueur j2)
                 j1.message = 3;
                 j2.message = 2;
             }
-            //joueur 1 et 2 dénoncent, pas de points
+            //both players betray, no points
             else
             {
                 j1.message = 1;

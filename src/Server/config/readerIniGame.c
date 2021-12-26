@@ -41,6 +41,13 @@ static int handler(void *recuperationJoueurs, const char *section, const char *n
 }
 
 
+/**
+ * @brief Get the party object
+ * Initialize every player for games
+ * 
+ * @param games 
+ * @return Jeu 
+ */
 Jeu get_party(Jeu games[2])
 {
     recup recuperationJoueurs;

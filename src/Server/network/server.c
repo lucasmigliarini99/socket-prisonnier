@@ -20,13 +20,21 @@ connection_t* connections[MAXSIMULTANEOUSCLIENTS];
 int players[MAXSIMULTANEOUSCLIENTS];
 
 
-
+/**
+ * @brief Initialize sockets
+ * 
+ */
 void init_sockets_array_Server() {
     for (int i = 0; i < MAXSIMULTANEOUSCLIENTS; i++) {
         connections[i] = NULL;
     }
 }
 
+/**
+ * @brief Add connection server
+ * 
+ * @param connection 
+ */
 void add_Server(connection_t *connection) {
     for (int i = 0; i < MAXSIMULTANEOUSCLIENTS; i++) {
         if (connections[i] == NULL) {
@@ -38,6 +46,11 @@ void add_Server(connection_t *connection) {
     exit(-5);
 }
 
+/**
+ * @brief Delete connection server
+ * 
+ * @param connection 
+ */
 void del_Server(connection_t *connection) {
     for (int i = 0; i < MAXSIMULTANEOUSCLIENTS; i++) {
         if (connections[i] == connection) {
@@ -146,6 +159,11 @@ void *threadProcess_Server(void *ptr) {
 
 }
 
+/**
+ * @brief Sends structure to the game
+ * 
+ * @param buffer_in 
+ */
 void send_structure_to_game(Joueur buffer_in)
 {
     for (int i = 0; i < 2; i++)
@@ -161,6 +179,14 @@ void send_structure_to_game(Joueur buffer_in)
         }
     }
 }
+
+/**
+ * @brief Send wait
+ * Force the first player connected to wait until another player connects
+ * 
+ * @param connections 
+ * @param buffer_in 
+ */
 
 
 void send_wait(connection_t* connections[MAXSIMULTANEOUSCLIENTS],Joueur buffer_in){
@@ -201,12 +227,22 @@ void send_wait(connection_t* connections[MAXSIMULTANEOUSCLIENTS],Joueur buffer_i
     }
 }
 
+/**
+ * @brief Send joueur object
+ * 
+ * @param j 
+ */
 send_joueur(Joueur j)
 {
     write(j.sockfd, &j, sizeof(Joueur));
 }
 
-
+/**
+ * @brief Create a server socket object
+ * Intialize the server socket
+ * 
+ * @return int 
+ */
 int create_server_socket() {
     int sockfd = -1;
     struct sockaddr_in address;

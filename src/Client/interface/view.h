@@ -16,5 +16,6 @@ init_interface(int argc, char **argv, int sockfdd, pthread_t thread);
 int get_round();
 void FinPartie();
 void AffciherBTN();
+int get_time();
 
 

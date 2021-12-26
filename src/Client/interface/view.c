@@ -175,7 +175,9 @@ void on_Denoncer()
 
     //stop the timer and return value in temptour
     temptour = elapsed_time;
-    elapsed_time = 0;
+    g_source_remove(timer_id);
+    timer_id = 0;
+    elapsed_time=0;
 
     compteur++;
     //return choice
@@ -200,7 +202,9 @@ void on_Taire()
 
     //stop the timer and return value in temptour
     temptour = elapsed_time;
-    elapsed_time = 0;
+    g_source_remove(timer_id);
+    timer_id = 0;
+    elapsed_time=0;
 
     compteur++;
     //return choice
@@ -210,6 +214,11 @@ void on_Taire()
 int get_round()
 {
     return compteur;
+}
+
+int get_time()
+{
+    return temptour;
 }
 
 void AffciherBTN(){
