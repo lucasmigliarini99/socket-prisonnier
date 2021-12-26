@@ -13,6 +13,7 @@
 #include "../config/readerIniGame.h"
 
 Jeu games[2];
+int firstLigne = 0;
 
 connection_t *connections[MAXSIMULTANEOUSCLIENTS];
 int players[MAXSIMULTANEOUSCLIENTS];
@@ -260,9 +261,13 @@ void create_csv(Joueur buffer)
     FILE *fp;
     fp = fopen("Data.csv", "a");
 
-    // affichage de l'entête (1 fois a la création du fichier)
-    //fprintf(fp, "ID, Pseudo, tour 1, tour 2, tour 3, tour 4, tour 5, temps 1, temps 2, temps 3, temps 4, temps5, Score\n"); */
-
+    if(firstLigne == 0)
+    {
+        // affichage de l'entête (1 fois a la création du fichier)
+        fprintf(fp, "ID, Pseudo, tour 1, tour 2, tour 3, tour 4, tour 5, temps 1, temps 2, temps 3, temps 4, temps5, Score\n");
+        firstLigne = 1;
+    }
+    
     //affichage de l'ID du joueur
     fprintf(fp, "%d,", buffer.id);
 
