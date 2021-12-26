@@ -10,7 +10,7 @@
 
 #include "../interface/view.h"
 #include "client.h"
-#include "ini.h"
+#include "../config/ini.h"
 
 Connection cnx;
 Joueur j;
@@ -90,7 +90,7 @@ int open_connection() {
 
     configuration config;
     
-    if (ini_parse("src/Client/network/config.ini", handler, &config) < 0) {
+    if (ini_parse("src/Client/config/config.ini", handler, &config) < 0) {
         printf("Can't load 'config.ini'\n");
         return 1;
     }

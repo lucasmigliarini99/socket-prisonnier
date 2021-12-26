@@ -1,11 +1,14 @@
 
 *.log
 
-Server/game/game.o
+src/Server/game/game.o
 
-Server/launchServer.o
+src/Server/launchServer.o
 
-Server/network/server.o
+src/Server/network/server.o
+
+src/Server/config/ini.o
+src/Server/config/readerIniGame.o
 
 src/Client/interface/view.o
 
@@ -13,6 +16,8 @@ src/Client/launchClient.o
 
 src/Client/network/client.o
 
-src/Client/network/ini.o
+src/Client/config/ini.o
 
 src/main.o
+
+output/
