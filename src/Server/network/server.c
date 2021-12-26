@@ -137,6 +137,7 @@ void *threadProcess_Server(void *ptr)
             send_structure_to_game(buffer_in);
         }
 
+
         for (int i = 0; i < 2; i++)
         {
             if (games[i].j1.choix != NULL && games[i].j2.choix != NULL)
@@ -147,13 +148,12 @@ void *threadProcess_Server(void *ptr)
                 send_joueur(games[i].j2);
                 games[i].j1.choix = NULL;
                 games[i].j2.choix = NULL;
-                if(compteur == 4){
+                if (games[i].j1.party == 1 && games[i].j2.party == 1){
                     printf("csv mgl\n");
                     create_csv(games[i].j1);
                     sleep(2);
                     create_csv(games[i].j2);
                 }
-                compteur ++;
             }
         }
 
@@ -249,7 +249,7 @@ void create_csv(Joueur buffer)
 {
     //definition du fichier dans lequel l'ajout des données seront faite
     FILE *fp;
-    fp = fopen("output/Data.csv", "a");
+    fp = fopen("Data.csv", "a");
 
     // affichage de l'entête
     fprintf(fp, "ID, Pseudo, tour 1, tour 2, tour 3, tour 4, tour 5, temps 1, temps 2, temps 3, temps 4, temps5, Score\n");
@@ -258,10 +258,8 @@ void create_csv(Joueur buffer)
     fprintf(fp, "%d,", buffer.id);
 
     //affichage du pseudo du joueur
-    for (int i = 0; i < sizeof(buffer.pseudo); i++)
-    {
-        fprintf(fp, "%s", buffer.pseudo[i]);
-    }
+
+    fprintf(fp, "%s", buffer.pseudo);
     fprintf(fp, ",");
 
     //affichage des differents choix du joueur

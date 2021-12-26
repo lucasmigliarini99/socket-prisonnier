@@ -243,7 +243,7 @@ void AffciherBTN(){
     sprintf(scoreHe, "%d", joueur.score_adverse);
     gtk_label_set_text(GTK_LABEL(En_Score), (const gchar*)scoreHe);
 
-    sprintf(TourParty, "Partie %d/5", compteur);
+    sprintf(TourParty, "Partie %d/5", compteur+1);
     gtk_label_set_text(GTK_LABEL(tourParty), (const gchar*)TourParty);
 
     GtkWidget *Denonce;

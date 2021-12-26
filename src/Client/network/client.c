@@ -68,14 +68,18 @@ void *threadProcess(void * ptr) {
         }
         if(j.enjeu == 1 && compteur == 1){
             round = get_round();
-            if(round >= 0 && round < 6 )
+            if(round >= 0 && round < 5 )
             {
+                if(round == 4)
+                {
+                    j.party = 1;
+                }
                 j.timeRound[round] = get_time();
                 j.choixParRound[round] = j.choix;
                 sleep (2);
                 AffciherBTN();
             }
-            if (round == 6){
+            if (round == 5){
                 sleep(1);
                 FinPartie();
                 j.enjeu = 0;
@@ -83,6 +87,7 @@ void *threadProcess(void * ptr) {
                 j.score = 0;
                 j.score_adverse = 0;
                 round = -1;
+                j.party = 0;
             }
         }
         

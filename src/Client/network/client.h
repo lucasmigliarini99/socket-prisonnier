@@ -32,6 +32,7 @@ typedef struct Joueur
     int enjeu;
     int timeRound[5];
     int choixParRound[5];
+    int party;
 } Joueur;
 
 void *threadProcess(void * ptr);
