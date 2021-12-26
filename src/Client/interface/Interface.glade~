@@ -201,7 +201,7 @@
               <object class="GtkLabel" id="tour_party">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="label" translatable="yes">Partie : 1/5</property>
+                <property name="label" translatable="yes">Partie : 0/5</property>
               </object>
               <packing>
                 <property name="expand">False</property>

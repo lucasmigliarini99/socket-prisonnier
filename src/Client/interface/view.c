@@ -12,23 +12,26 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "view.h"
 
-#include <view.h>
-#include <../network/client.h>
+#include "../network/client.h"
 
 #include <gtk/gtk.h>
 
 GtkBuilder *builder = NULL;
 
-
-
 Joueur joueur;
+char scoreMe[100];
+char scoreHe[100];
+char TourParty[100];
 
 int sockfd;
 
 int timer_id = 0;
 int elapsed_time = 0;
 int compteur = 0;
+
+int temptour;
 
 /**
  * Fermeture de la fenetre
@@ -56,11 +59,14 @@ int timer_handler()
 {
     elapsed_time++;
     char txt[100];
-    printf("timer running, time : %d\n", elapsed_time);
-    GtkLabel *timelabel = GTK_LABEL(gtk_builder_get_object(builder, "time_display"));
-    snprintf(txt, 100, "%04i", elapsed_time);
-    gtk_label_set_text(timelabel, txt);
-    return 1;
+    //printf("timer running, time : %d\n", elapsed_time);
+    if (compteur != 0)
+    {
+        GtkLabel *timelabel = GTK_LABEL(gtk_builder_get_object(builder, "time_display"));
+        snprintf(txt, 100, "%04i", elapsed_time);
+        gtk_label_set_text(timelabel, txt);
+        return 1;
+    }
 }
 
 /**
@@ -86,17 +92,12 @@ void on_toogle(GtkWidget *widget, gpointer data)
     }
 }
 
-void test(Joueur *j)
-{
-    j->choix = malloc(sizeof(int) * 10);
-}
-
 void on_Cancel()
 {
     GtkWidget *message_dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL,
                                                        GTK_MESSAGE_WARNING,
                                                        GTK_BUTTONS_OK_CANCEL,
-                                                       "Êtes vous sur de vouloir quitter ?");
+                                                       "Êtes vous sur de vouloir Quitter ?");
     //cf : http://refspecs.linuxbase.org/gtk/2.6/gtk/GtkMessageDialog.html
     //https://developer.gnome.org/gnome-devel-demos/stable/messagedialog.c.html.en
     unsigned int pressed = gtk_dialog_run(GTK_DIALOG(message_dialog));
@@ -114,8 +115,9 @@ void on_Cancel()
     }
 }
 
-void on_ConfirmationPseudo(Joueur j)
+void on_ConfirmationPseudo()
 {
+    //initialize the windows
     GtkWidget *win;
     win = GTK_WIDGET(gtk_builder_get_object(builder, "Win_Bienvenue"));
     gtk_builder_connect_signals(builder, NULL);
@@ -123,89 +125,223 @@ void on_ConfirmationPseudo(Joueur j)
     GtkWidget *win2;
     win2 = GTK_WIDGET(gtk_builder_get_object(builder, "Win_Jeux"));
 
+    //initialize the button Denonce and Taire
+    GtkWidget *Denonce;
+    Denonce = GTK_WIDGET(gtk_builder_get_object(builder, "ButtonDenoncer"));
+
+    GtkWidget *Taire;
+    Taire = GTK_WIDGET(gtk_builder_get_object(builder, "ButtonTaire"));
+
+    //Initialize button QuitterJ et Rejouer
+    GtkWidget *Rejouer;
+    Rejouer = GTK_WIDGET(gtk_builder_get_object(builder, "ButtonRejouer"));
+
+    GtkWidget *QuitterJ;
+    QuitterJ = GTK_WIDGET(gtk_builder_get_object(builder, "ButtonQuitterjeu"));
+
     // recuperation du pseudo.
     printf("bouton 'Confirmer' clicked\n");
     GtkEntry *texte = GTK_ENTRY(gtk_builder_get_object(builder, "texte"));
     GtkEntry *data = (gchar *)gtk_entry_get_text(texte);
-    strcpy(j.pseudo, data);
+    send_pseudo(data);
 
-    //fermeture de la fenetre actuelle
+    //close the current windows
     gtk_widget_hide(win);
 
-    //ouverture de la fenêtre suivante
+    //open the next windows
     gtk_widget_show(win2);
 
-    //demmarage du timer
+    //hide the button
+    gtk_widget_hide(Denonce);
+    gtk_widget_hide(Taire);
+    gtk_widget_hide(Rejouer);
+    gtk_widget_hide(QuitterJ);
+}
+
+void on_Denoncer()
+{
+    GtkWidget *win2;
+    win2 = GTK_WIDGET(gtk_builder_get_object(builder, "Win_Jeux"));
+
+
+    GtkWidget *Denonce;
+    Denonce = GTK_WIDGET(gtk_builder_get_object(builder, "ButtonDenoncer"));
+
+    GtkWidget *Taire;
+    Taire = GTK_WIDGET(gtk_builder_get_object(builder, "ButtonTaire"));
+
+    gtk_widget_hide(Denonce);
+    gtk_widget_hide(Taire);
+
+    //stop the timer and return value in temptour
+    temptour = elapsed_time;
+    g_source_remove(timer_id);
+    timer_id = 0;
+    elapsed_time=0;
+
+    compteur++;
+    //return choice
+    send_action(2);
+}
+
+void on_Taire()
+{
+    GtkWidget *win2;
+    win2 = GTK_WIDGET(gtk_builder_get_object(builder, "Win_Jeux"));
+
+
+
+    GtkWidget *Denonce;
+    Denonce = GTK_WIDGET(gtk_builder_get_object(builder, "ButtonDenoncer"));
+
+    GtkWidget *Taire;
+    Taire = GTK_WIDGET(gtk_builder_get_object(builder, "ButtonTaire"));
+
+    gtk_widget_hide(Denonce);
+    gtk_widget_hide(Taire);
+
+    //stop the timer and return value in temptour
+    temptour = elapsed_time;
+    g_source_remove(timer_id);
+    timer_id = 0;
+    elapsed_time=0;
+
+    compteur++;
+    //return choice
+    send_action(1);
+}
+
+int get_round()
+{
+    return compteur;
+}
+
+int get_time()
+{
+    return temptour;
+}
+
+void AffciherBTN(){
+
+    //get player datas
+    joueur = get_player();
+
+
+    //define text score, score enemy and party's round
+    GtkWidget *tourParty;
+    tourParty = GTK_WIDGET(gtk_builder_get_object(builder, "tour_party"));
+
+    GtkWidget *Score;
+    Score = GTK_WIDGET(gtk_builder_get_object(builder, "score"));
+
+    GtkWidget *En_Score;
+    En_Score = GTK_WIDGET(gtk_builder_get_object(builder, "en_score"));
+
+    sprintf(scoreMe, "%d", joueur.score);
+    gtk_label_set_text(GTK_LABEL(Score), (const gchar*)scoreMe);
+
+    sprintf(scoreHe, "%d", joueur.score_adverse);
+    gtk_label_set_text(GTK_LABEL(En_Score), (const gchar*)scoreHe);
+
+    sprintf(TourParty, "Partie %d/5", compteur+1);
+    gtk_label_set_text(GTK_LABEL(tourParty), (const gchar*)TourParty);
+
+    GtkWidget *Denonce;
+    Denonce = GTK_WIDGET(gtk_builder_get_object(builder, "ButtonDenoncer"));
+
+    GtkWidget *Taire;
+    Taire = GTK_WIDGET(gtk_builder_get_object(builder, "ButtonTaire"));
+
+    gtk_widget_show(Denonce);
+    gtk_widget_show(Taire);
+
+    //start the timer
     if (timer_id == 0)
     {
         timer_id = g_timeout_add(1000, (GSourceFunc)timer_handler, NULL);
     }
 }
 
-void on_Denoncer()
+void FinPartie()
 {
+    joueur = get_player();
 
-    GtkWidget *win2;
-    win2 = GTK_WIDGET(gtk_builder_get_object(builder, "Win_Jeux"));
+    //actualisation affichage score
+    GtkWidget *Score;
+    Score = GTK_WIDGET(gtk_builder_get_object(builder, "score"));
 
-    GtkWidget *win3;
-    win3 = GTK_WIDGET(gtk_builder_get_object(builder, "Win_Score"));
+    GtkWidget *En_Score;
+    En_Score = GTK_WIDGET(gtk_builder_get_object(builder, "en_score"));
 
-    if (compteur == 0)
+    sprintf(scoreMe, "%d", joueur.score);
+    gtk_label_set_text(GTK_LABEL(Score), (const gchar*)scoreMe);
+
+    sprintf(scoreHe, "%d", joueur.score_adverse);
+    gtk_label_set_text(GTK_LABEL(En_Score), (const gchar*)scoreHe);
+
+    GtkWidget *Resultat;
+    Resultat = GTK_WIDGET(gtk_builder_get_object(builder, "resulta"));
+
+    //Initialize button QuitterJ et Rejouer
+    GtkWidget *Rejouer;
+    Rejouer = GTK_WIDGET(gtk_builder_get_object(builder, "ButtonRejouer"));
+
+    GtkWidget *QuitterJ;
+    QuitterJ = GTK_WIDGET(gtk_builder_get_object(builder, "ButtonQuitterjeu"));
+
+    //show the button
+    gtk_widget_show(Rejouer);
+    gtk_widget_show(QuitterJ);
+
+    if (joueur.score > joueur.score_adverse)
     {
-        joueur.choix = malloc(sizeof(int) * 5);
+        gtk_label_set_text(GTK_LABEL(Resultat), "vous avez gagné");
     }
-    //regarde la nombre de tour, si il est egale a 5 le jeu s'arrete.
-    if (compteur == 4)
+    if (joueur.score == joueur.score_adverse)
     {
-        //arret du timer
-        g_source_remove(timer_id);
-
-        //fermeture de la fenetre actuelle
-        gtk_widget_hide(win2);
-
-        //ouverture de la fenêtre suivante
-        gtk_widget_show(win3);
+        gtk_label_set_text(GTK_LABEL(Resultat), "égalité");
     }
-
-    //ajouts du choix dennoncer --> 1, par rapport au tour actuel.
-    joueur.choix[compteur] = 1;
-
-    //incrementation du compteur de round
-    compteur++;
-    send_msg();
+    if (joueur.score < joueur.score_adverse)
+    {
+        gtk_label_set_text(GTK_LABEL(Resultat), "vous avez perdu");
+    }
 }
 
-void on_Taire(Joueur j)
+void debutPartie()
 {
+    //initialize the button Denonce and Taire
+    GtkWidget *Denonce;
+    Denonce = GTK_WIDGET(gtk_builder_get_object(builder, "ButtonDenoncer"));
+
+    GtkWidget *Taire;
+    Taire = GTK_WIDGET(gtk_builder_get_object(builder, "ButtonTaire"));
+
+    //show the button
+    gtk_widget_show(Denonce);
+    gtk_widget_show(Taire);
+
+    //define variable attente
+    GtkWidget *Attente;
+    Attente = GTK_WIDGET(gtk_builder_get_object(builder, "attente"));
+
+    //hide "en attend joueur"
+    gtk_widget_hide(Attente);
+}
+
+void on_Rejouer()
+{
+    //initialisation des fenêtres
+    GtkWidget *win;
+    win = GTK_WIDGET(gtk_builder_get_object(builder, "Win_Bienvenue"));
+
     GtkWidget *win2;
-    win2 = GTK_WIDGET(gtk_builder_get_object(builder, "Win_Jeux"));
+    win2 = GTK_WIDGET(gtk_builder_get_object(builder, "Win_Jeu"));
 
-    GtkWidget *win3;
-    win3 = GTK_WIDGET(gtk_builder_get_object(builder, "Win_Score"));
+    //fermeture de la fenetre actuelle
+    gtk_widget_hide(win2);
 
-    if (compteur == 0)
-    {
-        joueur.choix = malloc(sizeof(int) * 5);
-    }
-    //regarde la nombre de tour, si il est egale a 5 le jeu s'arrete.
-    if (compteur == 4)
-    {
-        //arret du timer
-        g_source_remove(timer_id);
-
-        //fermeture de la fenetre actuelle
-        gtk_widget_hide(win2);
-
-        //ouverture de la fenêtre suivante
-        gtk_widget_show(win3);
-    }
-
-    //ajouts du choix se taire --> 0, par rapport au tour actuel.
-    joueur.choix[compteur] = 0;
-
-    //incrementation du compteur de round
-    compteur++;
+    //ouverture de la premiere fenetre : celle du choix du pseudo
+    gtk_widget_show(win);
 }
 
 /*

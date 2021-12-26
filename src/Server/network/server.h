@@ -21,14 +21,35 @@ typedef struct {
 } connection_t;
 
 
+typedef struct Joueur
+{
+    int sockfd;
+    int id;
+    char pseudo[256];
+    int score;
+    int score_adverse;
+    int choix;
+    int message;
+    int enjeu;
+    int timeRound[5];
+    int choixParRound[5];
+    int party;
+} Joueur;
+
+typedef struct Jeu
+{
+    Joueur j1;
+    Joueur j2;
+} Jeu;
+
+
 
 
 void init_sockets_array();
 void add(connection_t *connection);
 void del(connection_t *connection);
-void *threadProcess(void *ptr);
+void *threadProcess_Server(void *ptr);
 int create_server_socket() ;
-void send_all_player(connection_t *player, char buffer_in[BUFFERSIZE],char buffer_out[BUFFERSIZE]);
 
 #endif /* SERVER_H */
 

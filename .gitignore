@@ -1,0 +1,6 @@
+
+src/Server/network/server.o
+
+src/Client/config/ini.o
+
+*.o
