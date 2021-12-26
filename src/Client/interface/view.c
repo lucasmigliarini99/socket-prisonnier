@@ -23,6 +23,7 @@ GtkBuilder *builder = NULL;
 Joueur joueur;
 char scoreMe[100];
 char scoreHe[100];
+char TourParty[100];
 
 int sockfd;
 
@@ -96,7 +97,7 @@ void on_Cancel()
     GtkWidget *message_dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL,
                                                        GTK_MESSAGE_WARNING,
                                                        GTK_BUTTONS_OK_CANCEL,
-                                                       "Êtes vous sur de vouloir quitter ?");
+                                                       "Êtes vous sur de vouloir Quitter ?");
     //cf : http://refspecs.linuxbase.org/gtk/2.6/gtk/GtkMessageDialog.html
     //https://developer.gnome.org/gnome-devel-demos/stable/messagedialog.c.html.en
     unsigned int pressed = gtk_dialog_run(GTK_DIALOG(message_dialog));
@@ -131,12 +132,12 @@ void on_ConfirmationPseudo()
     GtkWidget *Taire;
     Taire = GTK_WIDGET(gtk_builder_get_object(builder, "ButtonTaire"));
 
-    //Initialize button Quitter et Rejouer
+    //Initialize button QuitterJ et Rejouer
     GtkWidget *Rejouer;
     Rejouer = GTK_WIDGET(gtk_builder_get_object(builder, "ButtonRejouer"));
 
-    GtkWidget *Quitter;
-    QuitterJ = GTK_WIDGET(gtk_builder_get_object(builder, "ButtonQuitterJeu"));
+    GtkWidget *QuitterJ;
+    QuitterJ = GTK_WIDGET(gtk_builder_get_object(builder, "ButtonQuitterjeu"));
 
     // recuperation du pseudo.
     printf("bouton 'Confirmer' clicked\n");
@@ -162,37 +163,6 @@ void on_Denoncer()
     GtkWidget *win2;
     win2 = GTK_WIDGET(gtk_builder_get_object(builder, "Win_Jeux"));
 
-    //get player datas
-    joueur = get_player();
-
-    //define text score, score enemy, name, name enemy and party's round
-    GtkWidget *tourParty;
-    tourParty = GTK_WIDGET(gtk_builder_get_object(builder, "tour_party"));
-
-    GtkWidget *Score;
-    Score = GTK_WIDGET(gtk_builder_get_object(builder, "score"));
-
-    GtkWidget *En_Score;
-    En_Score = GTK_WIDGET(gtk_builder_get_object(builder, "en_score"));
-
-    GtkWidget *Choix;
-    Choix = GTK_WIDGET(gtk_builder_get_object(builder, "choix"));
-
-    GtkWidget *En_Choix;
-    En_Choix = GTK_WIDGET(gtk_builder_get_object(builder, "en_choix"));
-
-    //print round of the game
-    //gtk_label_set_text(GTK_LABEL(tourParty), compteur);
-
-    //print choice of players
-    //gtk_label_set_text(GTK_LABEL(Choix), joueur.choix);
-
-    /*tk_label_set_text(GTK_LABEL (En_Choix), "vous : %d", joueur.choix);  --> besoin de choix adverse*/
-
-    //print score
-
-    sprintf(scoreMe, "%d", joueur.score);
-    gtk_label_set_text(GTK_LABEL(Score), (const gchar *)scoreMe);
 
     GtkWidget *Denonce;
     Denonce = GTK_WIDGET(gtk_builder_get_object(builder, "ButtonDenoncer"));
@@ -217,26 +187,7 @@ void on_Taire()
     GtkWidget *win2;
     win2 = GTK_WIDGET(gtk_builder_get_object(builder, "Win_Jeux"));
 
-    //get player datas
-    joueur = get_player();
 
-    //define text score, score enemy, name, name enemy and party's round
-    GtkWidget *tourParty;
-    tourParty = GTK_WIDGET(gtk_builder_get_object(builder, "tour_party"));
-
-    GtkWidget *Score;
-    Score = GTK_WIDGET(gtk_builder_get_object(builder, "score"));
-
-    GtkWidget *En_Score;
-    En_Score = GTK_WIDGET(gtk_builder_get_object(builder, "en_score"));
-
-    //print score
-    printf("le score de moi %d", joueur.score);
-    sprintf(scoreMe, "%d", joueur.score);
-    gtk_label_set_text(GTK_LABEL(Score), (const gchar *)scoreMe);
-
-    sprintf(scoreHe, "%d", joueur.score_adverse);
-    gtk_label_set_text(GTK_LABEL(En_Score), (const gchar *)scoreHe);
 
     GtkWidget *Denonce;
     Denonce = GTK_WIDGET(gtk_builder_get_object(builder, "ButtonDenoncer"));
@@ -261,8 +212,31 @@ int get_round()
     return compteur;
 }
 
-void AffciherBTN()
-{
+void AffciherBTN(){
+
+    //get player datas
+    joueur = get_player();
+
+
+    //define text score, score enemy and party's round
+    GtkWidget *tourParty;
+    tourParty = GTK_WIDGET(gtk_builder_get_object(builder, "tour_party"));
+
+    GtkWidget *Score;
+    Score = GTK_WIDGET(gtk_builder_get_object(builder, "score"));
+
+    GtkWidget *En_Score;
+    En_Score = GTK_WIDGET(gtk_builder_get_object(builder, "en_score"));
+
+    sprintf(scoreMe, "%d", joueur.score);
+    gtk_label_set_text(GTK_LABEL(Score), (const gchar*)scoreMe);
+
+    sprintf(scoreHe, "%d", joueur.score_adverse);
+    gtk_label_set_text(GTK_LABEL(En_Score), (const gchar*)scoreHe);
+
+    sprintf(TourParty, "Partie %d/5", compteur);
+    gtk_label_set_text(GTK_LABEL(tourParty), (const gchar*)TourParty);
+
     GtkWidget *Denonce;
     Denonce = GTK_WIDGET(gtk_builder_get_object(builder, "ButtonDenoncer"));
 
@@ -283,15 +257,28 @@ void FinPartie()
 {
     joueur = get_player();
 
+    //actualisation affichage score
+    GtkWidget *Score;
+    Score = GTK_WIDGET(gtk_builder_get_object(builder, "score"));
+
+    GtkWidget *En_Score;
+    En_Score = GTK_WIDGET(gtk_builder_get_object(builder, "en_score"));
+
+    sprintf(scoreMe, "%d", joueur.score);
+    gtk_label_set_text(GTK_LABEL(Score), (const gchar*)scoreMe);
+
+    sprintf(scoreHe, "%d", joueur.score_adverse);
+    gtk_label_set_text(GTK_LABEL(En_Score), (const gchar*)scoreHe);
+
     GtkWidget *Resultat;
     Resultat = GTK_WIDGET(gtk_builder_get_object(builder, "resulta"));
 
-    //Initialize button Quitter et Rejouer
+    //Initialize button QuitterJ et Rejouer
     GtkWidget *Rejouer;
     Rejouer = GTK_WIDGET(gtk_builder_get_object(builder, "ButtonRejouer"));
 
-    GtkWidget *Quitter;
-    Quitter = GTK_WIDGET(gtk_builder_get_object(builder, "ButtonQuitterJeu"));
+    GtkWidget *QuitterJ;
+    QuitterJ = GTK_WIDGET(gtk_builder_get_object(builder, "ButtonQuitterjeu"));
 
     //show the button
     gtk_widget_show(Rejouer);

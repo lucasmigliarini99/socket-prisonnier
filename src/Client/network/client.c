@@ -62,16 +62,18 @@ void *threadProcess(void * ptr) {
         }
         if(j.enjeu == 1 && compteur == 1){
             round = get_round();
-            if(round >= 0 && round < 5 )
+            if(round >= 0 && round < 6 )
             {
-                sleep (1);
+                sleep (2);
                 AffciherBTN();
             }
-            if (round == 5){
+            if (round == 6){
                 sleep(1);
                 FinPartie();
                 j.enjeu = 0;
                 compteur = 0;
+                j.score = 0;
+                j.score_adverse = 0;
                 round = -1;
             }
         }
