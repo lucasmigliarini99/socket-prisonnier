@@ -71,6 +71,7 @@ void *threadProcess(void * ptr) {
             if(round >= 0 && round < 6 )
             {
                 j.timeRound[round] = get_time();
+                j.choixParRound[round] = j.choix;
                 sleep (2);
                 AffciherBTN();
             }

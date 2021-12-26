@@ -32,6 +32,7 @@ typedef struct Joueur
     int message;
     int enjeu;
     int timeRound[5];
+    int choixParRound[5];
 } Joueur;
 
 typedef struct Jeu
