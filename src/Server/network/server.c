@@ -81,7 +81,7 @@ pthread_mutex_unlock(&lock);
 void *threadProcess_Server(void *ptr)
 {
     Joueur buffer_in;
-    
+
     int compteur = 0;
 
     int len;
@@ -137,7 +137,6 @@ void *threadProcess_Server(void *ptr)
             send_structure_to_game(buffer_in);
         }
 
-
         for (int i = 0; i < 2; i++)
         {
             if (games[i].j1.choix != NULL && games[i].j2.choix != NULL)
@@ -148,7 +147,8 @@ void *threadProcess_Server(void *ptr)
                 send_joueur(games[i].j2);
                 games[i].j1.choix = NULL;
                 games[i].j2.choix = NULL;
-                if (games[i].j1.party == 1 && games[i].j2.party == 1){
+                if (games[i].j1.party == 1 && games[i].j2.party == 1)
+                {
                     printf("csv mgl\n");
                     create_csv(games[i].j1);
                     sleep(2);
@@ -251,8 +251,8 @@ void create_csv(Joueur buffer)
     FILE *fp;
     fp = fopen("Data.csv", "a");
 
-    // affichage de l'entête
-    fprintf(fp, "ID, Pseudo, tour 1, tour 2, tour 3, tour 4, tour 5, temps 1, temps 2, temps 3, temps 4, temps5, Score\n");
+    // affichage de l'entête (1 fois a la création du fichier)
+    /* fprintf(fp, "ID, Pseudo, tour 1, tour 2, tour 3, tour 4, tour 5, temps 1, temps 2, temps 3, temps 4, temps5, Score\n"); */
 
     //affichage de l'ID du joueur
     fprintf(fp, "%d,", buffer.id);
@@ -263,7 +263,7 @@ void create_csv(Joueur buffer)
     fprintf(fp, ",");
 
     //affichage des differents choix du joueur
-    for (int j = 0; j < 5; j++)
+    for (int j = 0; j <= 5; j++)
     {
         if (buffer.choixParRound[j] == 2)
         {
@@ -282,7 +282,7 @@ void create_csv(Joueur buffer)
     }
 
     //affichage du score
-    fprintf(fp, "%d", buffer.score);
+    fprintf(fp, "%d\n", buffer.score);
 
     //fermeture du fichier .csv
     fclose(fp);
