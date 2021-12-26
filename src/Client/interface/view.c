@@ -273,28 +273,19 @@ void FinPartie()
 {
     joueur = get_player();
 
-    GtkWidget *Choix;
-    Choix = GTK_WIDGET(gtk_builder_get_object(builder, "choix"));
+    GtkWidget *Resultat;
+    Resultat = GTK_WIDGET(gtk_builder_get_object(builder, "resulta"));
 
-    GtkWidget *En_Choix;
-    En_Choix = GTK_WIDGET(gtk_builder_get_object(builder, "en_choix"));
-
-
-    //print choice of players
-    
-
-    /*tk_label_set_text(GTK_LABEL (En_Choix), "vous : %d", joueur.choix);  --> besoin de choix adverse*/
 
     if(joueur.score > joueur.score_adverse)
     {
-       gtk_label_set_text(GTK_LABEL(Choix), "avez gagné");
+       gtk_label_set_text(GTK_LABEL(Resultat), "vous avez gagné");
     }
     if(joueur.score == joueur.score_adverse){
-        gtk_label_set_text(GTK_LABEL(Choix), "égalité");
-        gtk_label_set_text(GTK_LABEL (En_Choix), "égalité");
+        gtk_label_set_text(GTK_LABEL(Resultat), "égalité");
     }
     if(joueur.score < joueur.score_adverse){
-        gtk_label_set_text(GTK_LABEL (En_Choix), "a gagné");
+        gtk_label_set_text(GTK_LABEL (Resultat), "vous avez perdu");
     }
 }
 

@@ -68,7 +68,7 @@ void *threadProcess(void * ptr) {
                 AffciherBTN();
             }
             if (round == 5){
-                sleep(5);
+                sleep(1);
                 FinPartie();
                 j.enjeu = 0;
                 compteur = 0;
