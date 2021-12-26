@@ -335,13 +335,24 @@ void on_Rejouer()
     win = GTK_WIDGET(gtk_builder_get_object(builder, "Win_Bienvenue"));
 
     GtkWidget *win2;
-    win2 = GTK_WIDGET(gtk_builder_get_object(builder, "Win_Jeu"));
+    win2 = GTK_WIDGET(gtk_builder_get_object(builder, "Win_Jeux"));
 
     //fermeture de la fenetre actuelle
     gtk_widget_hide(win2);
 
+    //get player datas
+    joueur = get_player();
+
     //ouverture de la premiere fenetre : celle du choix du pseudo
     gtk_widget_show(win);
+    compteur = 0;
+    sprintf(scoreMe, "%d", 0);
+    sprintf(scoreHe, "%d", 0);
+
+    GtkWidget *Resultat;
+    Resultat = GTK_WIDGET(gtk_builder_get_object(builder, "resulta"));
+
+    gtk_label_set_text(GTK_LABEL(Resultat), "");
 }
 
 /*
