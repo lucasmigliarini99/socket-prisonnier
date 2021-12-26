@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sun Dec 26 18:53:11 2021
+# Make data base, printed on Sun Dec 26 23:44:36 2021
 
 # Variables
 
@@ -23,7 +23,7 @@ CLIENT_MAIN := client
 # makefile (from 'Makefile', line 32)
 MD := mkdir -p
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-6cec592f-b2c1-4612-aa0d-872569255366.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-9a987c57-81b9-4b56-b2e6-28692a2d4351.sock
 # environment
 VSCODE_CWD = /home/student
 # environment
@@ -41,7 +41,6 @@ endef
 # automatic
 @D = $(patsubst %/,%,$(dir $@))
 # environment
- 
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # default
 .VARIABLES := 
@@ -82,7 +81,7 @@ CURDIR := /home/student/Desktop/socket-prisonnier
 # environment
 VSCODE_PIPE_LOGGING = true
 # makefile (from 'Makefile', line 27)
-CLIENT_SOURCEDIRS := src/Client src/Client/interface src/Client/network
+CLIENT_SOURCEDIRS := src/Client src/Client/config src/Client/interface src/Client/network
 # environment
 APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
 # environment
@@ -92,7 +91,7 @@ LESSOPEN = ||/usr/bin/lesspipe.sh %s
 # environment
 MFLAGS = -pqrR
 # environment
-SSH_AUTH_SOCK = /tmp/ssh-XXXXXXTq468O/agent.1340
+SSH_AUTH_SOCK = /tmp/ssh-XXXXXXqOFSPf/agent.1310
 # default
 .SHELLFLAGS := -c
 # environment
@@ -102,7 +101,7 @@ XDG_CONFIG_DIRS = /etc/xdg
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # makefile (from 'Makefile', line 36)
-CLIENT_SOURCES := src/Client/launchClient.c src/Client/interface/view.c src/Client/network/client.c src/Client/network/ini.c
+CLIENT_SOURCES := src/Client/launchClient.c src/Client/config/ini.c src/Client/interface/view.c src/Client/network/client.c
 # environment
 XDG_SESSION_DESKTOP = xfce
 # environment
@@ -112,17 +111,17 @@ MAKEFILE_LIST := Makefile
 # automatic
 @F = $(notdir $@)
 # makefile (from 'Makefile', line 40)
-CLIENT_OBJECTS := src/Client/launchClient.o src/Client/interface/view.o src/Client/network/client.o src/Client/network/ini.o
+CLIENT_OBJECTS := src/Client/launchClient.o src/Client/config/ini.o src/Client/interface/view.o src/Client/network/client.o
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 22356
+VSCODE_PID = 2096
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # environment
-SESSION_MANAGER = local/unix:@/tmp/.ICE-unix/1340,unix/unix:/tmp/.ICE-unix/1340
+SESSION_MANAGER = local/unix:@/tmp/.ICE-unix/1310,unix/unix:/tmp/.ICE-unix/1310
 # automatic
 *F = $(notdir $*)
 # environment
@@ -155,8 +154,8 @@ MAKELEVEL := 0
 MAKE = $(MAKE_COMMAND)
 # makefile (from 'Makefile', line 28)
 SERVER_SOURCEDIRS := src/Server src/Server/config src/Server/game src/Server/network
- 
 # environment
+ 
 IMSETTINGS_MODULE = none
 # environment
 PATH = /home/student/.local/bin:/home/student/bin:/usr/lib64/ccache:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/home/student/.composer/vendor/bin
@@ -219,7 +218,7 @@ FIXPATH = $1
 # environment
 which_declare = declare -f
 # environment
-SSH_AGENT_PID = 1502
+SSH_AGENT_PID = 1472
 # environment
 _ = /usr/bin/make
 # environment
@@ -277,16 +276,17 @@ GDMSESSION = xfce
 
 # Directories
 
-# src/Server (device 41, inode 52751): 7 files, no impossibilities.
-# src/Client (device 41, inode 52723): 6 files, no impossibilities.
-# src/Server/network (device 41, inode 52767): 5 files, no impossibilities.
-# src/Client/network (device 41, inode 52729): 9 files, no impossibilities.
-# . (device 41, inode 52645): 8 files, no impossibilities.
-# src/Client/interface (device 41, inode 52724): 7 files, no impossibilities.
-# src/Server/game (device 41, inode 52761): 5 files, no impossibilities.
-# src/Server/config (device 41, inode 52752): 9 files, no impossibilities.
+# src/Server (device 41, inode 59045): 7 files, no impossibilities.
+# src/Client/config (device 41, inode 59028): 6 files, no impossibilities.
+# src/Client (device 41, inode 59027): 7 files, no impossibilities.
+# src/Server/network (device 41, inode 59060): 5 files, no impossibilities.
+# src/Client/network (device 41, inode 59041): 5 files, no impossibilities.
+# . (device 41, inode 58938): 9 files, no impossibilities.
+# src/Client/interface (device 41, inode 59033): 7 files, no impossibilities.
+# src/Server/game (device 41, inode 59054): 5 files, no impossibilities.
+# src/Server/config (device 41, inode 59046): 9 files, no impossibilities.
 
-# 56 files, no impossibilities in 8 directories.
+# 60 files, no impossibilities in 9 directories.
 
 # Implicit Rules
 
@@ -301,7 +301,7 @@ GDMSESSION = xfce
 #  recipe to execute (from 'Makefile', line 78):
 	$(CC) $(GTK1) $(CFLAGS) -c $<  -o $@
 
-client: output src/Client/launchClient.o src/Client/interface/view.o src/Client/network/client.o src/Client/network/ini.o
+client: output src/Client/launchClient.o src/Client/config/ini.o src/Client/interface/view.o src/Client/network/client.o
 #  Implicit rule search has not been done.
 #  Implicit/static pattern stem: ''
 #  File does not exist.
@@ -314,13 +314,13 @@ client: output src/Client/launchClient.o src/Client/interface/view.o src/Client/
 # automatic
 # < := output
 # automatic
-# + := output src/Client/launchClient.o src/Client/interface/view.o src/Client/network/client.o src/Client/network/ini.o
+# + := output src/Client/launchClient.o src/Client/config/ini.o src/Client/interface/view.o src/Client/network/client.o
 # automatic
 # % := 
 # automatic
-# ^ := output src/Client/launchClient.o src/Client/interface/view.o src/Client/network/client.o src/Client/network/ini.o
+# ^ := output src/Client/launchClient.o src/Client/config/ini.o src/Client/interface/view.o src/Client/network/client.o
 # automatic
-# ? := output src/Client/launchClient.o src/Client/interface/view.o src/Client/network/client.o src/Client/network/ini.o
+# ? := output src/Client/launchClient.o src/Client/config/ini.o src/Client/interface/view.o src/Client/network/client.o
 # automatic
 # | := 
 # variable set hash-table stats:
@@ -338,7 +338,7 @@ src/Server/game/game.o:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2021-12-26 18:43:38.583650684
+#  Last modified 2021-12-26 22:53:51.630384
 #  File has been updated.
 #  Successfully updated.
 
@@ -370,7 +370,7 @@ src/Server/config/readerIniGame.o:
 # Not a target:
 src/Client/launchClient.o:
 #  Implicit rule search has been done.
-#  Last modified 2021-12-26 18:44:15.588501584
+#  Last modified 2021-12-26 22:58:23.031451
 #  File has been updated.
 #  Successfully updated.
 
@@ -381,13 +381,6 @@ src/Server/launchServer.o:
 #  File has not been updated.
 
 # Not a target:
-src/Client/network/ini.o:
-#  Implicit rule search has been done.
-#  Last modified 2021-12-26 18:44:15.968500053
-#  File has been updated.
-#  Successfully updated.
-
-# Not a target:
 .DEFAULT:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -395,7 +388,7 @@ src/Client/network/ini.o:
 
 output:
 #  Implicit rule search has not been done.
-#  Last modified 2021-12-26 18:44:16.062499675
+#  Last modified 2021-12-26 23:43:47.412213736
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 54):
@@ -430,18 +423,19 @@ src/Server/config/ini.o:
 # Not a target:
 src/Client/interface/view.o:
 #  Implicit rule search has been done.
-#  Last modified 2021-12-26 18:44:15.89250036
+#  Last modified 2021-12-26 23:43:47.055215013
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 src/Client/network/client.o:
 #  Implicit rule search has been done.
-#  Last modified 2021-12-26 18:44:15.93950017
+#  Last modified 2021-12-26 22:58:23.13045
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
+ 
 src/Server/network/server.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -465,6 +459,13 @@ documentation:
 #  Modification time never checked.
 #  File has not been updated.
 
+# Not a target:
+src/Client/config/ini.o:
+#  Implicit rule search has been done.
+#  Last modified 2021-12-26 22:58:23.060451
+#  File has been updated.
+#  Successfully updated.
+
 # files hash-table stats:
 # Load=21/1024=2%, Rehash=0, Collisions=0/52=0%
 # VPATH Search Paths
@@ -473,13 +474,12 @@ documentation:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 65 / storage = 807 B / avg = 12 B
-# current buf: size = 8162 B / used = 807 B / count = 65 / avg = 12 B
+# strcache buffers: 1 (0) / strings = 67 / storage = 832 B / avg = 12 B
+# current buf: size = 8162 B / used = 832 B / count = 67 / avg = 12 B
 
-# strcache performance: lookups = 107 / hit rate = 39%
+# strcache performance: lookups = 112 / hit rate = 40%
 # hash-table stats:
- 
-# Load=65/8192=1%, Rehash=0, Collisions=0/107=0%
-# Finished Make data base on Sun Dec 26 18:53:11 2021
+# Load=67/8192=1%, Rehash=0, Collisions=0/112=0%
+# Finished Make data base on Sun Dec 26 23:44:36 2021
 
  

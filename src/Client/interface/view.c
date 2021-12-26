@@ -34,8 +34,8 @@ int compteur = 0;
 int temptour;
 
 /**
- * Fermeture de la fenetre
- * cette fonction est invoke par le gestionnaire d'evt
+ * @brief Close the window
+ * 
  */
 void on_window_main_destroy()
 {
@@ -44,7 +44,8 @@ void on_window_main_destroy()
 }
 
 /**
- * Fonction invoque lors du click sur le bouton 'Yes'
+ * @brief Called when the button 'Yes' is clicked
+ * 
  */
 void on_button_click()
 {
@@ -70,28 +71,9 @@ int timer_handler()
 }
 
 /**
- * Gestion du bouton toggle_one avec demarrage/arret d'un timer
- * @param widget  le widget qui a emit l'evt
- * @param data des donnees supplementatire
+ * @brief Called when 'cancel' button is clicked
+ * 
  */
-void on_toogle(GtkWidget *widget, gpointer data)
-{
-    GtkToggleButton *btn = GTK_TOGGLE_BUTTON(widget);
-    gchar *name = (gchar *)gtk_widget_get_name(widget);
-    gboolean status = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget));
-    printf("toggle %s pressed, status : %d\n", name, status);
-    //Activation du timer s'il etait arrete
-    if (timer_id == 0)
-    {
-        timer_id = g_timeout_add(1000, (GSourceFunc)timer_handler, NULL);
-    }
-    else
-    {
-        g_source_remove(timer_id);
-        timer_id = 0;
-    }
-}
-
 void on_Cancel()
 {
     GtkWidget *message_dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL,
@@ -115,6 +97,12 @@ void on_Cancel()
     }
 }
 
+/**
+ * @brief Called when the player enters his username and start
+ * initialize the window
+ * intialize the buttons
+ * 
+ */
 void on_ConfirmationPseudo()
 {
     //initialize the windows
@@ -158,6 +146,10 @@ void on_ConfirmationPseudo()
     gtk_widget_hide(QuitterJ);
 }
 
+/**
+ * @brief Called when the player betrays
+ * 
+ */
 void on_Denoncer()
 {
     GtkWidget *win2;
@@ -184,6 +176,10 @@ void on_Denoncer()
     send_action(2);
 }
 
+/**
+ * @brief Called when the player cooperates
+ * 
+ */
 void on_Taire()
 {
     GtkWidget *win2;
@@ -211,17 +207,29 @@ void on_Taire()
     send_action(1);
 }
 
+/**
+ * @brief Return the actual round
+ * 
+ */
 int get_round()
 {
     return compteur;
 }
 
+/**
+ * @brief Return the actual timer
+ * 
+ */
 int get_time()
 {
     return temptour;
 }
 
-void AffciherBTN(){
+/**
+ * @brief Make the buttons visible
+ * 
+ */
+void AfficherBTN(){
 
     //get player datas
     joueur = get_player();
@@ -262,6 +270,10 @@ void AffciherBTN(){
     }
 }
 
+/**
+ * @brief Called at the end of the game to reset everything
+ * 
+ */
 void FinPartie()
 {
     joueur = get_player();
@@ -307,6 +319,11 @@ void FinPartie()
     }
 }
 
+/**
+ * @brief Called at the beginning of a game
+ * allows the player to play
+ * 
+ */
 void debutPartie()
 {
     //initialize the button Denonce and Taire
@@ -328,6 +345,10 @@ void debutPartie()
     gtk_widget_hide(Attente);
 }
 
+/**
+ * @brief Called when the player click on "Rejouer"
+ * 
+ */
 void on_Rejouer()
 {
     //initialisation des fenêtres
@@ -355,7 +376,8 @@ void on_Rejouer()
     gtk_label_set_text(GTK_LABEL(Resultat), "");
 }
 
-/*
+/**
+ * @brief Initialize the window
  * 
  */
 int init_interface(int argc, char **argv, int sockfdd, pthread_t thread)

@@ -77,7 +77,7 @@ void *threadProcess(void * ptr) {
                 j.timeRound[round] = get_time();
                 j.choixParRound[round] = j.choix;
                 sleep (2);
-                AffciherBTN();
+                AfficherBTN();
             }
             if (round == 5){
                 sleep(1);

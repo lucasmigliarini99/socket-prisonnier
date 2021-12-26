@@ -1,5 +1,6 @@
-make --dry-run --always-make --keep-going --print-directory
+make --dry-run --keep-going --print-directory
 make: Entering directory '/home/student/Desktop/socket-prisonnier'
-mkdir -p output
+ 
+make: 'output' is up to date.
 make: Leaving directory '/home/student/Desktop/socket-prisonnier'
  
