@@ -24,12 +24,13 @@ Joueur joueur;
 char scoreMe[100];
 char scoreHe[100];
 
-
 int sockfd;
 
 int timer_id = 0;
 int elapsed_time = 0;
 int compteur = 0;
+
+int temptour;
 
 /**
  * Fermeture de la fenetre
@@ -130,6 +131,13 @@ void on_ConfirmationPseudo()
     GtkWidget *Taire;
     Taire = GTK_WIDGET(gtk_builder_get_object(builder, "ButtonTaire"));
 
+    //Initialize button Quitter et Rejouer
+    GtkWidget *Rejouer;
+    Rejouer = GTK_WIDGET(gtk_builder_get_object(builder, "ButtonRejouer"));
+
+    GtkWidget *Quitter;
+    QuitterJ = GTK_WIDGET(gtk_builder_get_object(builder, "ButtonQuitterJeu"));
+
     // recuperation du pseudo.
     printf("bouton 'Confirmer' clicked\n");
     GtkEntry *texte = GTK_ENTRY(gtk_builder_get_object(builder, "texte"));
@@ -145,12 +153,8 @@ void on_ConfirmationPseudo()
     //hide the button
     gtk_widget_hide(Denonce);
     gtk_widget_hide(Taire);
-
-    //start the timer
-    if (timer_id == 0)
-    {
-        timer_id = g_timeout_add(1000, (GSourceFunc)timer_handler, NULL);
-    }
+    gtk_widget_hide(Rejouer);
+    gtk_widget_hide(QuitterJ);
 }
 
 void on_Denoncer()
@@ -188,9 +192,7 @@ void on_Denoncer()
     //print score
 
     sprintf(scoreMe, "%d", joueur.score);
-    gtk_label_set_text(GTK_LABEL(Score), (const gchar*)scoreMe);
-
-    
+    gtk_label_set_text(GTK_LABEL(Score), (const gchar *)scoreMe);
 
     GtkWidget *Denonce;
     Denonce = GTK_WIDGET(gtk_builder_get_object(builder, "ButtonDenoncer"));
@@ -201,6 +203,10 @@ void on_Denoncer()
     gtk_widget_hide(Denonce);
     gtk_widget_hide(Taire);
 
+    //stop the timer and return value in temptour
+    temptour = elapsed_time;
+    elapsed_time = 0;
+
     compteur++;
     //return choice
     send_action(2);
@@ -210,7 +216,6 @@ void on_Taire()
 {
     GtkWidget *win2;
     win2 = GTK_WIDGET(gtk_builder_get_object(builder, "Win_Jeux"));
-
 
     //get player datas
     joueur = get_player();
@@ -225,16 +230,13 @@ void on_Taire()
     GtkWidget *En_Score;
     En_Score = GTK_WIDGET(gtk_builder_get_object(builder, "en_score"));
 
-   
-
     //print score
-    printf("le score de moi %d",joueur.score);
+    printf("le score de moi %d", joueur.score);
     sprintf(scoreMe, "%d", joueur.score);
-    gtk_label_set_text(GTK_LABEL(Score), (const gchar*)scoreMe);
+    gtk_label_set_text(GTK_LABEL(Score), (const gchar *)scoreMe);
 
     sprintf(scoreHe, "%d", joueur.score_adverse);
-    gtk_label_set_text(GTK_LABEL(En_Score), (const gchar*)scoreHe);
-
+    gtk_label_set_text(GTK_LABEL(En_Score), (const gchar *)scoreHe);
 
     GtkWidget *Denonce;
     Denonce = GTK_WIDGET(gtk_builder_get_object(builder, "ButtonDenoncer"));
@@ -245,12 +247,13 @@ void on_Taire()
     gtk_widget_hide(Denonce);
     gtk_widget_hide(Taire);
 
-     compteur++;
+    //stop the timer and return value in temptour
+    temptour = elapsed_time;
+    elapsed_time = 0;
+
+    compteur++;
     //return choice
     send_action(1);
-   
-
-    
 }
 
 int get_round()
@@ -258,7 +261,8 @@ int get_round()
     return compteur;
 }
 
-void AffciherBTN(){
+void AffciherBTN()
+{
     GtkWidget *Denonce;
     Denonce = GTK_WIDGET(gtk_builder_get_object(builder, "ButtonDenoncer"));
 
@@ -267,6 +271,12 @@ void AffciherBTN(){
 
     gtk_widget_show(Denonce);
     gtk_widget_show(Taire);
+
+    //start the timer
+    if (timer_id == 0)
+    {
+        timer_id = g_timeout_add(1000, (GSourceFunc)timer_handler, NULL);
+    }
 }
 
 void FinPartie()
@@ -276,16 +286,28 @@ void FinPartie()
     GtkWidget *Resultat;
     Resultat = GTK_WIDGET(gtk_builder_get_object(builder, "resulta"));
 
+    //Initialize button Quitter et Rejouer
+    GtkWidget *Rejouer;
+    Rejouer = GTK_WIDGET(gtk_builder_get_object(builder, "ButtonRejouer"));
 
-    if(joueur.score > joueur.score_adverse)
+    GtkWidget *Quitter;
+    Quitter = GTK_WIDGET(gtk_builder_get_object(builder, "ButtonQuitterJeu"));
+
+    //show the button
+    gtk_widget_show(Rejouer);
+    gtk_widget_show(QuitterJ);
+
+    if (joueur.score > joueur.score_adverse)
     {
-       gtk_label_set_text(GTK_LABEL(Resultat), "vous avez gagné");
+        gtk_label_set_text(GTK_LABEL(Resultat), "vous avez gagné");
     }
-    if(joueur.score == joueur.score_adverse){
+    if (joueur.score == joueur.score_adverse)
+    {
         gtk_label_set_text(GTK_LABEL(Resultat), "égalité");
     }
-    if(joueur.score < joueur.score_adverse){
-        gtk_label_set_text(GTK_LABEL (Resultat), "vous avez perdu");
+    if (joueur.score < joueur.score_adverse)
+    {
+        gtk_label_set_text(GTK_LABEL(Resultat), "vous avez perdu");
     }
 }
 
@@ -316,11 +338,11 @@ void on_Rejouer()
     GtkWidget *win;
     win = GTK_WIDGET(gtk_builder_get_object(builder, "Win_Bienvenue"));
 
-    GtkWidget *win3;
-    win3 = GTK_WIDGET(gtk_builder_get_object(builder, "Win_Score"));
+    GtkWidget *win2;
+    win2 = GTK_WIDGET(gtk_builder_get_object(builder, "Win_Jeu"));
 
     //fermeture de la fenetre actuelle
-    gtk_widget_hide(win3);
+    gtk_widget_hide(win2);
 
     //ouverture de la premiere fenetre : celle du choix du pseudo
     gtk_widget_show(win);
