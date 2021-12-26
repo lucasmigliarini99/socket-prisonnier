@@ -81,7 +81,8 @@ pthread_mutex_unlock(&lock);
 void *threadProcess_Server(void *ptr)
 {
     Joueur buffer_in;
-    //Joueur *buffer_out= malloc(sizeof(Joueur));
+    
+    int compteur = 0;
 
     int len;
     connection_t *connection;
@@ -146,6 +147,13 @@ void *threadProcess_Server(void *ptr)
                 send_joueur(games[i].j2);
                 games[i].j1.choix = NULL;
                 games[i].j2.choix = NULL;
+                if(compteur == 4){
+                    printf("csv mgl\n");
+                    create_csv(games[i].j1);
+                    sleep(2);
+                    create_csv(games[i].j2);
+                }
+                compteur ++;
             }
         }
 
@@ -237,7 +245,7 @@ send_joueur(Joueur j)
     write(j.sockfd, &j, sizeof(Joueur));
 }
 
-void create_csv(char *filename, Joueur buffer)
+void create_csv(Joueur buffer)
 {
     //definition du fichier dans lequel l'ajout des données seront faite
     FILE *fp;
